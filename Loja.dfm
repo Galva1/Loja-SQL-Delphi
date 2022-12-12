@@ -15,7 +15,7 @@ object LojaMenu: TLojaMenu
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeral: TPanel
-    Left = 228
+    Left = 224
     Top = 12
     Width = 533
     Height = 441
@@ -441,7 +441,7 @@ object LojaMenu: TLojaMenu
       BevelOuter = bvSpace
       TabOrder = 2
       Visible = False
-      object pnl9: TPanel
+      object pnlCadastroVenda: TPanel
         Left = 0
         Top = 0
         Width = 101
@@ -455,7 +455,7 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = pnl9Click
+        OnClick = pnlCadastroVendaClick
       end
       object pnl10: TPanel
         Left = 0

@@ -15,7 +15,7 @@ type
     pnlOVendas: TPanel;
     pnlCadastroCliente: TPanel;
     pnlCadastroProduto: TPanel;
-    pnl9: TPanel;
+    pnlCadastroVenda: TPanel;
     pnl10: TPanel;
     pnlOCadastro: TPanel;
     lblLogo: TLabel;
@@ -28,7 +28,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure pnlCadastroProdutoClick(Sender: TObject);
     procedure pnlVendasClick(Sender: TObject);
-    procedure pnl9Click(Sender: TObject);
+    procedure pnlCadastroVendaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -89,9 +89,10 @@ procedure TLojaMenu.pnlVendasClick(Sender: TObject);
 begin
   pnlOVendas.Visible := True;
   pnlOCadastro.Visible := False;
+  
 end;
 
-procedure TLojaMenu.pnl9Click(Sender: TObject);
+procedure TLojaMenu.pnlCadastroVendaClick(Sender: TObject);
 begin
   try
     Application.CreateForm(TCadastroVendas, CadastroVendas);
@@ -101,4 +102,4 @@ begin
   end;
 end;
 
-end.                                    
+end.

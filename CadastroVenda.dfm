@@ -162,6 +162,7 @@ object CadastroVendas: TCadastroVendas
           Top = 36
           Width = 65
           Height = 24
+          Color = 15395562
           DataField = 'idcliente'
           DataSource = dsConsultaCliente
           Enabled = False
@@ -178,6 +179,7 @@ object CadastroVendas: TCadastroVendas
           Top = 88
           Width = 101
           Height = 24
+          Color = 15395562
           DataField = 'cpf'
           DataSource = dsConsultaCliente
           Enabled = False
@@ -194,6 +196,7 @@ object CadastroVendas: TCadastroVendas
           Top = 36
           Width = 245
           Height = 24
+          Color = 15395562
           DataField = 'nome'
           DataSource = dsConsultaCliente
           Enabled = False
@@ -210,6 +213,7 @@ object CadastroVendas: TCadastroVendas
           Top = 88
           Width = 209
           Height = 24
+          Color = 15395562
           DataField = 'Endere'#231'o'
           DataSource = dsConsultaCliente
           Enabled = False
@@ -226,6 +230,7 @@ object CadastroVendas: TCadastroVendas
           Top = 88
           Width = 89
           Height = 24
+          Color = 15395562
           DataField = 'Bairro'
           DataSource = dsConsultaCliente
           Enabled = False
@@ -242,6 +247,7 @@ object CadastroVendas: TCadastroVendas
           Top = 88
           Width = 145
           Height = 24
+          Color = 15395562
           DataField = 'Cidade'
           DataSource = dsConsultaCliente
           Enabled = False
@@ -426,24 +432,20 @@ object CadastroVendas: TCadastroVendas
             end
             item
               Expanded = False
-              FieldName = 'nome'
-              Width = 220
+              FieldName = 'nomeproduto'
+              Width = 259
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'valor_produto'
+              FieldName = 'valor_item'
+              Width = 132
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'item_unidades'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'Total'
-              Width = 122
+              Width = 111
               Visible = True
             end>
         end
@@ -468,6 +470,7 @@ object CadastroVendas: TCadastroVendas
           Top = 28
           Width = 173
           Height = 28
+          Color = 15395562
           DataField = 'nome'
           DataSource = dsConsultaItem
           Enabled = False
@@ -530,12 +533,13 @@ object CadastroVendas: TCadastroVendas
       end
     end
     object btnConfirmar: TButton
-      Left = 412
+      Left = 408
       Top = 528
       Width = 97
       Height = 29
       Caption = 'Confirmar'
       TabOrder = 4
+      OnClick = btnConfirmarClick
     end
     object btnCancelar: TButton
       Left = 516
@@ -544,6 +548,7 @@ object CadastroVendas: TCadastroVendas
       Height = 29
       Caption = 'Cancelar'
       TabOrder = 5
+      OnClick = btnCancelarClick
     end
     object dtpvencimento: TDateTimePicker
       Left = 324
@@ -566,6 +571,7 @@ object CadastroVendas: TCadastroVendas
       Top = 272
       Width = 69
       Height = 28
+      Color = 15395562
       DataField = 'idvenda'
       DataSource = dsEmitirVenda
       Enabled = False
@@ -577,24 +583,32 @@ object CadastroVendas: TCadastroVendas
       ParentFont = False
       TabOrder = 7
     end
-    object cbb1: TComboBox
-      Left = 120
+    object btnNovaVenda: TButton
+      Left = 512
+      Top = 264
+      Width = 89
+      Height = 41
+      Caption = 'Nova venda'
+      TabOrder = 8
+      OnClick = btnNovaVendaClick
+    end
+    object dblkcbbidpagamento: TDBLookupComboBox
+      Left = 112
       Top = 272
-      Width = 169
+      Width = 181
       Height = 28
+      DataField = 'idpagamento'
+      DataSource = dsEmitirVenda
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      ItemHeight = 20
+      KeyField = 'idpagamento'
+      ListField = 'nomepagamento'
+      ListSource = dsPagamento
       ParentFont = False
-      TabOrder = 8
-      Items.Strings = (
-        'Cart'#227'o de cr'#233'dito'
-        'Cart'#227'o de d'#233'bito'
-        'Pix'
-        'C'#233'dula ')
+      TabOrder = 9
     end
   end
   object qryConsultaCliente: TADOQuery
@@ -613,55 +627,63 @@ object CadastroVendas: TCadastroVendas
       'select *'
       'from cliente'
       'where cliente.idcliente = :idcliente')
-    Left = 772
-    Top = 112
+    Left = 744
+    Top = 116
+    object qryConsultaClienteidcliente: TAutoIncField
+      FieldName = 'idcliente'
+      ReadOnly = True
+    end
+    object qryConsultaClientenome: TStringField
+      FieldName = 'nome'
+      Size = 50
+    end
+    object qryConsultaClientecpf: TBCDField
+      FieldName = 'cpf'
+      Precision = 18
+      Size = 0
+    end
+    object dtfldConsultaClientedata_nascimento: TDateField
+      FieldName = 'data_nascimento'
+    end
+    object qryConsultaClienteEndereo: TStringField
+      FieldName = 'Endere'#231'o'
+      Size = 50
+    end
+    object qryConsultaClienteBairro: TWideStringField
+      FieldName = 'Bairro'
+      Size = 50
+    end
+    object qryConsultaClienteCidade: TWideStringField
+      FieldName = 'Cidade'
+      Size = 50
+    end
   end
   object dsConsultaCliente: TDataSource
     DataSet = qryConsultaCliente
-    Left = 772
-    Top = 164
+    Left = 836
+    Top = 116
   end
   object qryEmitirVenda: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
     DataSource = dsConsultaCliente
-    Parameters = <
-      item
-        Name = 'idcliente'
-        Attributes = [paSigned, paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Size = 4
-        Value = Null
-      end>
+    Parameters = <>
     SQL.Strings = (
-      'Select *'
-      'from item_venda'
-      'inner join venda on venda.idvenda = item_venda.idvenda'
-      'inner join cliente on cliente.idcliente = :idcliente')
-    Left = 972
-    Top = 240
-    object qryEmitirVendaiditem_venda: TAutoIncField
-      FieldName = 'iditem_venda'
-      ReadOnly = True
-    end
-    object qryEmitirVendaidvenda: TIntegerField
+      
+        'Select venda.*, cliente.*, item_venda.idpagamento, pagamento.idp' +
+        'agamento, pagamento.nomepagamento'
+      'from venda'
+      'inner join cliente on cliente.idcliente = venda.idvenda'
+      'inner join item_venda on item_venda.idvenda = venda.idvenda'
+      
+        'inner join pagamento on pagamento.idpagamento = item_venda.idpag' +
+        'amento'
+      'where 1 = 0')
+    Left = 724
+    Top = 332
+    object qryEmitirVendaidvenda: TAutoIncField
+      AutoGenerateValue = arAutoInc
       FieldName = 'idvenda'
-    end
-    object qryEmitirVendaidproduto: TIntegerField
-      FieldName = 'idproduto'
-    end
-    object qryEmitirVendaitem_unidades: TIntegerField
-      FieldName = 'item_unidades'
-    end
-    object qryEmitirVendavalor_item: TFloatField
-      FieldName = 'valor_item'
-    end
-    object qryEmitirVendaidpagamento: TIntegerField
-      FieldName = 'idpagamento'
-    end
-    object qryEmitirVendaidvenda_1: TAutoIncField
-      FieldName = 'idvenda_1'
       ReadOnly = True
     end
     object qryEmitirVendavalor: TFloatField
@@ -672,10 +694,6 @@ object CadastroVendas: TCadastroVendas
     end
     object qryEmitirVendadata_venda: TDateTimeField
       FieldName = 'data_venda'
-    end
-    object qryEmitirVendaidcliente_1: TAutoIncField
-      FieldName = 'idcliente_1'
-      ReadOnly = True
     end
     object qryEmitirVendanome: TStringField
       FieldName = 'nome'
@@ -701,18 +719,22 @@ object CadastroVendas: TCadastroVendas
       FieldName = 'Cidade'
       Size = 50
     end
+    object qryEmitirVendaidpagamento: TIntegerField
+      FieldName = 'idpagamento'
+    end
   end
   object dsEmitirVenda: TDataSource
     DataSet = qryEmitirVenda
-    Left = 972
-    Top = 288
+    Left = 800
+    Top = 328
   end
   object dsConsultaItem: TDataSource
     DataSet = qryConsultaItem
-    Left = 752
-    Top = 384
+    Left = 992
+    Top = 284
   end
   object qryConsultaItem: TADOQuery
+    Active = True
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
     Parameters = <>
@@ -721,8 +743,8 @@ object CadastroVendas: TCadastroVendas
       'from produto'
       ''
       '')
-    Left = 756
-    Top = 340
+    Left = 936
+    Top = 284
     object qryConsultaItemidproduto: TAutoIncField
       FieldName = 'idproduto'
       ReadOnly = True
@@ -738,43 +760,78 @@ object CadastroVendas: TCadastroVendas
   end
   object dsIncluirItem: TDataSource
     DataSet = qryIncluirItem
-    Left = 848
-    Top = 464
+    Left = 800
+    Top = 384
   end
   object qryIncluirItem: TADOQuery
-    Active = True
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
-    DataSource = dsConsultaItem
-    Parameters = <>
+    AfterOpen = qryIncluirItemAfterOpen
+    Parameters = <
+      item
+        Name = 'idvenda'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
     SQL.Strings = (
+      'Select '
+      'item_venda.*'
+      'from item_venda'
       
-        'Select produto.idproduto, produto.nome, produto.valor_produto, i' +
-        'tem_venda.item_unidades, (valor_produto * item_unidades) as Tota' +
-        'l'
-      'from produto'
-      
-        'inner join item_venda on produto.idproduto = item_venda.idprodut' +
-        'o')
-    Left = 848
-    Top = 420
-    object qryIncluirItemidproduto: TAutoIncField
-      FieldName = 'idproduto'
+        'inner join pagamento on pagamento.idpagamento = item_venda.idpag' +
+        'amento'
+      'where item_venda.idvenda = :idvenda')
+    Left = 724
+    Top = 384
+    object qryIncluirItemiditem_venda: TAutoIncField
+      FieldName = 'iditem_venda'
       ReadOnly = True
     end
-    object qryIncluirItemnome: TWideStringField
-      FieldName = 'nome'
-      FixedChar = True
-      Size = 50
+    object qryIncluirItemidvenda: TIntegerField
+      FieldName = 'idvenda'
     end
-    object qryIncluirItemvalor_produto: TFloatField
-      FieldName = 'valor_produto'
+    object qryIncluirItemidproduto: TIntegerField
+      FieldName = 'idproduto'
     end
     object qryIncluirItemitem_unidades: TIntegerField
       FieldName = 'item_unidades'
     end
-    object qryIncluirItemTotal: TFloatField
-      FieldName = 'Total'
+    object qryIncluirItemvalor_item: TFloatField
+      FieldName = 'valor_item'
+    end
+    object qryIncluirItemnomeproduto: TStringField
+      FieldName = 'nomeproduto'
+      FixedChar = True
+      Size = 30
+    end
+    object qryIncluirItemidpagamento: TIntegerField
+      FieldName = 'idpagamento'
+    end
+  end
+  object dsPagamento: TDataSource
+    DataSet = qryPagamento
+    Left = 996
+    Top = 380
+  end
+  object qryPagamento: TADOQuery
+    Connection = LojaMenu.conLoja
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'Select *'
+      'from pagamento')
+    Left = 920
+    Top = 384
+    object qryPagamentonomepagamento: TWideStringField
+      FieldName = 'nomepagamento'
+      FixedChar = True
+      Size = 50
+    end
+    object qryPagamentoidpagamento: TAutoIncField
+      FieldName = 'idpagamento'
       ReadOnly = True
     end
   end

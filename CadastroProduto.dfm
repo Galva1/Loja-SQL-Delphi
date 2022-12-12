@@ -50,7 +50,7 @@ object CadastroProdutos: TCadastroProdutos
       Top = 41
       Width = 545
       Height = 412
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       object ts1: TTabSheet
@@ -131,7 +131,7 @@ object CadastroProdutos: TCadastroProdutos
           OnKeyDown = edtConsultaProdutoKeyDown
         end
         object btnBuscarProduto: TButton
-          Left = 424
+          Left = 428
           Top = 16
           Width = 61
           Height = 29

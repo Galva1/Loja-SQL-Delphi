@@ -31,6 +31,7 @@ type
       Shift: TShiftState);
     procedure btnSelecionarCliClick(Sender: TObject);
     procedure btnSaircliClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -94,6 +95,12 @@ end;
 procedure TpesquisarCliente.btnSaircliClick(Sender: TObject);
 begin
   pesquisarCliente.Close;
+end;
+
+procedure TpesquisarCliente.FormActivate(Sender: TObject);
+begin
+  edtConsulta.SetFocus;
+    
 end;
 
 end.
