@@ -100,7 +100,7 @@ end;
 procedure TpesquisarCliente.FormActivate(Sender: TObject);
 begin
   edtConsulta.SetFocus;
-    
+
 end;
 
 end.
