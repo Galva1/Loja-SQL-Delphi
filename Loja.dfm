@@ -457,7 +457,7 @@ object LojaMenu: TLojaMenu
         TabOrder = 0
         OnClick = pnlCadastroVendaClick
       end
-      object pnl10: TPanel
+      object pnlConsultaVendas: TPanel
         Left = 0
         Top = 28
         Width = 101
@@ -471,6 +471,7 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnClick = pnlConsultaVendasClick
       end
     end
   end

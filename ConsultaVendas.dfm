@@ -88,7 +88,7 @@ object ConsultaVenda: TConsultaVenda
           Visible = True
         end>
     end
-    object cbb1: TComboBox
+    object cbbConsulta: TComboBox
       Left = 8
       Top = 64
       Width = 93
@@ -99,11 +99,18 @@ object ConsultaVenda: TConsultaVenda
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ItemHeight = 16
+      ItemIndex = 0
       ParentFont = False
       TabOrder = 2
-      Text = 'cbbConsultaVenda'
+      Text = 'ID Venda'
+      Items.Strings = (
+        'ID Venda'
+        'Data'
+        'ID Cliente'
+        'Nome Cliente'
+        'CPF')
     end
-    object edt1: TEdit
+    object edtConsultaVenda: TEdit
       Left = 112
       Top = 64
       Width = 321
@@ -115,16 +122,15 @@ object ConsultaVenda: TConsultaVenda
       Font.Style = []
       ParentFont = False
       TabOrder = 3
-      Text = 'edtConsultaVenda'
     end
-    object btn1: TButton
+    object btnBuscarVenda: TButton
       Left = 448
       Top = 60
       Width = 53
       Height = 33
       Caption = 'Pesquisar'
       TabOrder = 4
-      OnClick = btn1Click
+      OnClick = btnBuscarVendaClick
     end
   end
   object qryConsultaVenda: TADOQuery

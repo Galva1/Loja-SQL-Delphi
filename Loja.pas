@@ -16,7 +16,7 @@ type
     pnlCadastroCliente: TPanel;
     pnlCadastroProduto: TPanel;
     pnlCadastroVenda: TPanel;
-    pnl10: TPanel;
+    pnlConsultaVendas: TPanel;
     pnlOCadastro: TPanel;
     lblLogo: TLabel;
     imgLogo: TImage;
@@ -29,6 +29,7 @@ type
     procedure pnlCadastroProdutoClick(Sender: TObject);
     procedure pnlVendasClick(Sender: TObject);
     procedure pnlCadastroVendaClick(Sender: TObject);
+    procedure pnlConsultaVendasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,7 +41,7 @@ var
 
 implementation
 
-uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes;
+uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes, ConsultaVendas;
 
 
 {$R *.dfm}
@@ -99,6 +100,16 @@ begin
     CadastroVendas.ShowModal;
   finally
     CadastroVendas.Free;
+  end;
+end;
+
+procedure TLojaMenu.pnlConsultaVendasClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TConsultaVenda, ConsultaVenda);
+    ConsultaVenda.ShowModal;
+  finally
+    ConsultaVenda.Free;
   end;
 end;
 

@@ -23,7 +23,7 @@ object CadastroVendas: TCadastroVendas
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
-    object lbl2: TLabel
+    object lblNvenda: TLabel
       Left = 20
       Top = 252
       Width = 68
@@ -36,7 +36,7 @@ object CadastroVendas: TCadastroVendas
       Font.Style = []
       ParentFont = False
     end
-    object lbl3: TLabel
+    object lblFormaPagamento: TLabel
       Left = 120
       Top = 252
       Width = 131
@@ -49,7 +49,7 @@ object CadastroVendas: TCadastroVendas
       Font.Style = []
       ParentFont = False
     end
-    object lbl4: TLabel
+    object lblVencimento: TLabel
       Left = 324
       Top = 252
       Width = 85
@@ -350,7 +350,7 @@ object CadastroVendas: TCadastroVendas
         TabOrder = 1
       end
     end
-    object pgc1: TPageControl
+    object pgcItem: TPageControl
       Left = 0
       Top = 308
       Width = 617

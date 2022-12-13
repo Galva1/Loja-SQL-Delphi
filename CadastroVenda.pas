@@ -30,7 +30,7 @@ type
     lbl1: TLabel;
     qryConsultaCliente: TADOQuery;
     dsConsultaCliente: TDataSource;
-    pgc1: TPageControl;
+    pgcItem: TPageControl;
     tsItem: TTabSheet;
     btnConfirmar: TButton;
     btnCancelar: TButton;
@@ -47,9 +47,9 @@ type
     qryConsultaItemnome: TWideStringField;
     qryConsultaItemvalor_produto: TFloatField;
     dbedtNumeroVenda: TDBEdit;
-    lbl2: TLabel;
-    lbl3: TLabel;
-    lbl4: TLabel;
+    lblNvenda: TLabel;
+    lblFormaPagamento: TLabel;
+    lblVencimento: TLabel;
     edtCodProduto: TEdit;
     dbedtnome: TDBEdit;
     edtqtdproduto: TEdit;
@@ -181,7 +181,6 @@ procedure TCadastroVendas.btn1Click(Sender: TObject);
 begin
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
-
   try
     qryIncluirItem.Insert;
     qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
@@ -190,7 +189,9 @@ begin
     qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
     qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
     qryIncluirItemidpagamento.Value   := qryEmitirVendaidpagamento.Value;
-//    qryIncluirItemidpagamento.Value   := StrToInt(edtTESTEPAGAMENTO.Text);
+    //qryEmitirVenda.Edit;
+    //qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+
     qryIncluirItem.Post;
   except
     on e: Exception do
@@ -263,6 +264,7 @@ end;
 
 procedure TCadastroVendas.btnConfirmarClick(Sender: TObject);
 begin
+
   qryEmitirVenda.Connection.CommitTrans;
 end;
 
