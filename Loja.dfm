@@ -437,7 +437,7 @@ object LojaMenu: TLojaMenu
       Left = 100
       Top = 36
       Width = 101
-      Height = 57
+      Height = 85
       BevelOuter = bvSpace
       TabOrder = 2
       Visible = False
@@ -472,6 +472,22 @@ object LojaMenu: TLojaMenu
         ParentFont = False
         TabOrder = 1
         OnClick = pnlConsultaVendasClick
+      end
+      object pnlRelatorioVendas: TPanel
+        Left = 0
+        Top = 56
+        Width = 101
+        Height = 29
+        Caption = 'Relat'#243'rio'
+        Color = 13423300
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = pnlRelatorioVendasClick
       end
     end
   end

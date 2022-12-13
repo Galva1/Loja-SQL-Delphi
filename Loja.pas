@@ -21,6 +21,7 @@ type
     lblLogo: TLabel;
     imgLogo: TImage;
     conLoja: TADOConnection;
+    pnlRelatorioVendas: TPanel;
     procedure pnlCadastroClick(Sender: TObject);
     procedure pnlGeralMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -30,6 +31,7 @@ type
     procedure pnlVendasClick(Sender: TObject);
     procedure pnlCadastroVendaClick(Sender: TObject);
     procedure pnlConsultaVendasClick(Sender: TObject);
+    procedure pnlRelatorioVendasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +43,7 @@ var
 
 implementation
 
-uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes, ConsultaVendas;
+uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes, ConsultaVendas, RelatorioVenda;
 
 
 {$R *.dfm}
@@ -110,6 +112,16 @@ begin
     ConsultaVenda.ShowModal;
   finally
     ConsultaVenda.Free;
+  end;
+end;
+
+procedure TLojaMenu.pnlRelatorioVendasClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TRelatorioVendas, RelatorioVendas);
+    RelatorioVendas.ShowModal;
+  finally
+    RelatorioVendas.Free;
   end;
 end;
 
