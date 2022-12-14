@@ -50,6 +50,8 @@ object ConsultaVenda: TConsultaVenda
       Width = 501
       Height = 229
       DataSource = dsConsultaVenda
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -122,6 +124,7 @@ object ConsultaVenda: TConsultaVenda
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      OnKeyDown = edtConsultaVendaKeyDown
     end
     object btnBuscarVenda: TButton
       Left = 448
@@ -132,10 +135,20 @@ object ConsultaVenda: TConsultaVenda
       TabOrder = 4
       OnClick = btnBuscarVendaClick
     end
+    object btnimprimirVenda: TButton
+      Left = 412
+      Top = 372
+      Width = 89
+      Height = 29
+      Caption = 'Imprimir'
+      TabOrder = 5
+      OnClick = btnimprimirVendaClick
+    end
   end
   object qryConsultaVenda: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
+    DataSource = RelatorioVendas.dsRelatorioVenda
     Parameters = <>
     SQL.Strings = (
       'select venda.*, cliente.nome, cliente.cpf'
