@@ -15,7 +15,7 @@ object LojaMenu: TLojaMenu
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeral: TPanel
-    Left = 228
+    Left = 224
     Top = 12
     Width = 533
     Height = 441
@@ -437,11 +437,11 @@ object LojaMenu: TLojaMenu
       Left = 100
       Top = 36
       Width = 101
-      Height = 57
+      Height = 85
       BevelOuter = bvSpace
       TabOrder = 2
       Visible = False
-      object pnl9: TPanel
+      object pnlCadastroVenda: TPanel
         Left = 0
         Top = 0
         Width = 101
@@ -455,9 +455,9 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        OnClick = pnl9Click
+        OnClick = pnlCadastroVendaClick
       end
-      object pnl10: TPanel
+      object pnlConsultaVendas: TPanel
         Left = 0
         Top = 28
         Width = 101
@@ -471,6 +471,23 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        OnClick = pnlConsultaVendasClick
+      end
+      object pnlRelatorioVendas: TPanel
+        Left = 0
+        Top = 56
+        Width = 101
+        Height = 29
+        Caption = 'Relat'#243'rio'
+        Color = 13423300
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = pnlRelatorioVendasClick
       end
     end
   end
@@ -482,7 +499,7 @@ object LojaMenu: TLojaMenu
       'l File Name="";Server SPN="";Authentication="";Access Token=""'
     LoginPrompt = False
     Provider = 'MSOLEDBSQL.1'
-    Left = 916
-    Top = 20
+    Left = 776
+    Top = 16
   end
 end

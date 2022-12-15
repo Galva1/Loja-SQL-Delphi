@@ -15,12 +15,13 @@ type
     pnlOVendas: TPanel;
     pnlCadastroCliente: TPanel;
     pnlCadastroProduto: TPanel;
-    pnl9: TPanel;
-    pnl10: TPanel;
+    pnlCadastroVenda: TPanel;
+    pnlConsultaVendas: TPanel;
     pnlOCadastro: TPanel;
     lblLogo: TLabel;
     imgLogo: TImage;
     conLoja: TADOConnection;
+    pnlRelatorioVendas: TPanel;
     procedure pnlCadastroClick(Sender: TObject);
     procedure pnlGeralMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -28,7 +29,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure pnlCadastroProdutoClick(Sender: TObject);
     procedure pnlVendasClick(Sender: TObject);
-    procedure pnl9Click(Sender: TObject);
+    procedure pnlCadastroVendaClick(Sender: TObject);
+    procedure pnlConsultaVendasClick(Sender: TObject);
+    procedure pnlRelatorioVendasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,7 +43,7 @@ var
 
 implementation
 
-uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes;
+uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes, ConsultaVendas, RelatorioVenda;
 
 
 {$R *.dfm}
@@ -89,9 +92,10 @@ procedure TLojaMenu.pnlVendasClick(Sender: TObject);
 begin
   pnlOVendas.Visible := True;
   pnlOCadastro.Visible := False;
+  
 end;
 
-procedure TLojaMenu.pnl9Click(Sender: TObject);
+procedure TLojaMenu.pnlCadastroVendaClick(Sender: TObject);
 begin
   try
     Application.CreateForm(TCadastroVendas, CadastroVendas);
@@ -101,4 +105,24 @@ begin
   end;
 end;
 
-end.                                    
+procedure TLojaMenu.pnlConsultaVendasClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TConsultaVenda, ConsultaVenda);
+    ConsultaVenda.ShowModal;
+  finally
+    ConsultaVenda.Free;
+  end;
+end;
+
+procedure TLojaMenu.pnlRelatorioVendasClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TRelatorioVendas, RelatorioVendas);
+    RelatorioVendas.ShowModal;
+  finally
+    RelatorioVendas.Free;
+  end;
+end;
+
+end.

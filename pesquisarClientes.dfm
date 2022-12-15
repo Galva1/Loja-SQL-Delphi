@@ -11,6 +11,7 @@ object pesquisarCliente: TpesquisarCliente
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPesquisarClienteGeral: TPanel
@@ -124,7 +125,7 @@ object pesquisarCliente: TpesquisarCliente
         end>
     end
     object btnSelecionarCli: TButton
-      Left = 272
+      Left = 268
       Top = 244
       Width = 53
       Height = 29

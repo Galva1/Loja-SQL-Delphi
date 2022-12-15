@@ -175,7 +175,7 @@ begin
       begin
         qryDadosProduto.Delete;
         qryDadosProduto.Active := False;
-        ShowMessage('O registro foi excluído com sucesso!');
+        ShowMessage('O Registro foi excluído com sucesso!');
 
       end;
     IDNO:

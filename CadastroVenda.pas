@@ -30,7 +30,7 @@ type
     lbl1: TLabel;
     qryConsultaCliente: TADOQuery;
     dsConsultaCliente: TDataSource;
-    pgc1: TPageControl;
+    pgcItem: TPageControl;
     tsItem: TTabSheet;
     btnConfirmar: TButton;
     btnCancelar: TButton;
@@ -47,10 +47,9 @@ type
     qryConsultaItemnome: TWideStringField;
     qryConsultaItemvalor_produto: TFloatField;
     dbedtNumeroVenda: TDBEdit;
-    cbb1: TComboBox;
-    lbl2: TLabel;
-    lbl3: TLabel;
-    lbl4: TLabel;
+    lblNvenda: TLabel;
+    lblFormaPagamento: TLabel;
+    lblVencimento: TLabel;
     edtCodProduto: TEdit;
     dbedtnome: TDBEdit;
     edtqtdproduto: TEdit;
@@ -60,31 +59,41 @@ type
     lblDesc: TLabel;
     lblQTD: TLabel;
     lblValorTotal: TLabel;
-    qryEmitirVendaiditem_venda: TAutoIncField;
-    qryEmitirVendaidvenda: TIntegerField;
-    qryEmitirVendaidproduto: TIntegerField;
-    qryEmitirVendaitem_unidades: TIntegerField;
-    qryEmitirVendavalor_item: TFloatField;
-    qryEmitirVendaidpagamento: TIntegerField;
-    qryEmitirVendaidvenda_1: TAutoIncField;
+    qryConsultaItemidproduto: TAutoIncField;
+    dsIncluirItem: TDataSource;
+    qryIncluirItem: TADOQuery;
+    qryIncluirItemiditem_venda: TAutoIncField;
+    qryIncluirItemidvenda: TIntegerField;
+    qryIncluirItemidproduto: TIntegerField;
+    qryIncluirItemitem_unidades: TIntegerField;
+    qryIncluirItemvalor_item: TFloatField;
+    btnNovaVenda: TButton;
+    qryEmitirVendaidvenda: TAutoIncField;
     qryEmitirVendavalor: TFloatField;
     qryEmitirVendaidcliente: TIntegerField;
     qryEmitirVendadata_venda: TDateTimeField;
-    qryEmitirVendaidcliente_1: TAutoIncField;
     qryEmitirVendanome: TStringField;
     qryEmitirVendacpf: TBCDField;
     dtfldEmitirVendadata_nascimento: TDateField;
     qryEmitirVendaEndereo: TStringField;
     qryEmitirVendaBairro: TWideStringField;
     qryEmitirVendaCidade: TWideStringField;
-    qryConsultaItemidproduto: TAutoIncField;
-    dsIncluirItem: TDataSource;
-    qryIncluirItem: TADOQuery;
-    qryIncluirItemidproduto: TAutoIncField;
-    qryIncluirItemnome: TWideStringField;
-    qryIncluirItemvalor_produto: TFloatField;
-    qryIncluirItemitem_unidades: TIntegerField;
-    qryIncluirItemTotal: TFloatField;
+    qryConsultaClienteidcliente: TAutoIncField;
+    qryConsultaClientenome: TStringField;
+    qryConsultaClientecpf: TBCDField;
+    dtfldConsultaClientedata_nascimento: TDateField;
+    qryConsultaClienteEndereo: TStringField;
+    qryConsultaClienteBairro: TWideStringField;
+    qryConsultaClienteCidade: TWideStringField;
+    qryIncluirItemnomeproduto: TStringField;
+    dblkcbbidpagamento: TDBLookupComboBox;
+    qryIncluirItemidpagamento: TIntegerField;
+    qryEmitirVendaidpagamento: TIntegerField;
+    dsPagamento: TDataSource;
+    qryPagamento: TADOQuery;
+    qryPagamentonomepagamento: TWideStringField;
+    qryPagamentoidpagamento: TAutoIncField;
+    fltfldIncluirItemvalor: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -95,6 +104,10 @@ type
     procedure edtCodProdutoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btn1Click(Sender: TObject);
+    procedure btnNovaVendaClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure qryIncluirItemAfterOpen(DataSet: TDataSet);
+    procedure btnConfirmarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -127,6 +140,7 @@ procedure TCadastroVendas.FormCreate(Sender: TObject);
 begin
   pnlDataAtual.Caption := '  ' + DateToStr(Date);
   pnlHoraAtual.Caption := '  ' + TimeToStr(Time);
+  qryEmitirVenda.Connection.BeginTrans;
 end;
 
 procedure TCadastroVendas.FormActivate(Sender: TObject);
@@ -166,11 +180,110 @@ end;
 
 procedure TCadastroVendas.btn1Click(Sender: TObject);
 begin
-  qryIncluirItem.Insert;
-  qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
-  qryIncluirItemnome.Value := qryConsultaItemnome.Value;
-  qryIncluirItem.Close;
-  qryIncluirItem.Open;
+  if not qryIncluirItem.Active then
+    qryIncluirItem.Open;
+  try
+    qryIncluirItem.Insert;
+    qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
+    qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
+    qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
+    qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
+    qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
+    qryIncluirItemidpagamento.Value   := qryEmitirVendaidpagamento.Value;
+    qryEmitirVenda.Edit;
+    qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+
+    qryIncluirItem.Post;
+  except
+    on e: Exception do
+    begin
+      qryIncluirItem.CancelUpdates;
+      MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
+    end;
+  end;
+end;
+
+procedure TCadastroVendas.btnNovaVendaClick(Sender: TObject);
+begin
+  if not qryEmitirVenda.Active then
+    qryEmitirVenda.Open;
+
+  if not qryConsultaCliente.Active then
+    Exit;
+
+  if not qryPagamento.Active then
+    qryPagamento.Open;
+
+  try
+    qryEmitirVenda.Insert;
+    qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
+    qryEmitirVendadata_venda.Value    := Now();
+    qryEmitirVendavalor.Value         := 0;
+    qryEmitirVenda.Post;
+  except
+    on e:Exception do
+    begin
+      qryEmitirVenda.CancelUpdates;
+      MessageDlg('Erro ao tentar iniciar venda' + #13 + e.Message, mtError, [mbok], 0);
+    end;
+  end;
+end;
+
+procedure TCadastroVendas.btnCancelarClick(Sender: TObject);
+begin
+  if dbedtNumeroVenda.Text <> '' then
+  begin
+    case Application.MessageBox('Deseja realmente excluir essa venda?', 'Exclusão de venda', MB_YESNO + MB_ICONQUESTION)  of
+    IDYES:
+      begin
+        try
+          qryEmitirVenda.Connection.RollbackTrans;
+          ShowMessage('A venda foi cancelada com sucesso!');
+          CadastroVendas.Close;
+        except
+          ShowMessage('Não foi possível cancelar a sua venda.');
+        end;
+      end;
+    IDNO:
+      begin
+        Exit;
+      end;
+    end;
+  end
+  else
+  begin
+    qryEmitirVenda.Connection.RollbackTrans;
+    CadastroVendas.Close;
+  end;
+
+end;
+
+procedure TCadastroVendas.qryIncluirItemAfterOpen(DataSet: TDataSet);
+begin
+  qryIncluirItem.Properties['Unique Table'].Value := 'item_venda';
+end;
+
+procedure TCadastroVendas.btnConfirmarClick(Sender: TObject);
+begin
+  case Application.MessageBox('Confirmar venda?', 'Confirmação de venda', MB_YESNO + MB_ICONQUESTION)  of
+    IDYES:
+      begin
+        try
+          ShowMessage('A venda foi concluída com sucesso!');
+          qryEmitirVenda.Connection.CommitTrans;
+          CadastroVendas.Close;
+        except
+          on e:Exception do
+          begin
+            MessageDlg('Erro ao tentar concluir sua venda!' + #13 + e.Message, mtError, [mbok], 0);
+          end;
+        end;
+      end;
+    IDNO:
+      begin
+        Exit;
+      end;
+  end;
 end;
 
 end.

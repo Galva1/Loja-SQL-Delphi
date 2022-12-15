@@ -131,7 +131,7 @@ object CadastroProdutos: TCadastroProdutos
           OnKeyDown = edtConsultaProdutoKeyDown
         end
         object btnBuscarProduto: TButton
-          Left = 424
+          Left = 428
           Top = 16
           Width = 61
           Height = 29
