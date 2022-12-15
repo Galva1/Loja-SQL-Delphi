@@ -499,7 +499,7 @@ object LojaMenu: TLojaMenu
       'l File Name="";Server SPN="";Authentication="";Access Token=""'
     LoginPrompt = False
     Provider = 'MSOLEDBSQL.1'
-    Left = 916
-    Top = 20
+    Left = 776
+    Top = 16
   end
 end

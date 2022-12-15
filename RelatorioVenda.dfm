@@ -1,8 +1,8 @@
 object RelatorioVendas: TRelatorioVendas
-  Left = 171
-  Top = 154
-  Width = 1410
-  Height = 619
+  Left = 216
+  Top = 116
+  Width = 1310
+  Height = 739
   Caption = 'RelatorioVendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -13,19 +13,19 @@ object RelatorioVendas: TRelatorioVendas
   OldCreateOrder = False
   Scaled = False
   OnActivate = FormActivate
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object qckrpRelatorioVenda: TQuickRep
-    Left = 96
-    Top = 44
-    Width = 833
-    Height = 585
+    Left = 112
+    Top = 36
+    Width = 761
+    Height = 533
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
     Frame.DrawLeft = False
     Frame.DrawRight = False
+    AfterPreview = qckrpRelatorioVendaAfterPreview
     DataSet = qryRelatorioVenda
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -64,7 +64,7 @@ object RelatorioVendas: TRelatorioVendas
     object TitleBand1: TQRBand
       Left = 38
       Top = 38
-      Width = 757
+      Width = 685
       Height = 23
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -77,11 +77,11 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewPage = False
       Size.Values = (
         60.854166666666670000
-        2002.895833333333000000)
+        1812.395833333333000000)
       BandType = rbPageHeader
       object QRSysData1: TQRSysData
-        Left = 564
-        Top = 4
+        Left = 561
+        Top = 2
         Width = 119
         Height = 17
         Frame.Color = clBlack
@@ -91,8 +91,8 @@ object RelatorioVendas: TRelatorioVendas
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1492.250000000000000000
-          10.583333333333330000
+          1484.312500000000000000
+          5.291666666666667000
           314.854166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -106,8 +106,8 @@ object RelatorioVendas: TRelatorioVendas
     object qrbnddetalhesMAE: TQRBand
       Left = 38
       Top = 97
-      Width = 757
-      Height = 156
+      Width = 685
+      Height = 108
       Frame.Color = clBlack
       Frame.DrawTop = True
       Frame.DrawBottom = True
@@ -118,8 +118,8 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        412.750000000000000000
-        2002.895833333333000000)
+        285.750000000000000000
+        1812.395833333333000000)
       BandType = rbDetail
       object qrlbl6: TQRLabel
         Left = 4
@@ -150,14 +150,14 @@ object RelatorioVendas: TRelatorioVendas
         Left = 108
         Top = 8
         Width = 39
-        Height = 15
+        Height = 20
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          39.687500000000000000
+          52.916666666666670000
           285.750000000000000000
           21.166666666666670000
           103.187500000000000000)
@@ -294,7 +294,7 @@ object RelatorioVendas: TRelatorioVendas
       end
       object qrlbl2: TQRLabel
         Left = 4
-        Top = 36
+        Top = 40
         Width = 92
         Height = 17
         Frame.Color = clBlack
@@ -305,7 +305,7 @@ object RelatorioVendas: TRelatorioVendas
         Size.Values = (
           44.979166666666670000
           10.583333333333330000
-          95.250000000000000000
+          105.833333333333300000
           243.416666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -319,7 +319,7 @@ object RelatorioVendas: TRelatorioVendas
       end
       object QRDBidProduto: TQRDBText
         Left = 108
-        Top = 36
+        Top = 40
         Width = 46
         Height = 21
         Frame.Color = clBlack
@@ -330,7 +330,7 @@ object RelatorioVendas: TRelatorioVendas
         Size.Values = (
           55.562500000000000000
           285.750000000000000000
-          95.250000000000000000
+          105.833333333333300000
           121.708333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -556,7 +556,7 @@ object RelatorioVendas: TRelatorioVendas
     object TitleBand2: TQRBand
       Left = 38
       Top = 61
-      Width = 757
+      Width = 685
       Height = 36
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -569,7 +569,7 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewPage = False
       Size.Values = (
         95.250000000000000000
-        2002.895833333333000000)
+        1812.395833333333000000)
       BandType = rbTitle
       object QRLabel1: TQRLabel
         Left = 269
@@ -602,6 +602,25 @@ object RelatorioVendas: TRelatorioVendas
         WordWrap = True
         FontSize = 12
       end
+    end
+    object qrbnd1: TQRBand
+      Left = 38
+      Top = 205
+      Width = 685
+      Height = 85
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      AlignToBottom = False
+      Color = clWhite
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        224.895833333333300000
+        1812.395833333333000000)
+      BandType = rbSubDetail
     end
   end
   object qryRelatorioVenda: TADOQuery

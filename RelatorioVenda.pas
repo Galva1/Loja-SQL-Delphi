@@ -31,9 +31,9 @@ type
     QRDBvalorItem: TQRDBText;
     qrlbl5: TQRLabel;
     QRDBvalorTotal: TQRDBText;
-    procedure FormCreate(Sender: TObject);
-    procedure btn1Click(Sender: TObject);
+    qrbnd1: TQRBand;
     procedure FormActivate(Sender: TObject);
+    procedure qckrpRelatorioVendaAfterPreview(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,26 +49,15 @@ uses Loja;
 
 {$R *.dfm}
 
-procedure TRelatorioVendas.FormCreate(Sender: TObject);
-begin
-
-
-  
-
-  //qryRel.Parameters.ParamByName('idcliente').Value := FloatToStr(pesquisarCliente.dbgrdconsultacli.Fields[0].Value);
-end;
-
-procedure TRelatorioVendas.btn1Click(Sender: TObject);
-begin
-//  qryRelatorioVenda.Close;
-//  qryRelatorioVenda.Parameters.ParamByName('idvenda').Value := FloatToStr(ConsultaVenda.dbgrdConsultaVenda.Fields[0].Value);
-//  qryRelatorioVenda.Open;
-//  qckrpRelatorioVenda.Preview;
-end;
-
 procedure TRelatorioVendas.FormActivate(Sender: TObject);
 begin
   qryRelatorioVenda.Active;
+end;
+
+procedure TRelatorioVendas.qckrpRelatorioVendaAfterPreview(
+  Sender: TObject);
+begin
+  RelatorioVendas.Close;
 end;
 
 end.

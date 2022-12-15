@@ -778,11 +778,12 @@ object CadastroVendas: TCadastroVendas
       end>
     SQL.Strings = (
       'Select '
-      'item_venda.*'
+      'item_venda.*, venda.valor'
       'from item_venda'
       
         'inner join pagamento on pagamento.idpagamento = item_venda.idpag' +
         'amento'
+      'inner join venda on venda.idvenda = item_venda.idvenda'
       'where item_venda.idvenda = :idvenda')
     Left = 724
     Top = 384
@@ -809,6 +810,9 @@ object CadastroVendas: TCadastroVendas
     end
     object qryIncluirItemidpagamento: TIntegerField
       FieldName = 'idpagamento'
+    end
+    object fltfldIncluirItemvalor: TFloatField
+      FieldName = 'valor'
     end
   end
   object dsPagamento: TDataSource

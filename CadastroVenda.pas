@@ -93,6 +93,7 @@ type
     qryPagamento: TADOQuery;
     qryPagamentonomepagamento: TWideStringField;
     qryPagamentoidpagamento: TAutoIncField;
+    fltfldIncluirItemvalor: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -189,8 +190,8 @@ begin
     qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
     qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
     qryIncluirItemidpagamento.Value   := qryEmitirVendaidpagamento.Value;
-    //qryEmitirVenda.Edit;
-    //qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+    qryEmitirVenda.Edit;
+    qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
 
     qryIncluirItem.Post;
   except
@@ -264,8 +265,25 @@ end;
 
 procedure TCadastroVendas.btnConfirmarClick(Sender: TObject);
 begin
-
-  qryEmitirVenda.Connection.CommitTrans;
+  case Application.MessageBox('Confirmar venda?', 'Confirmação de venda', MB_YESNO + MB_ICONQUESTION)  of
+    IDYES:
+      begin
+        try
+          ShowMessage('A venda foi concluída com sucesso!');
+          qryEmitirVenda.Connection.CommitTrans;
+          CadastroVendas.Close;
+        except
+          on e:Exception do
+          begin
+            MessageDlg('Erro ao tentar concluir sua venda!' + #13 + e.Message, mtError, [mbok], 0);
+          end;
+        end;
+      end;
+    IDNO:
+      begin
+        Exit;
+      end;
+  end;
 end;
 
 end.

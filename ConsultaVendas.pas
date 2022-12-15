@@ -103,7 +103,6 @@ begin
     RelatorioVendas.qryRelatorioVenda.Parameters.ParamByName('idvenda').Value := FloatToStr(ConsultaVenda.dbgrdConsultaVenda.Fields[0].Value);
     RelatorioVendas.qryRelatorioVenda.Open;
     RelatorioVendas.qckrpRelatorioVenda.Preview;
-    RelatorioVendas.ShowModal;
   finally
     RelatorioVendas.Free;
   end;
