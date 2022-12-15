@@ -15,8 +15,8 @@ object LojaMenu: TLojaMenu
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeral: TPanel
-    Left = 224
-    Top = 12
+    Left = 232
+    Top = 16
     Width = 533
     Height = 441
     BevelOuter = bvNone
@@ -496,7 +496,7 @@ object LojaMenu: TLojaMenu
     ConnectionString = 
       'Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Persist Security ' +
       'Info=False;User ID="";Initial Catalog=LOJA;Data Source="";Initia' +
-      'l File Name="";Server SPN="";Authentication="";Access Token=""'
+      'l File Name="";Server SPN="";Authentication="";Access Token="";'
     LoginPrompt = False
     Provider = 'MSOLEDBSQL.1'
     Left = 776

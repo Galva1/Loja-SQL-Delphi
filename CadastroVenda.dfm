@@ -666,23 +666,19 @@ object CadastroVendas: TCadastroVendas
   object qryEmitirVenda: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
+    AfterOpen = qryEmitirVendaAfterOpen
     DataSource = dsConsultaCliente
     Parameters = <>
     SQL.Strings = (
-      
-        'Select venda.*, cliente.*, item_venda.idpagamento, pagamento.idp' +
-        'agamento, pagamento.nomepagamento'
+      'Select venda.*, pagamento.idpagamento, pagamento.nomepagamento'
       'from venda'
-      'inner join cliente on cliente.idcliente = venda.idvenda'
-      'inner join item_venda on item_venda.idvenda = venda.idvenda'
       
-        'inner join pagamento on pagamento.idpagamento = item_venda.idpag' +
-        'amento'
+        'inner join pagamento on pagamento.idpagamento = venda.idpagament' +
+        'o'
       'where 1 = 0')
     Left = 724
     Top = 332
     object qryEmitirVendaidvenda: TAutoIncField
-      AutoGenerateValue = arAutoInc
       FieldName = 'idvenda'
       ReadOnly = True
     end
@@ -692,35 +688,16 @@ object CadastroVendas: TCadastroVendas
     object qryEmitirVendaidcliente: TIntegerField
       FieldName = 'idcliente'
     end
-    object qryEmitirVendadata_venda: TDateTimeField
+    object qryEmitirVendadata_venda: TDateField
       FieldName = 'data_venda'
-    end
-    object qryEmitirVendanome: TStringField
-      FieldName = 'nome'
-      Size = 50
-    end
-    object qryEmitirVendacpf: TBCDField
-      FieldName = 'cpf'
-      Precision = 18
-      Size = 0
-    end
-    object dtfldEmitirVendadata_nascimento: TDateField
-      FieldName = 'data_nascimento'
-    end
-    object qryEmitirVendaEndereo: TStringField
-      FieldName = 'Endere'#231'o'
-      Size = 50
-    end
-    object qryEmitirVendaBairro: TWideStringField
-      FieldName = 'Bairro'
-      Size = 50
-    end
-    object qryEmitirVendaCidade: TWideStringField
-      FieldName = 'Cidade'
-      Size = 50
     end
     object qryEmitirVendaidpagamento: TIntegerField
       FieldName = 'idpagamento'
+    end
+    object qryEmitirVendanomepagamento: TWideStringField
+      FieldName = 'nomepagamento'
+      FixedChar = True
+      Size = 50
     end
   end
   object dsEmitirVenda: TDataSource
@@ -734,7 +711,6 @@ object CadastroVendas: TCadastroVendas
     Top = 284
   end
   object qryConsultaItem: TADOQuery
-    Active = True
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
     Parameters = <>
@@ -767,24 +743,11 @@ object CadastroVendas: TCadastroVendas
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
     AfterOpen = qryIncluirItemAfterOpen
-    Parameters = <
-      item
-        Name = 'idvenda'
-        Attributes = [paSigned, paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Size = 4
-        Value = Null
-      end>
+    Parameters = <>
     SQL.Strings = (
-      'Select '
-      'item_venda.*, venda.valor'
+      'Select item_venda.*'
       'from item_venda'
-      
-        'inner join pagamento on pagamento.idpagamento = item_venda.idpag' +
-        'amento'
-      'inner join venda on venda.idvenda = item_venda.idvenda'
-      'where item_venda.idvenda = :idvenda')
+      'where 1 = 0')
     Left = 724
     Top = 384
     object qryIncluirItemiditem_venda: TAutoIncField
@@ -807,12 +770,6 @@ object CadastroVendas: TCadastroVendas
       FieldName = 'nomeproduto'
       FixedChar = True
       Size = 30
-    end
-    object qryIncluirItemidpagamento: TIntegerField
-      FieldName = 'idpagamento'
-    end
-    object fltfldIncluirItemvalor: TFloatField
-      FieldName = 'valor'
     end
   end
   object dsPagamento: TDataSource
