@@ -21,7 +21,11 @@ type
     lblLogo: TLabel;
     imgLogo: TImage;
     conLoja: TADOConnection;
-    pnlRelatorioVendas: TPanel;
+    pnlRelatorio: TPanel;
+    pnlORelatorio: TPanel;
+    pnlRClientes: TPanel;
+    pnlRVendas: TPanel;
+    pnlRProdutos: TPanel;
     procedure pnlCadastroClick(Sender: TObject);
     procedure pnlGeralMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
@@ -32,6 +36,7 @@ type
     procedure pnlCadastroVendaClick(Sender: TObject);
     procedure pnlConsultaVendasClick(Sender: TObject);
     procedure pnlRelatorioVendasClick(Sender: TObject);
+    procedure pnlRelatorioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,6 +57,7 @@ procedure TLojaMenu.pnlCadastroClick(Sender: TObject);
 begin
   pnlOCadastro.Visible := True;
   pnlOVendas.Visible := False;
+  pnlORelatorio.Visible := False;
 
 end;
 
@@ -60,6 +66,7 @@ procedure TLojaMenu.pnlGeralMouseMove(Sender: TObject; Shift: TShiftState;
 begin
   pnlOCadastro.Visible := False;
   pnlOVendas.Visible := False;
+  pnlORelatorio.Visible := False;
 end;
 
 procedure TLojaMenu.pnlCadastroClienteClick(Sender: TObject);
@@ -92,7 +99,8 @@ procedure TLojaMenu.pnlVendasClick(Sender: TObject);
 begin
   pnlOVendas.Visible := True;
   pnlOCadastro.Visible := False;
-  
+  pnlORelatorio.Visible := False;
+
 end;
 
 procedure TLojaMenu.pnlCadastroVendaClick(Sender: TObject);
@@ -123,6 +131,13 @@ begin
   finally
     RelatorioVendas.Free;
   end;
+end;
+
+procedure TLojaMenu.pnlRelatorioClick(Sender: TObject);
+begin
+  pnlORelatorio.Visible := True;
+  pnlOVendas.Visible := False;
+  pnlOCadastro.Visible := False;
 end;
 
 end.

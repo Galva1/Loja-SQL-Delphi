@@ -54,7 +54,7 @@ type
     dbedtnome: TDBEdit;
     edtqtdproduto: TEdit;
     pnlvalorTotal: TPanel;
-    btn1: TButton;
+    btnIncluir: TButton;
     lblCodProduto: TLabel;
     lblDesc: TLabel;
     lblQTD: TLabel;
@@ -96,7 +96,7 @@ type
       Shift: TShiftState);
     procedure edtCodProdutoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure btn1Click(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
     procedure btnNovaVendaClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure qryIncluirItemAfterOpen(DataSet: TDataSet);
@@ -178,8 +178,9 @@ begin
 
 end;
 
-procedure TCadastroVendas.btn1Click(Sender: TObject);
+procedure TCadastroVendas.btnIncluirClick(Sender: TObject);
 begin
+  btnConfirmar.Enabled := True;
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
   try
@@ -193,17 +194,23 @@ begin
     //.SQL.Add('update venda set venda.valor = '+ (pnlvalorTotal.Caption) + ' where venda.idvenda = '+dbedtNumeroVenda.Text);
     //qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
     qryIncluirItem.Post;
+
+
+    if qryEmitirVenda.State = dsbrowse then
+      qryEmitirVenda.Edit;
+    qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+    qryEmitirVenda.Post;
   except
     on e: Exception do
     begin
-      qryIncluirItem.CancelUpdates;
+      qryIncluirItem.Cancel;
       MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
     end;
   end;
-  if qryEmitirVenda.State = dsbrowse then
-    qryEmitirVenda.Edit;
-  qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
-  qryEmitirVenda.Post;
+
+
+
+
 
 end;
 

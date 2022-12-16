@@ -18,8 +18,8 @@ object RelatorioVendas: TRelatorioVendas
   object qckrpRelatorioVenda: TQuickRep
     Left = 112
     Top = 36
-    Width = 761
-    Height = 533
+    Width = 794
+    Height = 1123
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -64,7 +64,7 @@ object RelatorioVendas: TRelatorioVendas
     object TitleBand1: TQRBand
       Left = 38
       Top = 38
-      Width = 685
+      Width = 718
       Height = 23
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -77,12 +77,12 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewPage = False
       Size.Values = (
         60.854166666666670000
-        1812.395833333333000000)
+        1899.708333333333000000)
       BandType = rbPageHeader
       object QRSysData1: TQRSysData
         Left = 561
         Top = 2
-        Width = 119
+        Width = 68
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -93,7 +93,7 @@ object RelatorioVendas: TRelatorioVendas
           44.979166666666670000
           1484.312500000000000000
           5.291666666666667000
-          314.854166666666700000)
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -106,7 +106,7 @@ object RelatorioVendas: TRelatorioVendas
     object qrbnddetalhesMAE: TQRBand
       Left = 38
       Top = 97
-      Width = 685
+      Width = 718
       Height = 108
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -119,7 +119,7 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewPage = False
       Size.Values = (
         285.750000000000000000
-        1812.395833333333000000)
+        1899.708333333333000000)
       BandType = rbDetail
       object qrlbl6: TQRLabel
         Left = 4
@@ -556,7 +556,7 @@ object RelatorioVendas: TRelatorioVendas
     object TitleBand2: TQRBand
       Left = 38
       Top = 61
-      Width = 685
+      Width = 718
       Height = 36
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -569,7 +569,7 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewPage = False
       Size.Values = (
         95.250000000000000000
-        1812.395833333333000000)
+        1899.708333333333000000)
       BandType = rbTitle
       object QRLabel1: TQRLabel
         Left = 269
@@ -606,7 +606,7 @@ object RelatorioVendas: TRelatorioVendas
     object qrbnd1: TQRBand
       Left = 38
       Top = 205
-      Width = 685
+      Width = 718
       Height = 85
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -619,7 +619,7 @@ object RelatorioVendas: TRelatorioVendas
       ForceNewPage = False
       Size.Values = (
         224.895833333333300000
-        1812.395833333333000000)
+        1899.708333333333000000)
       BandType = rbSubDetail
     end
   end
@@ -638,7 +638,7 @@ object RelatorioVendas: TRelatorioVendas
     SQL.Strings = (
       
         'Select venda.*, item_venda.item_unidades, item_venda.valor_item,' +
-        ' item_venda.idpagamento, produto.idproduto, '
+        ' produto.idproduto, '
       
         'produto.nome, cliente.nome, cliente.cpf, cliente.data_nascimento' +
         ', cliente.Endere'#231'o, cliente.Bairro, cliente.Cidade'

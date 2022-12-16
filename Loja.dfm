@@ -390,6 +390,23 @@ object LojaMenu: TLojaMenu
         TabOrder = 1
         OnClick = pnlVendasClick
       end
+      object pnlRelatorio: TPanel
+        Left = 200
+        Top = 0
+        Width = 101
+        Height = 37
+        BevelOuter = bvLowered
+        Caption = 'Relat'#243'rio'
+        Color = 13423300
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNone
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+        OnClick = pnlRelatorioClick
+      end
     end
     object pnlOCadastro: TPanel
       Left = 0
@@ -437,7 +454,7 @@ object LojaMenu: TLojaMenu
       Left = 100
       Top = 36
       Width = 101
-      Height = 85
+      Height = 57
       BevelOuter = bvSpace
       TabOrder = 2
       Visible = False
@@ -473,12 +490,53 @@ object LojaMenu: TLojaMenu
         TabOrder = 1
         OnClick = pnlConsultaVendasClick
       end
-      object pnlRelatorioVendas: TPanel
+    end
+    object pnlORelatorio: TPanel
+      Left = 200
+      Top = 36
+      Width = 101
+      Height = 85
+      BevelOuter = bvSpace
+      TabOrder = 3
+      Visible = False
+      object pnlRClientes: TPanel
         Left = 0
         Top = 56
         Width = 101
         Height = 29
-        Caption = 'Relat'#243'rio'
+        Caption = 'Clientes'
+        Color = 13423300
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        OnClick = pnlCadastroVendaClick
+      end
+      object pnlRVendas: TPanel
+        Left = 0
+        Top = 0
+        Width = 101
+        Height = 29
+        Caption = 'Vendas'
+        Color = 13423300
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        OnClick = pnlCadastroVendaClick
+      end
+      object pnlRProdutos: TPanel
+        Left = 0
+        Top = 28
+        Width = 101
+        Height = 29
+        Caption = 'Produtos'
         Color = 13423300
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -487,7 +545,7 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = pnlRelatorioVendasClick
+        OnClick = pnlCadastroVendaClick
       end
     end
   end

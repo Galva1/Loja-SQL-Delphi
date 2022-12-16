@@ -515,7 +515,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
           TabOrder = 4
         end
-        object btn1: TButton
+        object btnIncluir: TButton
           Left = 512
           Top = 20
           Width = 81
@@ -528,7 +528,7 @@ object CadastroVendas: TCadastroVendas
           Font.Style = []
           ParentFont = False
           TabOrder = 5
-          OnClick = btn1Click
+          OnClick = btnIncluirClick
         end
       end
     end
@@ -538,6 +538,7 @@ object CadastroVendas: TCadastroVendas
       Width = 97
       Height = 29
       Caption = 'Confirmar'
+      Enabled = False
       TabOrder = 4
       OnClick = btnConfirmarClick
     end
