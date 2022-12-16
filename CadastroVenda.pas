@@ -54,7 +54,7 @@ type
     dbedtnome: TDBEdit;
     edtqtdproduto: TEdit;
     pnlvalorTotal: TPanel;
-    btn1: TButton;
+    btnIncluir: TButton;
     lblCodProduto: TLabel;
     lblDesc: TLabel;
     lblQTD: TLabel;
@@ -62,22 +62,7 @@ type
     qryConsultaItemidproduto: TAutoIncField;
     dsIncluirItem: TDataSource;
     qryIncluirItem: TADOQuery;
-    qryIncluirItemiditem_venda: TAutoIncField;
-    qryIncluirItemidvenda: TIntegerField;
-    qryIncluirItemidproduto: TIntegerField;
-    qryIncluirItemitem_unidades: TIntegerField;
-    qryIncluirItemvalor_item: TFloatField;
     btnNovaVenda: TButton;
-    qryEmitirVendaidvenda: TAutoIncField;
-    qryEmitirVendavalor: TFloatField;
-    qryEmitirVendaidcliente: TIntegerField;
-    qryEmitirVendadata_venda: TDateTimeField;
-    qryEmitirVendanome: TStringField;
-    qryEmitirVendacpf: TBCDField;
-    dtfldEmitirVendadata_nascimento: TDateField;
-    qryEmitirVendaEndereo: TStringField;
-    qryEmitirVendaBairro: TWideStringField;
-    qryEmitirVendaCidade: TWideStringField;
     qryConsultaClienteidcliente: TAutoIncField;
     qryConsultaClientenome: TStringField;
     qryConsultaClientecpf: TBCDField;
@@ -85,15 +70,23 @@ type
     qryConsultaClienteEndereo: TStringField;
     qryConsultaClienteBairro: TWideStringField;
     qryConsultaClienteCidade: TWideStringField;
-    qryIncluirItemnomeproduto: TStringField;
     dblkcbbidpagamento: TDBLookupComboBox;
-    qryIncluirItemidpagamento: TIntegerField;
-    qryEmitirVendaidpagamento: TIntegerField;
     dsPagamento: TDataSource;
     qryPagamento: TADOQuery;
     qryPagamentonomepagamento: TWideStringField;
     qryPagamentoidpagamento: TAutoIncField;
-    fltfldIncluirItemvalor: TFloatField;
+    qryEmitirVendaidvenda: TAutoIncField;
+    qryEmitirVendavalor: TFloatField;
+    qryEmitirVendaidcliente: TIntegerField;
+    qryEmitirVendadata_venda: TDateField;
+    qryEmitirVendaidpagamento: TIntegerField;
+    qryEmitirVendanomepagamento: TWideStringField;
+    qryIncluirItemiditem_venda: TAutoIncField;
+    qryIncluirItemidvenda: TIntegerField;
+    qryIncluirItemidproduto: TIntegerField;
+    qryIncluirItemitem_unidades: TIntegerField;
+    qryIncluirItemvalor_item: TFloatField;
+    qryIncluirItemnomeproduto: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -103,11 +96,12 @@ type
       Shift: TShiftState);
     procedure edtCodProdutoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure btn1Click(Sender: TObject);
+    procedure btnIncluirClick(Sender: TObject);
     procedure btnNovaVendaClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure qryIncluirItemAfterOpen(DataSet: TDataSet);
     procedure btnConfirmarClick(Sender: TObject);
+    procedure qryEmitirVendaAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -140,6 +134,7 @@ procedure TCadastroVendas.FormCreate(Sender: TObject);
 begin
   pnlDataAtual.Caption := '  ' + DateToStr(Date);
   pnlHoraAtual.Caption := '  ' + TimeToStr(Time);
+  qryEmitirVenda.Connection.Connected := true;
   qryEmitirVenda.Connection.BeginTrans;
 end;
 
@@ -156,7 +151,8 @@ begin
       qryConsultaItem.SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
       qryConsultaItem.Open;
     end;
-
+    if pnlvalorTotal.Caption <> '0' then
+      CadastroVendas.edtqtdprodutoExit(nil);
 end;
 
 procedure TCadastroVendas.edtqtdprodutoExit(Sender: TObject);
@@ -176,10 +172,15 @@ procedure TCadastroVendas.edtCodProdutoKeyDown(Sender: TObject;
 begin
   if Key = 13 then
     edtCodProdutoExit(nil);
+  if pnlvalorTotal.Caption <> '0' then
+    CadastroVendas.edtqtdprodutoExit(nil);
+
+
 end;
 
-procedure TCadastroVendas.btn1Click(Sender: TObject);
+procedure TCadastroVendas.btnIncluirClick(Sender: TObject);
 begin
+  btnConfirmar.Enabled := True;
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
   try
@@ -189,18 +190,28 @@ begin
     qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
     qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
     qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
-    qryIncluirItemidpagamento.Value   := qryEmitirVendaidpagamento.Value;
-    qryEmitirVenda.Edit;
-    qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
-
+    //qryIncluirItemvalor.Value         := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+    //.SQL.Add('update venda set venda.valor = '+ (pnlvalorTotal.Caption) + ' where venda.idvenda = '+dbedtNumeroVenda.Text);
+    //qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
     qryIncluirItem.Post;
+
+
+    if qryEmitirVenda.State = dsbrowse then
+      qryEmitirVenda.Edit;
+    qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+    qryEmitirVenda.Post;
   except
     on e: Exception do
     begin
-      qryIncluirItem.CancelUpdates;
+      qryIncluirItem.Cancel;
       MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
     end;
   end;
+
+
+
+
+
 end;
 
 procedure TCadastroVendas.btnNovaVendaClick(Sender: TObject);
@@ -218,7 +229,7 @@ begin
     qryEmitirVenda.Insert;
     qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
     qryEmitirVendadata_venda.Value    := Now();
-    qryEmitirVendavalor.Value         := 0;
+    QryEmitirVendavalor.Value         := 0;
     qryEmitirVenda.Post;
   except
     on e:Exception do
@@ -284,6 +295,11 @@ begin
         Exit;
       end;
   end;
+end;
+
+procedure TCadastroVendas.qryEmitirVendaAfterOpen(DataSet: TDataSet);
+begin
+  qryEmitirVenda.Properties['Unique Table'].Value := 'venda';
 end;
 
 end.
