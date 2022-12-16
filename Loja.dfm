@@ -529,7 +529,7 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        OnClick = pnlCadastroVendaClick
+        OnClick = pnlRVendasClick
       end
       object pnlRProdutos: TPanel
         Left = 0
@@ -545,7 +545,7 @@ object LojaMenu: TLojaMenu
         Font.Style = []
         ParentFont = False
         TabOrder = 2
-        OnClick = pnlCadastroVendaClick
+        OnClick = pnlRProdutosClick
       end
     end
   end
