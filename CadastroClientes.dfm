@@ -3,7 +3,6 @@ object CadastroClientes1: TCadastroClientes1
   Top = 197
   Width = 1051
   Height = 509
-  Caption = 'CadastroClientes1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -166,14 +165,14 @@ object CadastroClientes1: TCadastroClientes1
       object ts2: TTabSheet
         Caption = 'Dados'
         ImageIndex = 1
-        object pnl1: TPanel
+        object pnlCadastroCliente: TPanel
           Left = 8
           Top = 4
           Width = 517
           Height = 365
           Color = 14934999
           TabOrder = 0
-          object lbl1: TLabel
+          object lblCodCadastroCliente: TLabel
             Left = 80
             Top = 48
             Width = 29
@@ -186,7 +185,7 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
-          object lbl2: TLabel
+          object lblCadastroNomeCliente: TLabel
             Left = 172
             Top = 48
             Width = 42
@@ -199,7 +198,7 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
-          object lbl3: TLabel
+          object lblCadastroCPFCliente: TLabel
             Left = 80
             Top = 100
             Width = 31
@@ -212,7 +211,7 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
-          object lbl4: TLabel
+          object lblCadastroDataNascCliente: TLabel
             Left = 284
             Top = 100
             Width = 121
@@ -225,7 +224,7 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
-          object lbl5: TLabel
+          object lblCadastroEndCliente: TLabel
             Left = 80
             Top = 152
             Width = 69
@@ -238,7 +237,7 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
-          object lbl6: TLabel
+          object lblCadastroBairroCliente: TLabel
             Left = 80
             Top = 204
             Width = 42
@@ -251,7 +250,7 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
-          object lbl7: TLabel
+          object lblCadastroCidadeCliente: TLabel
             Left = 240
             Top = 204
             Width = 50

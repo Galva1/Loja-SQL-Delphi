@@ -24,19 +24,19 @@ type
     dtfldConsultaClientedata_nascimento: TDateField;
     edtConsulta: TEdit;
     btnBuscar: TButton;
-    pnl1: TPanel;
+    pnlCadastroCliente: TPanel;
     dbedtnomecli: TDBEdit;
-    lbl1: TLabel;
-    lbl2: TLabel;
+    lblCodCadastroCliente: TLabel;
+    lblCadastroNomeCliente: TLabel;
     dbedtcpfcli: TDBEdit;
-    lbl3: TLabel;
-    lbl4: TLabel;
+    lblCadastroCPFCliente: TLabel;
+    lblCadastroDataNascCliente: TLabel;
     dbedtdatacli: TDBEdit;
-    lbl5: TLabel;
+    lblCadastroEndCliente: TLabel;
     dbedtendcli: TDBEdit;
-    lbl6: TLabel;
+    lblCadastroBairroCliente: TLabel;
     dbedtbairrocli: TDBEdit;
-    lbl7: TLabel;
+    lblCadastroCidadeCliente: TLabel;
     dbedtcidadecli: TDBEdit;
     btnInserir: TButton;
     btnSalvar: TButton;
@@ -71,6 +71,7 @@ type
     procedure ConsultarClientes(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pgcCadastroClienteChange(Sender: TObject);
+    function CamposValidos():Boolean;
 
   private
     { Private declarations }
@@ -105,22 +106,43 @@ begin
   dbedtbairrocli.Enabled := True;
   dbedtcidadecli.Enabled := True;
   qryDadosCliente.Active := True;
-  qryDadosCliente.Insert;
+  qryDadosCliente.edit;
   dbedtnomecli.SetFocus;
   AtivarDesativarBotoes(nil);
+end;
+
+function TCadastroClientes1.CamposValidos():Boolean;
+var erro: String;
+begin
+  Result := False;
+  erro := '';
+  // CPF
+  if not (Length(dbedtcpfcli.Text) = 11) then
+    erro := erro+'CPF ';
+  // Data Nasc.
+  if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/')) then
+    erro := erro+'Data Nasc. ';
+  if erro = '' then
+    Result := True
+  else
+    showMessage('Corrija os campos: '+erro);
 end;
 
 procedure TCadastroClientes1.btnSalvarClick(Sender: TObject);
 begin
   if qryDadosCliente.Active then
   begin
-    try
-      qryDadosCliente.Post;
-      showMessage('O Registro foi salvo com sucesso!');
-      AtivarDesativarBotoes(nil);
-    except
-      ShowMessage('Preencha os campos vazios!');
+    if CamposValidos then
+    begin
+      try
+        qryDadosCliente.Post;
+        showMessage('O Registro foi salvo com sucesso!');
+        AtivarDesativarBotoes(nil);
+      except
+        ShowMessage('Preencha os campos vazios!');
+      end;
     end;
+
   end
   else
     ShowMessage('Não há registro para salvar!');
@@ -234,8 +256,15 @@ end;
 
 
 procedure TCadastroClientes1.FormCreate(Sender: TObject);
+//var
+//  //teste: string;
+//  //teste1: string;
 begin
+//  teste1 := '23/22/1100';
+//  teste := Copy(teste1,3,1);
+//  showMessage(teste);
   CadastroClientes1.AutoSize := True;
+
 end;
 
 procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);

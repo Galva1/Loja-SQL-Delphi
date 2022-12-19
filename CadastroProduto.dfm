@@ -277,7 +277,7 @@ object CadastroProdutos: TCadastroProdutos
             object dbedtvalorpro: TDBEdit
               Left = 8
               Top = 172
-              Width = 121
+              Width = 169
               Height = 21
               DataField = 'valor_produto'
               DataSource = dsDadosProduto
