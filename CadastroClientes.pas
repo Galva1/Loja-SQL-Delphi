@@ -70,6 +70,7 @@ type
       Shift: TShiftState);
     procedure ConsultarClientes(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure pgcCadastroClienteChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -235,6 +236,33 @@ end;
 procedure TCadastroClientes1.FormCreate(Sender: TObject);
 begin
   CadastroClientes1.AutoSize := True;
+end;
+
+procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);
+begin
+  if pgcCadastroCliente.ActivePageIndex = 1 then
+  begin
+    if qryConsultaCliente.Active then
+    begin
+      qryDadosCliente.Close;
+      qryDadosCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(dbgrdConsultaCliente.Fields[0].Value);
+      qryDadosCliente.Open;
+      qryDadosCliente.Edit;
+     { btnInserir.Enabled := False;
+      btnAlterar.Enabled := True;
+      btnExcluir.Enabled := True;
+      btnCancelar.Enabled := True;}
+    end
+    else
+    begin
+      btnInserir.Enabled := True;
+      btnAlterar.Enabled := False;
+      btnSalvar.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnCancelar.Enabled := True;
+    end;
+
+  end;
 end;
 
 end.
