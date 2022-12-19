@@ -53,6 +53,7 @@ object CadastroClientes1: TCadastroClientes1
       ActivePage = ts2
       Align = alClient
       TabOrder = 1
+      OnChange = pgcCadastroClienteChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel
@@ -352,6 +353,7 @@ object CadastroClientes1: TCadastroClientes1
             Width = 69
             Height = 49
             Caption = 'Salvar'
+            Enabled = False
             TabOrder = 7
             OnClick = btnSalvarClick
           end
@@ -361,6 +363,7 @@ object CadastroClientes1: TCadastroClientes1
             Width = 69
             Height = 49
             Caption = 'Excluir'
+            Enabled = False
             TabOrder = 8
             OnClick = btnExcluirClick
           end
@@ -379,6 +382,7 @@ object CadastroClientes1: TCadastroClientes1
             Width = 69
             Height = 49
             Caption = 'Alterar'
+            Enabled = False
             TabOrder = 10
             OnClick = btnAlterarClick
           end
@@ -434,10 +438,20 @@ object CadastroClientes1: TCadastroClientes1
   object qryDadosCliente: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
-    Parameters = <>
+    DataSource = dsConsultaCliente
+    Parameters = <
+      item
+        Name = 'idcliente'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
     SQL.Strings = (
       'select *'
-      'from cliente')
+      'from cliente'
+      'where cliente.idcliente = :idcliente')
     Left = 956
     Top = 52
     object qryDadosClienteidcliente: TAutoIncField
