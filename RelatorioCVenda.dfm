@@ -19,8 +19,8 @@ object RelatorioCVendas: TRelatorioCVendas
   object qckrpRelatorioCVendas: TQuickRep
     Left = 20
     Top = 32
-    Width = 769
-    Height = 589
+    Width = 794
+    Height = 1123
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -65,7 +65,7 @@ object RelatorioCVendas: TRelatorioCVendas
     object qrbndPageHeaderBand1: TQRBand
       Left = 38
       Top = 38
-      Width = 693
+      Width = 718
       Height = 40
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -78,7 +78,7 @@ object RelatorioCVendas: TRelatorioCVendas
       ForceNewPage = False
       Size.Values = (
         105.833333333333300000
-        1833.562500000000000000)
+        1899.708333333333000000)
       BandType = rbPageHeader
       object QRSysData1: TQRSysData
         Left = 560
@@ -107,11 +107,11 @@ object RelatorioCVendas: TRelatorioCVendas
     object qrbnd1: TQRBand
       Left = 38
       Top = 78
-      Width = 693
+      Width = 718
       Height = 35
       Frame.Color = clBlack
       Frame.DrawTop = False
-      Frame.DrawBottom = False
+      Frame.DrawBottom = True
       Frame.DrawLeft = True
       Frame.DrawRight = True
       AlignToBottom = False
@@ -120,7 +120,7 @@ object RelatorioCVendas: TRelatorioCVendas
       ForceNewPage = False
       Size.Values = (
         92.604166666666670000
-        1833.562500000000000000)
+        1899.708333333333000000)
       BandType = rbTitle
       object qrlbl1: TQRLabel
         Left = 260
@@ -157,7 +157,7 @@ object RelatorioCVendas: TRelatorioCVendas
     object qrbndDetailBand1: TQRBand
       Left = 38
       Top = 113
-      Width = 693
+      Width = 718
       Height = 60
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -170,7 +170,7 @@ object RelatorioCVendas: TRelatorioCVendas
       ForceNewPage = False
       Size.Values = (
         158.750000000000000000
-        1833.562500000000000000)
+        1899.708333333333000000)
       BandType = rbDetail
       object QRDBidCliente: TQRDBText
         Left = 132
@@ -300,7 +300,7 @@ object RelatorioCVendas: TRelatorioCVendas
         FontSize = 10
       end
       object QRDBText1: TQRDBText
-        Left = 632
+        Left = 624
         Top = 36
         Width = 27
         Height = 17
@@ -311,7 +311,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1672.166666666667000000
+          1651.000000000000000000
           95.250000000000000000
           71.437500000000000000)
         Alignment = taLeftJustify

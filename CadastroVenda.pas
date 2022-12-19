@@ -102,6 +102,7 @@ type
     procedure qryIncluirItemAfterOpen(DataSet: TDataSet);
     procedure btnConfirmarClick(Sender: TObject);
     procedure qryEmitirVendaAfterOpen(DataSet: TDataSet);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -300,6 +301,14 @@ end;
 procedure TCadastroVendas.qryEmitirVendaAfterOpen(DataSet: TDataSet);
 begin
   qryEmitirVenda.Properties['Unique Table'].Value := 'venda';
+end;
+
+procedure TCadastroVendas.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  qryEmitirVenda.CancelUpdates;
+  qryEmitirVenda.Connection.RollbackTrans;
+
 end;
 
 end.

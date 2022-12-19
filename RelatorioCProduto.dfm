@@ -19,8 +19,8 @@ object RelatorioCProdutos: TRelatorioCProdutos
   object qckrpRelatorioCProdutos: TQuickRep
     Left = 120
     Top = 28
-    Width = 777
-    Height = 449
+    Width = 794
+    Height = 1123
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -65,7 +65,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
     object qrbndPageHeaderBand1: TQRBand
       Left = 38
       Top = 38
-      Width = 701
+      Width = 718
       Height = 31
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -78,12 +78,12 @@ object RelatorioCProdutos: TRelatorioCProdutos
       ForceNewPage = False
       Size.Values = (
         82.020833333333330000
-        1854.729166666667000000)
+        1899.708333333333000000)
       BandType = rbPageHeader
       object QRSysData1: TQRSysData
         Left = 556
         Top = 4
-        Width = 119
+        Width = 68
         Height = 21
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -94,7 +94,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
           55.562500000000000000
           1471.083333333333000000
           10.583333333333330000
-          314.854166666666700000)
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -107,11 +107,11 @@ object RelatorioCProdutos: TRelatorioCProdutos
     object qrbndTitleBand1: TQRBand
       Left = 38
       Top = 69
-      Width = 701
+      Width = 718
       Height = 40
       Frame.Color = clBlack
       Frame.DrawTop = False
-      Frame.DrawBottom = False
+      Frame.DrawBottom = True
       Frame.DrawLeft = True
       Frame.DrawRight = True
       AlignToBottom = False
@@ -120,7 +120,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
       ForceNewPage = False
       Size.Values = (
         105.833333333333300000
-        1854.729166666667000000)
+        1899.708333333333000000)
       BandType = rbTitle
       object qrlbl1: TQRLabel
         Left = 257
@@ -157,8 +157,8 @@ object RelatorioCProdutos: TRelatorioCProdutos
     object qrbndDetailBand1: TQRBand
       Left = 38
       Top = 109
-      Width = 701
-      Height = 48
+      Width = 718
+      Height = 40
       Frame.Color = clBlack
       Frame.DrawTop = True
       Frame.DrawBottom = True
@@ -169,8 +169,8 @@ object RelatorioCProdutos: TRelatorioCProdutos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        127.000000000000000000
-        1854.729166666667000000)
+        105.833333333333300000
+        1899.708333333333000000)
       BandType = rbDetail
       object QRDBText1: TQRDBText
         Left = 144
@@ -339,6 +339,6 @@ object RelatorioCProdutos: TRelatorioCProdutos
   object dsRelatorioConsultaP: TDataSource
     DataSet = qryRelatorioConsultaP
     Left = 952
-    Top = 164
+    Top = 112
   end
 end
