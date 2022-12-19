@@ -39,6 +39,7 @@ type
     procedure pnlRelatorioClick(Sender: TObject);
     procedure pnlRVendasClick(Sender: TObject);
     procedure pnlRProdutosClick(Sender: TObject);
+    procedure pnlRClientesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,7 +51,7 @@ var
 
 implementation
 
-uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes, ConsultaVendas, RelatorioVenda, RelatorioCVenda, RelatorioCProduto;
+uses CadastroClientes, CadastroProduto, CadastroVenda, pesquisarClientes, ConsultaVendas, RelatorioVenda, RelatorioCVenda, RelatorioCProduto, RelatorioCCliente;
 
 
 {$R *.dfm}
@@ -159,6 +160,16 @@ begin
     RelatorioCProdutos.qckrpRelatorioCProdutos.Preview;
   finally
     RelatorioCProdutos.Free;
+  end;
+end;
+
+procedure TLojaMenu.pnlRClientesClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TRelatorioCClientes, RelatorioCClientes);
+    RelatorioCClientes.qckrpRelatorioCCliente.Preview;
+  finally
+    RelatorioCClientes.Free;
   end;
 end;
 

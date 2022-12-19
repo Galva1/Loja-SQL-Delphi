@@ -1,6 +1,6 @@
 object CadastroProdutos: TCadastroProdutos
-  Left = 468
-  Top = 179
+  Left = 620
+  Top = 163
   Width = 798
   Height = 563
   Caption = 'CadastroProduto'
@@ -50,9 +50,10 @@ object CadastroProdutos: TCadastroProdutos
       Top = 41
       Width = 545
       Height = 412
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
+      OnChange = pgcCadastroClienteChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel
@@ -69,6 +70,7 @@ object CadastroProdutos: TCadastroProdutos
           Width = 493
           Height = 305
           DataSource = dsConsultaProduto
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -150,124 +152,138 @@ object CadastroProdutos: TCadastroProdutos
           Height = 365
           Color = 14934999
           TabOrder = 0
-          object lbl1: TLabel
-            Left = 228
-            Top = 24
-            Width = 29
-            Height = 20
-            Caption = 'Cod'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object lbl2: TLabel
-            Left = 224
-            Top = 84
-            Width = 42
-            Height = 20
-            Caption = 'Nome'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object lbl7: TLabel
-            Left = 228
-            Top = 144
-            Width = 37
-            Height = 20
-            Caption = 'Valor'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object dbtxtcodpro: TDBText
-            Left = 208
-            Top = 48
-            Width = 69
-            Height = 29
-            Alignment = taCenter
-            DataField = 'idproduto'
-            DataSource = dsDadosProduto
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object dbedtnomepro: TDBEdit
-            Left = 132
-            Top = 108
-            Width = 245
-            Height = 21
-            DataField = 'nome'
-            DataSource = dsDadosProduto
-            Enabled = False
-            TabOrder = 0
-          end
-          object dbedtvalorpro: TDBEdit
-            Left = 184
-            Top = 172
-            Width = 121
-            Height = 21
-            DataField = 'valor_produto'
-            DataSource = dsDadosProduto
-            Enabled = False
-            TabOrder = 1
-          end
           object btnInserir: TButton
             Left = 84
-            Top = 252
+            Top = 316
             Width = 69
             Height = 49
             Caption = 'Inserir'
-            TabOrder = 2
+            TabOrder = 0
             OnClick = btnInserirClick
           end
           object btnSalvar: TButton
             Left = 220
-            Top = 252
+            Top = 316
             Width = 69
             Height = 49
             Caption = 'Salvar'
-            TabOrder = 3
+            Enabled = False
+            TabOrder = 1
             OnClick = btnSalvarClick
           end
           object btnExcluir: TButton
             Left = 288
-            Top = 252
+            Top = 316
             Width = 69
             Height = 49
             Caption = 'Excluir'
-            TabOrder = 4
+            Enabled = False
+            TabOrder = 2
             OnClick = btnExcluirClick
           end
           object btnCancelar: TButton
             Left = 356
-            Top = 252
+            Top = 316
             Width = 69
             Height = 49
             Caption = 'Cancelar'
-            TabOrder = 5
+            TabOrder = 3
             OnClick = btnCancelarClick
           end
           object btnAlterar: TButton
             Left = 152
-            Top = 252
+            Top = 316
             Width = 69
             Height = 49
             Caption = 'Alterar'
-            TabOrder = 6
+            Enabled = False
+            TabOrder = 4
             OnClick = btnAlterarClick
+          end
+          object pnl3: TPanel
+            Left = 152
+            Top = 28
+            Width = 205
+            Height = 265
+            BevelOuter = bvNone
+            BiDiMode = bdLeftToRight
+            Color = clWhite
+            ParentBiDiMode = False
+            TabOrder = 5
+            object lbl7: TLabel
+              Left = 8
+              Top = 148
+              Width = 37
+              Height = 20
+              Caption = 'Valor'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object lbl2: TLabel
+              Left = 7
+              Top = 92
+              Width = 42
+              Height = 20
+              Caption = 'Nome'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object dbtxtcodpro: TDBText
+              Left = 4
+              Top = 52
+              Width = 69
+              Height = 29
+              Alignment = taCenter
+              DataField = 'idproduto'
+              DataSource = dsDadosProduto
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object lbl1: TLabel
+              Left = 4
+              Top = 24
+              Width = 33
+              Height = 20
+              Caption = 'Cod:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object dbedtnomepro: TDBEdit
+              Left = 8
+              Top = 116
+              Width = 169
+              Height = 21
+              DataField = 'nome'
+              DataSource = dsDadosProduto
+              Enabled = False
+              TabOrder = 0
+            end
+            object dbedtvalorpro: TDBEdit
+              Left = 8
+              Top = 172
+              Width = 121
+              Height = 21
+              DataField = 'valor_produto'
+              DataSource = dsDadosProduto
+              Enabled = False
+              TabOrder = 1
+            end
           end
         end
       end
@@ -308,10 +324,20 @@ object CadastroProdutos: TCadastroProdutos
   object qryDadosProduto: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
-    Parameters = <>
+    DataSource = dsConsultaProduto
+    Parameters = <
+      item
+        Name = 'idproduto'
+        Attributes = [paSigned, paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
     SQL.Strings = (
       'select *'
-      'from produto')
+      'from produto'
+      'where produto.idproduto = :idproduto')
     Left = 640
     Top = 144
     object AutoIncField1: TAutoIncField

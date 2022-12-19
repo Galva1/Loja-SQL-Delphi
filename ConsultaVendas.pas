@@ -84,7 +84,10 @@ begin
   end
   else
   begin
-
+    qryConsultaVenda.Close;
+    qryConsultaVenda.SQL.Clear;
+    qryConsultaVenda.SQL.Add('select * from venda innerjoin cliente on cliente.idcliente = venda.idcliente');
+    qryConsultaVenda.Open;
   end;
 end;
 

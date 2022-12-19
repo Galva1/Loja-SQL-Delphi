@@ -21,11 +21,6 @@ type
     btnBuscarProduto: TButton;
     ts2: TTabSheet;
     pnl1: TPanel;
-    lbl1: TLabel;
-    lbl2: TLabel;
-    lbl7: TLabel;
-    dbedtnomepro: TDBEdit;
-    dbedtvalorpro: TDBEdit;
     btnInserir: TButton;
     btnSalvar: TButton;
     btnExcluir: TButton;
@@ -41,7 +36,13 @@ type
     AutoIncField1: TAutoIncField;
     WideStringField1: TWideStringField;
     FloatField1: TFloatField;
+    pnl3: TPanel;
+    dbedtnomepro: TDBEdit;
+    lbl7: TLabel;
+    dbedtvalorpro: TDBEdit;
+    lbl2: TLabel;
     dbtxtcodpro: TDBText;
+    lbl1: TLabel;
     procedure btnBuscarProdutoClick(Sender: TObject);
     procedure ConsultarProduto(Sender:TObject);
     procedure edtConsultaProdutoKeyDown(Sender: TObject; var Key: Word;
@@ -53,6 +54,7 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure pgcCadastroClienteChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -133,7 +135,7 @@ begin
   dbedtnomepro.Enabled := True;
   dbedtvalorpro.Enabled := True;
   qryDadosProduto.Active := True;
-  qryDadosProduto.Insert;
+  qryDadosProduto.Edit;
   dbedtnomepro.SetFocus;
   AtivarDesativarBotoes(nil);
 end;
@@ -198,6 +200,33 @@ begin
     AtivarDesativarBotoes(nil);
     if dbtxtcodpro.Caption <> EmptyStr then
       qryDadosProduto.Active := False;
+  end;
+end;
+
+procedure TCadastroProdutos.pgcCadastroClienteChange(Sender: TObject);
+begin
+  if pgcCadastroCliente.ActivePageIndex = 1 then
+  begin
+    if qryConsultaProduto.Active then
+    begin
+      qryDadosProduto.Close;
+      qryDadosProduto.Parameters.ParamByName('idproduto').Value := FloatToStr(dbgrdConsultaProduto.Fields[0].Value);
+      qryDadosProduto.Open;
+      qryDadosProduto.Edit;
+     { btnInserir.Enabled := False;
+      btnAlterar.Enabled := True;
+      btnExcluir.Enabled := True;
+      btnCancelar.Enabled := True;}
+    end
+    else
+    begin
+      btnInserir.Enabled := True;
+      btnAlterar.Enabled := False;
+      btnSalvar.Enabled := False;
+      btnExcluir.Enabled := False;
+      btnCancelar.Enabled := True;
+    end;
+
   end;
 end;
 
