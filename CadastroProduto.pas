@@ -213,10 +213,6 @@ begin
       qryDadosProduto.Parameters.ParamByName('idproduto').Value := FloatToStr(dbgrdConsultaProduto.Fields[0].Value);
       qryDadosProduto.Open;
       qryDadosProduto.Edit;
-     { btnInserir.Enabled := False;
-      btnAlterar.Enabled := True;
-      btnExcluir.Enabled := True;
-      btnCancelar.Enabled := True;}
     end
     else
     begin

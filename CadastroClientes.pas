@@ -72,6 +72,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure pgcCadastroClienteChange(Sender: TObject);
     function CamposValidos():Boolean;
+    procedure dbedtdatacliKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -120,7 +121,7 @@ begin
   if not (Length(dbedtcpfcli.Text) = 11) then
     erro := erro+'CPF ';
   // Data Nasc.
-  if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/')) then
+  if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/') ) then
     erro := erro+'Data Nasc. ';
   if erro = '' then
     Result := True
@@ -135,6 +136,7 @@ begin
     if CamposValidos then
     begin
       try
+        
         qryDadosCliente.Post;
         showMessage('O Registro foi salvo com sucesso!');
         AtivarDesativarBotoes(nil);
@@ -292,6 +294,30 @@ begin
     end;
 
   end;
+end;
+
+procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #32]) then
+  begin
+    Beep;
+    Key := #0;
+  end;
+
+  if (Length(dbedtdatacli.Text)=10) and not(Key in[#8])then
+    Key := #0
+  else
+    if not(Key in[#8]) then
+    begin
+
+      if Length(dbedtdatacli.Text)=2 then
+        dbedtdatacli.Text := dbedtdatacli.Text + '/';
+      if Length(dbedtdatacli.Text)=5 then
+        dbedtdatacli.Text := dbedtdatacli.Text + '/';
+      dbedtdatacli.SelStart := Length(dbedtdatacli.Text);
+    end;
+
 end;
 
 end.

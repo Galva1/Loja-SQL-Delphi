@@ -88,7 +88,11 @@ begin
   if qryConsultaCliente.IsEmpty then
     ShowMessage('Selecione um campo.')
   else
+  begin
     pesquisarCliente.Close;
+    CadastroVendas.btnNovaVenda.Enabled := True;
+  end;
+
 
 end;
 

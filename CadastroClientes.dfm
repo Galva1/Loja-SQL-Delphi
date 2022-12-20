@@ -306,6 +306,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 2
+            OnKeyPress = dbedtdatacliKeyPress
           end
           object dbedtendcli: TDBEdit
             Left = 80

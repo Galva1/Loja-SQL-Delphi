@@ -522,6 +522,7 @@ object CadastroVendas: TCadastroVendas
           Width = 81
           Height = 41
           Caption = 'Incluir'
+          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -567,6 +568,7 @@ object CadastroVendas: TCadastroVendas
       MinDate = 44902.000000000000000000
       ParentFont = False
       TabOrder = 6
+      OnChange = dtpvencimentoChange
     end
     object dbedtNumeroVenda: TDBEdit
       Left = 20
@@ -591,6 +593,7 @@ object CadastroVendas: TCadastroVendas
       Width = 89
       Height = 41
       Caption = 'Nova venda'
+      Enabled = False
       TabOrder = 8
       OnClick = btnNovaVendaClick
     end

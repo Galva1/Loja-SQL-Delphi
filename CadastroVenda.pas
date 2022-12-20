@@ -103,6 +103,7 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure qryEmitirVendaAfterOpen(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure dtpvencimentoChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -191,9 +192,6 @@ begin
     qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
     qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
     qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
-    //qryIncluirItemvalor.Value         := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
-    //.SQL.Add('update venda set venda.valor = '+ (pnlvalorTotal.Caption) + ' where venda.idvenda = '+dbedtNumeroVenda.Text);
-    //qryEmitirVendavalor.Value := (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
     qryIncluirItem.Post;
 
 
@@ -208,11 +206,6 @@ begin
       MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
     end;
   end;
-
-
-
-
-
 end;
 
 procedure TCadastroVendas.btnNovaVendaClick(Sender: TObject);
@@ -227,6 +220,7 @@ begin
     qryPagamento.Open;
 
   try
+    btnIncluir.Enabled := True;
     qryEmitirVenda.Insert;
     qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
     qryEmitirVendadata_venda.Value    := Now();
@@ -284,6 +278,7 @@ begin
           ShowMessage('A venda foi concluída com sucesso!');
           qryEmitirVenda.Connection.CommitTrans;
           CadastroVendas.Close;
+          qryEmitirVenda.Connection.Connected := False;
         except
           on e:Exception do
           begin
@@ -306,9 +301,20 @@ end;
 procedure TCadastroVendas.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  qryEmitirVenda.CancelUpdates;
-  qryEmitirVenda.Connection.RollbackTrans;
+  if qryEmitirVenda.Connection.Connected then
+  begin
+    if qryEmitirVenda.State in [dsedit, dsinsert] then
+      qryEmitirVenda.CancelUpdates;
+    qryEmitirVenda.Connection.RollbackTrans;
+  end;
 
 end;
+
+procedure TCadastroVendas.dtpvencimentoChange(Sender: TObject);
+begin
+  if qryEmitirVenda.State in [dsinsert] then
+    qryEmitirVendadata_venda.Value := dtpvencimento.Date;
+end;
+
 
 end.
