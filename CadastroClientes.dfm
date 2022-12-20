@@ -1,6 +1,6 @@
 object CadastroClientes1: TCadastroClientes1
-  Left = 277
-  Top = 197
+  Left = 408
+  Top = 251
   Width = 1051
   Height = 509
   Color = clBtnFace
@@ -296,6 +296,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 1
+            OnKeyPress = dbedtcpfcliKeyPress
           end
           object dbedtdatacli: TDBEdit
             Left = 284
