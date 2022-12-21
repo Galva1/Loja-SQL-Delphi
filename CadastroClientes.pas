@@ -72,6 +72,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure pgcCadastroClienteChange(Sender: TObject);
     function CamposValidos():Boolean;
+    procedure dbedtdatacliKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtcpfcliKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -99,6 +101,8 @@ end;
 
 procedure TCadastroClientes1.btnInserirClick(Sender: TObject);
 begin
+  qryConsultaCliente.Connection.Connected := true;
+  qryConsultaCliente.Connection.BeginTrans;
   dbedtnomecli.Enabled := True;
   dbedtcpfcli.Enabled := True;
   dbedtdatacli.Enabled := True;
@@ -120,7 +124,7 @@ begin
   if not (Length(dbedtcpfcli.Text) = 11) then
     erro := erro+'CPF ';
   // Data Nasc.
-  if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/')) then
+  if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/') ) then
     erro := erro+'Data Nasc. ';
   if erro = '' then
     Result := True
@@ -135,8 +139,10 @@ begin
     if CamposValidos then
     begin
       try
+        
         qryDadosCliente.Post;
         showMessage('O Registro foi salvo com sucesso!');
+        qryConsultaCliente.Connection.CommitTrans;
         AtivarDesativarBotoes(nil);
       except
         ShowMessage('Preencha os campos vazios!');
@@ -186,19 +192,25 @@ end;
 
 procedure TCadastroClientes1.btnCancelarClick(Sender: TObject);
 begin
-  if qryDadosCliente.Active then
-  begin
-    dbedtnomecli.Enabled   := False;
-    dbedtcpfcli.Enabled    := False;
-    dbedtdatacli.Enabled   := False;
-    dbedtendcli.Enabled    := False;
-    dbedtbairrocli.Enabled := False;
-  dbedtcidadecli.Enabled   := False;
-    qryDadosCliente.Cancel;
-    AtivarDesativarBotoes(nil);
+  try
+    if qryDadosCliente.Active then
+    begin
+      dbedtnomecli.Enabled     := False;
+      dbedtcpfcli.Enabled      := False;
+      dbedtdatacli.Enabled     := False;
+      dbedtendcli.Enabled      := False;
+      dbedtbairrocli.Enabled   := False;
+      dbedtcidadecli.Enabled   := False;
+      qryConsultaCliente.Connection.RollbackTrans;
+      qryDadosCliente.Cancel;
+      AtivarDesativarBotoes(nil);
     if dbtxtidcli.Caption <> EmptyStr then
       qryDadosCliente.Active := False;
   end;
+  except
+    ShowMessage('Teste');
+  end;
+
 
 
 end;
@@ -251,36 +263,23 @@ begin
     btnBuscarClick(nil);
 end;
 
-
-
-
-
 procedure TCadastroClientes1.FormCreate(Sender: TObject);
-//var
-//  //teste: string;
-//  //teste1: string;
 begin
-//  teste1 := '23/22/1100';
-//  teste := Copy(teste1,3,1);
-//  showMessage(teste);
   CadastroClientes1.AutoSize := True;
-
+  
 end;
 
 procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);
 begin
   if pgcCadastroCliente.ActivePageIndex = 1 then
   begin
-    if qryConsultaCliente.Active then
+    if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.Value <> 0)
+     then
     begin
       qryDadosCliente.Close;
       qryDadosCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(dbgrdConsultaCliente.Fields[0].Value);
       qryDadosCliente.Open;
       qryDadosCliente.Edit;
-     { btnInserir.Enabled := False;
-      btnAlterar.Enabled := True;
-      btnExcluir.Enabled := True;
-      btnCancelar.Enabled := True;}
     end
     else
     begin
@@ -292,6 +291,37 @@ begin
     end;
 
   end;
+end;
+
+procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #32]) then
+  begin
+    Beep;
+    Key := #0;
+  end;
+
+  if (Length(dbedtdatacli.Text)=10) and not(Key in[#8])then
+    Key := #0
+  else
+    if not(Key in[#8]) then
+    begin
+
+      if Length(dbedtdatacli.Text)=2 then
+        dbedtdatacli.Text := dbedtdatacli.Text + '/';
+      if Length(dbedtdatacli.Text)=5 then
+        dbedtdatacli.Text := dbedtdatacli.Text + '/';
+      dbedtdatacli.SelStart := Length(dbedtdatacli.Text);
+    end;
+
+end;
+
+procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if (Length(dbedtcpfcli.Text)=11) and not(Key in [#8]) then
+    Key := #0;
 end;
 
 end.

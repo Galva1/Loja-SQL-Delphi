@@ -1,6 +1,6 @@
 object CadastroProdutos: TCadastroProdutos
-  Left = 620
-  Top = 163
+  Left = 621
+  Top = 164
   Width = 798
   Height = 563
   Caption = 'CadastroProduto'
@@ -31,7 +31,7 @@ object CadastroProdutos: TCadastroProdutos
       BevelOuter = bvNone
       Color = 13423300
       TabOrder = 0
-      object lbl8: TLabel
+      object lblCadastroProdutoLogo: TLabel
         Left = 4
         Top = 4
         Width = 263
@@ -45,15 +45,15 @@ object CadastroProdutos: TCadastroProdutos
         ParentFont = False
       end
     end
-    object pgcCadastroCliente: TPageControl
+    object pgcCadastroProduto: TPageControl
       Left = 0
       Top = 41
       Width = 545
       Height = 412
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
-      OnChange = pgcCadastroClienteChange
+      OnChange = pgcCadastroProdutoChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel
@@ -106,14 +106,17 @@ object CadastroProdutos: TCadastroProdutos
           Width = 125
           Height = 28
           AutoDropDown = True
+          Style = csDropDownList
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ItemHeight = 20
+          ItemIndex = 0
           ParentFont = False
           TabOrder = 1
+          Text = 'Nome'
           Items.Strings = (
             'Nome'
             'ID')

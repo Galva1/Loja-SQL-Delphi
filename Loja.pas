@@ -77,10 +77,10 @@ begin
   try
     Application.CreateForm(TCadastroClientes1, CadastroClientes1);
     CadastroClientes1.ShowModal;
+    CadastroClientes1.pgcCadastroCliente.ActivePageIndex := 1;
   finally
     CadastroClientes1.Free;
   end;
-
 end;
 
 procedure TLojaMenu.FormCreate(Sender: TObject);
@@ -93,6 +93,7 @@ begin
   try
     Application.CreateForm(TCadastroProdutos, CadastroProdutos);
     CadastroProdutos.ShowModal;
+    CadastroProdutos.pgcCadastroProduto.ActivePageIndex := 1;
   finally
     CadastroProdutos.Free;
   end;

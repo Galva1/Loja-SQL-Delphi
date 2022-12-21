@@ -571,37 +571,6 @@ object RelatorioVendas: TRelatorioVendas
         95.250000000000000000
         1899.708333333333000000)
       BandType = rbTitle
-      object QRLabel1: TQRLabel
-        Left = 269
-        Top = 0
-        Width = 156
-        Height = 33
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          87.312500000000000000
-          711.729166666666700000
-          0.000000000000000000
-          412.750000000000000000)
-        Alignment = taCenter
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Caption = 'RELAT'#211'RIO VENDA'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-        WordWrap = True
-        FontSize = 12
-      end
     end
     object qrbnd1: TQRBand
       Left = 38

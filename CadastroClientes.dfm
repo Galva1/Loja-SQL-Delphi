@@ -1,6 +1,6 @@
 object CadastroClientes1: TCadastroClientes1
-  Left = 277
-  Top = 197
+  Left = 377
+  Top = 252
   Width = 1051
   Height = 509
   Color = clBtnFace
@@ -49,7 +49,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 545
       Height = 416
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroClienteChange
@@ -125,14 +125,17 @@ object CadastroClientes1: TCadastroClientes1
           Width = 125
           Height = 28
           AutoDropDown = True
+          Style = csDropDownList
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ItemHeight = 20
+          ItemIndex = 0
           ParentFont = False
           TabOrder = 1
+          Text = 'Nome'
           OnEnter = cbbConsultaEnter
           Items.Strings = (
             'Nome'
@@ -296,6 +299,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 1
+            OnKeyPress = dbedtcpfcliKeyPress
           end
           object dbedtdatacli: TDBEdit
             Left = 284
@@ -306,6 +310,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 2
+            OnKeyPress = dbedtdatacliKeyPress
           end
           object dbedtendcli: TDBEdit
             Left = 80

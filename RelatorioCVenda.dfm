@@ -1,6 +1,6 @@
 object RelatorioCVendas: TRelatorioCVendas
-  Left = 198
-  Top = 122
+  Left = 355
+  Top = 113
   Width = 1387
   Height = 701
   Caption = 'RelatorioCVendas'

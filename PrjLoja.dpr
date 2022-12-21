@@ -10,7 +10,8 @@ uses
   ConsultaVendas in 'ConsultaVendas.pas' {ConsultaVenda},
   RelatorioVenda in 'RelatorioVenda.pas' {RelatorioVendas},
   RelatorioCVenda in 'RelatorioCVenda.pas' {RelatorioCVendas},
-  RelatorioCProduto in 'RelatorioCProduto.pas' {RelatorioCProdutos};
+  RelatorioCProduto in 'RelatorioCProduto.pas' {RelatorioCProdutos},
+  RelatorioCCliente in 'RelatorioCCliente.pas' {RelatorioCClientes};
 
 {$R *.res}
 

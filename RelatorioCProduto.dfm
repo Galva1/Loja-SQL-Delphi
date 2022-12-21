@@ -1,6 +1,6 @@
 object RelatorioCProdutos: TRelatorioCProdutos
-  Left = 319
-  Top = 142
+  Left = 320
+  Top = 143
   Width = 1088
   Height = 563
   Caption = 'RelatorioCProdutos'
@@ -83,7 +83,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
       object QRSysData1: TQRSysData
         Left = 556
         Top = 4
-        Width = 68
+        Width = 119
         Height = 21
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -94,7 +94,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
           55.562500000000000000
           1471.083333333333000000
           10.583333333333330000
-          179.916666666666700000)
+          314.854166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
