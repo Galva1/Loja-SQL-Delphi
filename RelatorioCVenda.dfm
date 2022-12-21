@@ -22,10 +22,11 @@ object RelatorioCVendas: TRelatorioCVendas
     Width = 794
     Height = 1123
     Frame.Color = clBlack
-    Frame.DrawTop = False
-    Frame.DrawBottom = False
+    Frame.DrawTop = True
+    Frame.DrawBottom = True
     Frame.DrawLeft = False
     Frame.DrawRight = False
+    Frame.Style = psDot
     AfterPreview = qckrpRelatorioCVendasAfterPreview
     DataSet = qryRelatorioConsultaV
     Font.Charset = DEFAULT_CHARSET
@@ -68,14 +69,21 @@ object RelatorioCVendas: TRelatorioCVendas
       Width = 718
       Height = 40
       Frame.Color = clBlack
-      Frame.DrawTop = True
-      Frame.DrawBottom = False
-      Frame.DrawLeft = True
-      Frame.DrawRight = True
+      Frame.DrawTop = False
+      Frame.DrawBottom = True
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Frame.Style = psDot
       AlignToBottom = False
-      Color = clWhite
+      Color = 13423300
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = []
       ForceNewColumn = False
       ForceNewPage = False
+      ParentFont = False
       Size.Values = (
         105.833333333333300000
         1899.708333333333000000)
@@ -83,22 +91,22 @@ object RelatorioCVendas: TRelatorioCVendas
       object QRSysData1: TQRSysData
         Left = 560
         Top = 8
-        Width = 119
-        Height = 25
+        Width = 68
+        Height = 21
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          66.145833333333330000
+          55.562500000000000000
           1481.666666666667000000
           21.166666666666670000
-          314.854166666666700000)
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
-        Color = clWhite
+        Color = 13423300
         Data = qrsDateTime
         Transparent = False
         FontSize = 10
@@ -111,9 +119,10 @@ object RelatorioCVendas: TRelatorioCVendas
       Height = 35
       Frame.Color = clBlack
       Frame.DrawTop = False
-      Frame.DrawBottom = True
+      Frame.DrawBottom = False
       Frame.DrawLeft = True
       Frame.DrawRight = True
+      Frame.Style = psDot
       AlignToBottom = False
       Color = clWhite
       ForceNewColumn = False
@@ -161,9 +170,10 @@ object RelatorioCVendas: TRelatorioCVendas
       Height = 60
       Frame.Color = clBlack
       Frame.DrawTop = True
-      Frame.DrawBottom = True
+      Frame.DrawBottom = False
       Frame.DrawLeft = True
       Frame.DrawRight = True
+      Frame.Style = psDot
       AlignToBottom = False
       Color = clWhite
       ForceNewColumn = False

@@ -66,35 +66,35 @@ object RelatorioCProdutos: TRelatorioCProdutos
       Left = 38
       Top = 38
       Width = 718
-      Height = 31
+      Height = 47
       Frame.Color = clBlack
       Frame.DrawTop = True
-      Frame.DrawBottom = False
+      Frame.DrawBottom = True
       Frame.DrawLeft = True
       Frame.DrawRight = True
       AlignToBottom = False
-      Color = clWhite
+      Color = 13423300
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333330000
+        124.354166666666700000
         1899.708333333333000000)
       BandType = rbPageHeader
       object QRSysData1: TQRSysData
-        Left = 556
-        Top = 4
-        Width = 119
-        Height = 21
+        Left = 636
+        Top = 16
+        Width = 68
+        Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          55.562500000000000000
-          1471.083333333333000000
-          10.583333333333330000
-          314.854166666666700000)
+          44.979166666666670000
+          1682.750000000000000000
+          42.333333333333330000
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -106,11 +106,11 @@ object RelatorioCProdutos: TRelatorioCProdutos
     end
     object qrbndTitleBand1: TQRBand
       Left = 38
-      Top = 69
+      Top = 85
       Width = 718
       Height = 40
       Frame.Color = clBlack
-      Frame.DrawTop = False
+      Frame.DrawTop = True
       Frame.DrawBottom = True
       Frame.DrawLeft = True
       Frame.DrawRight = True
@@ -123,20 +123,20 @@ object RelatorioCProdutos: TRelatorioCProdutos
         1899.708333333333000000)
       BandType = rbTitle
       object qrlbl1: TQRLabel
-        Left = 257
+        Left = 250
         Top = 8
-        Width = 193
-        Height = 24
+        Width = 208
+        Height = 25
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          63.500000000000000000
-          679.979166666666700000
+          66.145833333333330000
+          661.458333333333300000
           21.166666666666670000
-          510.645833333333300000)
+          550.333333333333300000)
         Alignment = taCenter
         AlignToBand = False
         AutoSize = True
@@ -147,7 +147,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
         Font.Color = clWindowText
         Font.Height = -20
         Font.Name = 'Arial'
-        Font.Style = []
+        Font.Style = [fsBold]
         ParentFont = False
         Transparent = False
         WordWrap = True
@@ -156,7 +156,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
     end
     object qrbndDetailBand1: TQRBand
       Left = 38
-      Top = 109
+      Top = 125
       Width = 718
       Height = 40
       Frame.Color = clBlack

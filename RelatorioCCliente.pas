@@ -13,14 +13,9 @@ type
     dsRelatorioCCliente: TDataSource;
     qrbndColumnHeaderBand1: TQRBand;
     qrbndDetailBand1: TQRBand;
-    qrbnd1: TQRBand;
     QRSysData1: TQRSysData;
-    qrlbl1: TQRLabel;
-    qrlbl2: TQRLabel;
     QRDBText1: TQRDBText;
-    qrlbl3: TQRLabel;
     QRDBText2: TQRDBText;
-    qrlbl4: TQRLabel;
     QRDBText3: TQRDBText;
     qryRelatorioCClienteidcliente: TAutoIncField;
     qryRelatorioCClientenome: TStringField;
@@ -29,20 +24,29 @@ type
     qryRelatorioCClienteEndereo: TStringField;
     qryRelatorioCClienteBairro: TWideStringField;
     qryRelatorioCClienteCidade: TWideStringField;
-    qrlbl5: TQRLabel;
     QRDBText4: TQRDBText;
-    qrlbl6: TQRLabel;
     QRDBText5: TQRDBText;
-    qrlbl7: TQRLabel;
     QRDBText6: TQRDBText;
-    qrlbl8: TQRLabel;
     QRDBText7: TQRDBText;
+    qrlbl9: TQRLabel;
+    qrchldbndChildBand1: TQRChildBand;
+    qrlbl3: TQRLabel;
+    qrlbl2: TQRLabel;
+    qrlbl4: TQRLabel;
+    qrlbl5: TQRLabel;
+    qrlbl6: TQRLabel;
+    qrlbl8: TQRLabel;
+    qrlbl7: TQRLabel;
+    qrlbl1: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure qckrpRelatorioCClienteAfterPreview(Sender: TObject);
+    procedure qrbndDetailBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
+    contador : Integer;
     { Public declarations }
   end;
 
@@ -58,6 +62,7 @@ uses Loja;
 procedure TRelatorioCClientes.FormCreate(Sender: TObject);
 begin
   qryRelatorioCCliente.Active := True;
+  contador := 0;
 end;
 
 procedure TRelatorioCClientes.FormClose(Sender: TObject;
@@ -70,6 +75,17 @@ procedure TRelatorioCClientes.qckrpRelatorioCClienteAfterPreview(
   Sender: TObject);
 begin
   RelatorioCClientes.Close;
+end;
+
+procedure TRelatorioCClientes.qrbndDetailBand1BeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  if Odd(contador) then
+  qrbndDetailBand1.Color := clWhite
+  else
+    qrbndDetailBand1.color := $00EEEEEE;
+  contador := contador+1;
+
 end;
 
 end.
