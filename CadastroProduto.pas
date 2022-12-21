@@ -11,8 +11,8 @@ type
   TCadastroProdutos = class(TForm)
     pnlGeralCC: TPanel;
     pnlBarraPesquisa: TPanel;
-    lbl8: TLabel;
-    pgcCadastroCliente: TPageControl;
+    lblCadastroProdutoLogo: TLabel;
+    pgcCadastroProduto: TPageControl;
     ts1: TTabSheet;
     pnl2: TPanel;
     dbgrdConsultaProduto: TDBGrid;
@@ -54,7 +54,7 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure pgcCadastroClienteChange(Sender: TObject);
+    procedure pgcCadastroProdutoChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -84,6 +84,7 @@ begin
           ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
       except
         ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
+        qryConsultaProduto.Close;
       end;
 
     end
@@ -203,11 +204,11 @@ begin
   end;
 end;
 
-procedure TCadastroProdutos.pgcCadastroClienteChange(Sender: TObject);
+procedure TCadastroProdutos.pgcCadastroProdutoChange(Sender: TObject);
 begin
-  if pgcCadastroCliente.ActivePageIndex = 1 then
+  if pgcCadastroProduto.ActivePageIndex = 1 then
   begin
-    if qryConsultaProduto.Active then
+    if (qryConsultaProduto.Active) and (qryConsultaProdutoidproduto.Value <> 0) then
     begin
       qryDadosProduto.Close;
       qryDadosProduto.Parameters.ParamByName('idproduto').Value := FloatToStr(dbgrdConsultaProduto.Fields[0].Value);

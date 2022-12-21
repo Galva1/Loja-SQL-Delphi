@@ -15,7 +15,6 @@ type
     qrbnddetalhesMAE: TQRBand;
     QRSysData1: TQRSysData;
     TitleBand2: TQRBand;
-    QRLabel1: TQRLabel;
     qrlbl6: TQRLabel;
     QRDBText1: TQRDBText;
     qrlbl7: TQRLabel;

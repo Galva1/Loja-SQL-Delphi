@@ -273,7 +273,8 @@ procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);
 begin
   if pgcCadastroCliente.ActivePageIndex = 1 then
   begin
-    if qryConsultaCliente.Active then
+    if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.Value <> 0)
+     then
     begin
       qryDadosCliente.Close;
       qryDadosCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(dbgrdConsultaCliente.Fields[0].Value);
