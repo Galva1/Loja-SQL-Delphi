@@ -90,7 +90,7 @@ object RelatorioCVendas: TRelatorioCVendas
       object QRSysData1: TQRSysData
         Left = 592
         Top = 4
-        Width = 119
+        Width = 68
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -101,7 +101,7 @@ object RelatorioCVendas: TRelatorioCVendas
           44.979166666666670000
           1566.333333333333000000
           10.583333333333330000
-          314.854166666666700000)
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -197,7 +197,7 @@ object RelatorioCVendas: TRelatorioCVendas
       Left = 38
       Top = 112
       Width = 718
-      Height = 19
+      Height = 18
       Frame.Color = clBlack
       Frame.DrawTop = False
       Frame.DrawBottom = False
@@ -209,12 +209,12 @@ object RelatorioCVendas: TRelatorioCVendas
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        50.270833333333330000
+        47.625000000000000000
         1899.708333333333000000)
       BandType = rbDetail
       object QRDBidCliente: TQRDBText
         Left = 88
-        Top = 0
+        Top = 1
         Width = 66
         Height = 17
         Frame.Color = clBlack
@@ -225,7 +225,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Size.Values = (
           44.979166666666670000
           232.833333333333300000
-          0.000000000000000000
+          2.645833333333333000
           174.625000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -240,7 +240,7 @@ object RelatorioCVendas: TRelatorioCVendas
       end
       object QRDBidVenda: TQRDBText
         Left = 8
-        Top = 0
+        Top = 1
         Width = 69
         Height = 17
         Frame.Color = clBlack
@@ -251,7 +251,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Size.Values = (
           44.979166666666670000
           21.166666666666670000
-          0.000000000000000000
+          2.645833333333333000
           182.562500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -266,7 +266,7 @@ object RelatorioCVendas: TRelatorioCVendas
       end
       object QRDBText1: TQRDBText
         Left = 560
-        Top = 0
+        Top = 1
         Width = 153
         Height = 17
         Frame.Color = clBlack
@@ -277,7 +277,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Size.Values = (
           44.979166666666670000
           1481.666666666667000000
-          0.000000000000000000
+          2.645833333333333000
           404.812500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -292,7 +292,7 @@ object RelatorioCVendas: TRelatorioCVendas
       end
       object QRDBText2: TQRDBText
         Left = 332
-        Top = 0
+        Top = 1
         Width = 225
         Height = 17
         Frame.Color = clBlack
@@ -303,7 +303,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Size.Values = (
           44.979166666666670000
           878.416666666666700000
-          0.000000000000000000
+          2.645833333333333000
           595.312500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -318,7 +318,7 @@ object RelatorioCVendas: TRelatorioCVendas
       end
       object QRDBText3: TQRDBText
         Left = 156
-        Top = 0
+        Top = 1
         Width = 173
         Height = 17
         Frame.Color = clBlack
@@ -329,7 +329,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Size.Values = (
           44.979166666666670000
           412.750000000000000000
-          0.000000000000000000
+          2.645833333333333000
           457.729166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -380,7 +380,7 @@ object RelatorioCVendas: TRelatorioCVendas
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Num. Venda'
+        Caption = 'Num.Venda'
         Color = clWhite
         Transparent = True
         WordWrap = True
@@ -405,7 +405,7 @@ object RelatorioCVendas: TRelatorioCVendas
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'C'#243'd. Cliente'
+        Caption = 'C'#243'd.Cliente'
         Color = clWhite
         Transparent = True
         WordWrap = True

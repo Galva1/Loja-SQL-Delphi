@@ -38,7 +38,6 @@ type
     lblHora: TLabel;
     pnlDataAtual: TPanel;
     pnlHoraAtual: TPanel;
-    dtpvencimento: TDateTimePicker;
     dbgrdprodutos: TDBGrid;
     qryEmitirVenda: TADOQuery;
     dsEmitirVenda: TDataSource;
@@ -49,7 +48,6 @@ type
     dbedtNumeroVenda: TDBEdit;
     lblNvenda: TLabel;
     lblFormaPagamento: TLabel;
-    lblVencimento: TLabel;
     edtCodProduto: TEdit;
     dbedtnome: TDBEdit;
     edtqtdproduto: TEdit;
@@ -87,6 +85,9 @@ type
     qryIncluirItemitem_unidades: TIntegerField;
     qryIncluirItemvalor_item: TFloatField;
     qryIncluirItemnomeproduto: TStringField;
+    lbl2: TLabel;
+    qryEmitirVendaobservacao_venda: TMemoField;
+    edtobservacaovenda: TEdit;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -103,7 +104,8 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure qryEmitirVendaAfterOpen(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure dtpvencimentoChange(Sender: TObject);
+    procedure edtCodProdutoKeyPress(Sender: TObject; var Key: Char);
+    procedure edtqtdprodutoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -185,27 +187,32 @@ begin
   btnConfirmar.Enabled := True;
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
-  try
-    qryIncluirItem.Insert;
-    qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
-    qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
-    qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
-    qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
-    qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
-    qryIncluirItem.Post;
+  if edtCodProduto.Text <> '0' then
+  begin
+    try
+      qryIncluirItem.Insert;
+      qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
+      qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
+      qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
+      qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
+      qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
+      qryIncluirItem.Post;
 
 
-    if qryEmitirVenda.State = dsbrowse then
-      qryEmitirVenda.Edit;
-    qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
-    qryEmitirVenda.Post;
-  except
-    on e: Exception do
-    begin
-      qryIncluirItem.Cancel;
-      MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
+      if qryEmitirVenda.State = dsbrowse then
+        qryEmitirVenda.Edit;
+      qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+      qryEmitirVenda.Post;
+    except
+      on e: Exception do
+      begin
+        qryIncluirItem.Cancel;
+        MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
+      end;
     end;
-  end;
+  end
+  else
+    ShowMessage('Insira um código de produto.');
 end;
 
 procedure TCadastroVendas.btnNovaVendaClick(Sender: TObject);
@@ -220,7 +227,7 @@ begin
     qryPagamento.Open;
 
   try
-    btnIncluir.Enabled := True;
+    btnIncluir.Enabled                := True;
     qryEmitirVenda.Insert;
     qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
     qryEmitirVendadata_venda.Value    := Now();
@@ -244,6 +251,7 @@ begin
       begin
         try
           qryEmitirVenda.Connection.RollbackTrans;
+          qryEmitirVenda.Connection.Connected := False;
           ShowMessage('A venda foi cancelada com sucesso!');
           CadastroVendas.Close;
         except
@@ -258,7 +266,6 @@ begin
   end
   else
   begin
-    qryEmitirVenda.Connection.RollbackTrans;
     CadastroVendas.Close;
   end;
 
@@ -275,6 +282,9 @@ begin
     IDYES:
       begin
         try
+          qryEmitirVenda.Edit;
+          qryEmitirVendaobservacao_venda.Value := edtobservacaovenda.Text;
+          qryEmitirVenda.Post;
           ShowMessage('A venda foi concluída com sucesso!');
           qryEmitirVenda.Connection.CommitTrans;
           CadastroVendas.Close;
@@ -310,11 +320,24 @@ begin
 
 end;
 
-procedure TCadastroVendas.dtpvencimentoChange(Sender: TObject);
+procedure TCadastroVendas.edtCodProdutoKeyPress(Sender: TObject;
+  var Key: Char);
 begin
-  if qryEmitirVenda.State in [dsinsert] then
-    qryEmitirVendadata_venda.Value := dtpvencimento.Date;
+  if not (Key in['0'..'9',#8, #27, #32]) then
+  begin
+    Beep;
+    Key := #0;
+  end;
 end;
 
+procedure TCadastroVendas.edtqtdprodutoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #32]) then
+  begin
+    Beep;
+    Key := #0;
+  end;
+end;
 
 end.

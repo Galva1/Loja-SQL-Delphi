@@ -25,8 +25,8 @@ object CadastroVendas: TCadastroVendas
     Color = clWhite
     TabOrder = 0
     object lblNvenda: TLabel
-      Left = 20
-      Top = 252
+      Left = 8
+      Top = 244
       Width = 68
       Height = 20
       Caption = 'N'#186' Venda'
@@ -38,9 +38,9 @@ object CadastroVendas: TCadastroVendas
       ParentFont = False
     end
     object lblFormaPagamento: TLabel
-      Left = 120
-      Top = 252
-      Width = 131
+      Left = 100
+      Top = 244
+      Width = 133
       Height = 20
       Caption = 'Forma pagamento'
       Font.Charset = DEFAULT_CHARSET
@@ -50,12 +50,12 @@ object CadastroVendas: TCadastroVendas
       Font.Style = []
       ParentFont = False
     end
-    object lblVencimento: TLabel
-      Left = 324
-      Top = 252
-      Width = 85
+    object lbl2: TLabel
+      Left = 8
+      Top = 513
+      Width = 89
       Height = 20
-      Caption = 'Vencimento'
+      Caption = 'Observa'#231#227'o:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -353,7 +353,7 @@ object CadastroVendas: TCadastroVendas
     end
     object pgcItem: TPageControl
       Left = 0
-      Top = 308
+      Top = 296
       Width = 617
       Height = 213
       ActivePage = tsItem
@@ -465,6 +465,7 @@ object CadastroVendas: TCadastroVendas
           Text = '0'
           OnExit = edtCodProdutoExit
           OnKeyDown = edtCodProdutoKeyDown
+          OnKeyPress = edtCodProdutoKeyPress
         end
         object dbedtnome: TDBEdit
           Left = 112
@@ -498,6 +499,7 @@ object CadastroVendas: TCadastroVendas
           Text = '0'
           OnExit = edtqtdprodutoExit
           OnKeyDown = edtqtdprodutoKeyDown
+          OnKeyPress = edtqtdprodutoKeyPress
         end
         object pnlvalorTotal: TPanel
           Left = 388
@@ -553,26 +555,9 @@ object CadastroVendas: TCadastroVendas
       TabOrder = 5
       OnClick = btnCancelarClick
     end
-    object dtpvencimento: TDateTimePicker
-      Left = 324
-      Top = 272
-      Width = 149
-      Height = 28
-      Date = 44902.670463946760000000
-      Time = 44902.670463946760000000
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      MinDate = 44902.000000000000000000
-      ParentFont = False
-      TabOrder = 6
-      OnChange = dtpvencimentoChange
-    end
     object dbedtNumeroVenda: TDBEdit
-      Left = 20
-      Top = 272
+      Left = 8
+      Top = 264
       Width = 69
       Height = 28
       Color = 15395562
@@ -585,21 +570,21 @@ object CadastroVendas: TCadastroVendas
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 6
     end
     object btnNovaVenda: TButton
-      Left = 512
-      Top = 264
+      Left = 320
+      Top = 252
       Width = 89
       Height = 41
       Caption = 'Nova venda'
       Enabled = False
-      TabOrder = 8
+      TabOrder = 7
       OnClick = btnNovaVendaClick
     end
     object dblkcbbidpagamento: TDBLookupComboBox
-      Left = 112
-      Top = 272
+      Left = 100
+      Top = 264
       Width = 181
       Height = 28
       DataField = 'idpagamento'
@@ -613,6 +598,13 @@ object CadastroVendas: TCadastroVendas
       ListField = 'nomepagamento'
       ListSource = dsPagamento
       ParentFont = False
+      TabOrder = 8
+    end
+    object edtobservacaovenda: TEdit
+      Left = 8
+      Top = 536
+      Width = 365
+      Height = 21
       TabOrder = 9
     end
   end
@@ -703,6 +695,10 @@ object CadastroVendas: TCadastroVendas
       FieldName = 'nomepagamento'
       FixedChar = True
       Size = 50
+    end
+    object qryEmitirVendaobservacao_venda: TMemoField
+      FieldName = 'observacao_venda'
+      BlobType = ftMemo
     end
   end
   object dsEmitirVenda: TDataSource
