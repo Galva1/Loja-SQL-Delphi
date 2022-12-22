@@ -95,6 +95,7 @@ object ConsultaVenda: TConsultaVenda
       Top = 64
       Width = 93
       Height = 24
+      Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13

@@ -15,27 +15,34 @@ type
     qrbnddetalhesMAE: TQRBand;
     QRSysData1: TQRSysData;
     TitleBand2: TQRBand;
-    qrlbl6: TQRLabel;
     QRDBText1: TQRDBText;
-    qrlbl7: TQRLabel;
     QRDBText3: TQRDBText;
-    qrlbl8: TQRLabel;
     QRDBnomeCliente: TQRDBText;
-    qrlbl2: TQRLabel;
     QRDBidProduto: TQRDBText;
-    QRDBprodutoNome: TQRDBText;
-    qrlbl3: TQRLabel;
     QRDBitemUnidades: TQRDBText;
-    qrlbl4: TQRLabel;
     QRDBvalorItem: TQRDBText;
-    qrlbl5: TQRLabel;
     QRDBvalorTotal: TQRDBText;
-    qrbnd1: TQRBand;
+    qrlbl1: TQRLabel;
+    qrchldbndChildBand1: TQRChildBand;
+    qrlbl6: TQRLabel;
+    qrlbl2: TQRLabel;
+    qrlbl3: TQRLabel;
+    qrlbl7: TQRLabel;
+    QRDBprodutoNome: TQRDBText;
+    qrlbl4: TQRLabel;
+    qrlbl8: TQRLabel;
+    qrlbl5: TQRLabel;
+    QRDBText2: TQRDBText;
+    qrlbl9: TQRLabel;
     procedure FormActivate(Sender: TObject);
     procedure qckrpRelatorioVendaAfterPreview(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure qrbnddetalhesMAEBeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
+    contador: Integer;
     { Public declarations }
   end;
 
@@ -57,6 +64,21 @@ procedure TRelatorioVendas.qckrpRelatorioVendaAfterPreview(
   Sender: TObject);
 begin
   RelatorioVendas.Close;
+end;
+
+procedure TRelatorioVendas.FormCreate(Sender: TObject);
+begin
+  contador := 0;
+end;
+
+procedure TRelatorioVendas.qrbnddetalhesMAEBeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  if Odd(contador) then
+  qrbnddetalhesMAE.Color := clWhite
+  else
+    qrbnddetalhesMAE.color := $00EEEEEE;
+  contador := contador+1;
 end;
 
 end.

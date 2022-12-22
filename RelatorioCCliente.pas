@@ -13,7 +13,6 @@ type
     dsRelatorioCCliente: TDataSource;
     qrbndColumnHeaderBand1: TQRBand;
     qrbndDetailBand1: TQRBand;
-    QRSysData1: TQRSysData;
     QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
     QRDBText3: TQRDBText;
@@ -37,7 +36,9 @@ type
     qrlbl6: TQRLabel;
     qrlbl8: TQRLabel;
     qrlbl7: TQRLabel;
+    qrbndTitleBand1: TQRBand;
     qrlbl1: TQRLabel;
+    QRSysData1: TQRSysData;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure qckrpRelatorioCClienteAfterPreview(Sender: TObject);
@@ -69,6 +70,7 @@ procedure TRelatorioCClientes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   qryRelatorioCCliente.Active := False;
+  contador := 0;
 end;
 
 procedure TRelatorioCClientes.qckrpRelatorioCClienteAfterPreview(
