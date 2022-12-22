@@ -177,9 +177,9 @@ object CadastroClientes1: TCadastroClientes1
           TabOrder = 0
           object lblCodCadastroCliente: TLabel
             Left = 80
-            Top = 48
+            Top = 22
             Width = 29
-            Height = 20
+            Height = 21
             Caption = 'Cod'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -190,9 +190,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroNomeCliente: TLabel
             Left = 172
-            Top = 48
+            Top = 22
             Width = 42
-            Height = 20
+            Height = 21
             Caption = 'Nome'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -203,9 +203,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroCPFCliente: TLabel
             Left = 80
-            Top = 100
+            Top = 74
             Width = 31
-            Height = 20
+            Height = 21
             Caption = 'CPF'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -216,9 +216,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroDataNascCliente: TLabel
             Left = 284
-            Top = 100
+            Top = 74
             Width = 121
-            Height = 20
+            Height = 21
             Caption = 'Data nascimento'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -229,9 +229,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroEndCliente: TLabel
             Left = 80
-            Top = 152
+            Top = 126
             Width = 69
-            Height = 20
+            Height = 21
             Caption = 'Endere'#231'o'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -242,9 +242,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroBairroCliente: TLabel
             Left = 80
-            Top = 204
+            Top = 178
             Width = 42
-            Height = 20
+            Height = 21
             Caption = 'Bairro'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -255,9 +255,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroCidadeCliente: TLabel
             Left = 240
-            Top = 204
+            Top = 178
             Width = 50
-            Height = 20
+            Height = 21
             Caption = 'Cidade'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -268,9 +268,9 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbtxtidcli: TDBText
             Left = 80
-            Top = 72
+            Top = 46
             Width = 57
-            Height = 29
+            Height = 30
             DataField = 'idcliente'
             DataSource = dsDadosCliente
             Font.Charset = DEFAULT_CHARSET
@@ -280,11 +280,25 @@ object CadastroClientes1: TCadastroClientes1
             Font.Style = []
             ParentFont = False
           end
+          object lbl1: TLabel
+            Left = 80
+            Top = 230
+            Width = 85
+            Height = 21
+            Caption = 'Observa'#231#227'o'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
           object dbedtnomecli: TDBEdit
             Left = 172
-            Top = 72
+            Top = 46
             Width = 245
-            Height = 21
+            Height = 22
+            Color = 15395562
             DataField = 'nome'
             DataSource = dsDadosCliente
             Enabled = False
@@ -292,9 +306,10 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbedtcpfcli: TDBEdit
             Left = 80
-            Top = 124
+            Top = 98
             Width = 193
-            Height = 21
+            Height = 22
+            Color = 15395562
             DataField = 'cpf'
             DataSource = dsDadosCliente
             Enabled = False
@@ -303,9 +318,10 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbedtdatacli: TDBEdit
             Left = 284
-            Top = 124
+            Top = 98
             Width = 133
-            Height = 21
+            Height = 22
+            Color = 15395562
             DataField = 'data_nascimento'
             DataSource = dsDadosCliente
             Enabled = False
@@ -314,9 +330,10 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbedtendcli: TDBEdit
             Left = 80
-            Top = 176
+            Top = 150
             Width = 337
-            Height = 21
+            Height = 22
+            Color = 15395562
             DataField = 'Endere'#231'o'
             DataSource = dsDadosCliente
             Enabled = False
@@ -324,9 +341,10 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbedtbairrocli: TDBEdit
             Left = 80
-            Top = 228
+            Top = 202
             Width = 149
-            Height = 21
+            Height = 22
+            Color = 15395562
             DataField = 'Bairro'
             DataSource = dsDadosCliente
             Enabled = False
@@ -334,9 +352,10 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbedtcidadecli: TDBEdit
             Left = 240
-            Top = 228
+            Top = 202
             Width = 177
-            Height = 21
+            Height = 22
+            Color = 15395562
             DataField = 'Cidade'
             DataSource = dsDadosCliente
             Enabled = False
@@ -389,6 +408,21 @@ object CadastroClientes1: TCadastroClientes1
             Enabled = False
             TabOrder = 10
             OnClick = btnAlterarClick
+          end
+          object edtobservacaoCliente: TEdit
+            Left = 80
+            Top = 258
+            Width = 345
+            Height = 21
+            Color = 15395562
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 11
           end
         end
       end
@@ -485,6 +519,10 @@ object CadastroClientes1: TCadastroClientes1
     object qryDadosClienteCidade: TWideStringField
       FieldName = 'Cidade'
       Size = 50
+    end
+    object qryDadosClienteobservacao_cliente: TMemoField
+      FieldName = 'observacao_cliente'
+      BlobType = ftMemo
     end
   end
   object dsDadosCliente: TDataSource

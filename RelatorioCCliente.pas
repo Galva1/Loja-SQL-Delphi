@@ -39,6 +39,9 @@ type
     qrbndTitleBand1: TQRBand;
     qrlbl1: TQRLabel;
     QRSysData1: TQRSysData;
+    qrbndPageFooterBand1: TQRBand;
+    qrlbl10: TQRLabel;
+    qrlblTotaldeRegistros: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure qckrpRelatorioCClienteAfterPreview(Sender: TObject);
@@ -83,11 +86,9 @@ procedure TRelatorioCClientes.qrbndDetailBand1BeforePrint(
   Sender: TQRCustomBand; var PrintBand: Boolean);
 begin
   if Odd(contador) then
-  qrbndDetailBand1.Color := clWhite
+    qrbndDetailBand1.Color := clWhite
   else
     qrbndDetailBand1.color := $00EEEEEE;
   contador := contador+1;
-
 end;
-
 end.

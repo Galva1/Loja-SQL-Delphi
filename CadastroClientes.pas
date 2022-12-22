@@ -58,6 +58,9 @@ type
     qryConsultaClienteCidade: TWideStringField;
     pnl2: TPanel;
     dbtxtidcli: TDBText;
+    edtobservacaoCliente: TEdit;
+    lbl1: TLabel;
+    qryDadosClienteobservacao_cliente: TMemoField;
     procedure btnInserirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure AtivarDesativarBotoes(Sender: TObject);
@@ -74,6 +77,7 @@ type
     function CamposValidos():Boolean;
     procedure dbedtdatacliKeyPress(Sender: TObject; var Key: Char);
     procedure dbedtcpfcliKeyPress(Sender: TObject; var Key: Char);
+    procedure AlterarCorCampos(Sender: TObject);
 
   private
     { Private declarations }
@@ -89,6 +93,28 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TCadastroClientes1.AlterarCorCampos(Sender: TObject);
+var
+  i: Integer;
+begin
+  if qryDadosCliente.State in [dsBrowse] then
+  begin
+    edtobservacaoCliente.Color := $00EAEAEA;
+    for i:=0 to ComponentCount-1 do
+      if (Components[i] is TDBEdit) then
+        TDBEdit(Components[i]).Color := $00EAEAEA;
+
+  end
+  else
+  begin
+    edtobservacaoCliente.Color := clWindow;
+    for i:=0 to ComponentCount-1 do
+      if (Components[i] is TDBEdit)then
+        TDBEdit(Components[i]).Color := clWindow;
+
+  end;
+end;
 
 procedure TCadastroClientes1.AtivarDesativarBotoes(Sender: TObject);
 begin
@@ -110,8 +136,10 @@ begin
   dbedtbairrocli.Enabled := True;
   dbedtcidadecli.Enabled := True;
   qryDadosCliente.Active := True;
+  edtobservacaoCliente.Enabled := True;
   qryDadosCliente.edit;
   dbedtnomecli.SetFocus;
+  AlterarCorCampos(nil);
   AtivarDesativarBotoes(nil);
 end;
 
@@ -139,10 +167,11 @@ begin
     if CamposValidos then
     begin
       try
-        
+        qryDadosClienteobservacao_cliente.Value := edtobservacaoCliente.Text;
         qryDadosCliente.Post;
         showMessage('O Registro foi salvo com sucesso!');
         qryConsultaCliente.Connection.CommitTrans;
+        AlterarCorCampos(nil);
         AtivarDesativarBotoes(nil);
       except
         ShowMessage('Preencha os campos vazios!');
@@ -161,6 +190,7 @@ begin
   begin
     qryDadosCliente.Edit;
     dbedtnomecli.SetFocus;
+    AlterarCorCampos(nil);
     AtivarDesativarBotoes(nil);
   end
   else
@@ -201,9 +231,11 @@ begin
       dbedtendcli.Enabled      := False;
       dbedtbairrocli.Enabled   := False;
       dbedtcidadecli.Enabled   := False;
+      edtobservacaoCliente.Enabled := False;
       qryConsultaCliente.Connection.RollbackTrans;
       qryDadosCliente.Cancel;
       AtivarDesativarBotoes(nil);
+      AlterarCorCampos(nil);
     if dbtxtidcli.Caption <> EmptyStr then
       qryDadosCliente.Active := False;
   end;
