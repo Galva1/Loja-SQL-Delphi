@@ -55,6 +55,7 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure pgcCadastroProdutoChange(Sender: TObject);
+    procedure AlterarCorCamposProdutos (Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,6 +68,25 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TCadastroProdutos.AlterarCorCamposProdutos (Sender: TObject);
+var
+  i: integer;
+begin
+  if qryDadosProduto.State in [dsBrowse, dsInactive] then
+  begin
+    for i:=0 to ComponentCount-1 do
+      if (Components[i] is TDBEdit) then
+        TDBEdit(Components[i]).Color := $00EAEAEA;
+
+  end
+  else
+  begin
+    for i:=0 to ComponentCount-1 do
+      if (Components[i] is TDBEdit)then
+        TDBEdit(Components[i]).Color := clWindow;
+  end;
+end;
 
 procedure TCadastroProdutos.ConsultarProduto(Sender:TObject);
 begin
@@ -128,6 +148,17 @@ begin
   btnExcluir.Enabled := qryDadosProduto.State in [dsBrowse];
   btnSalvar.Enabled  := qryDadosProduto.State in [dsInsert, dsEdit];
   btnCancelar.Enabled:= qryDadosProduto.State in [dsInsert, dsEdit];
+  if qryDadosProduto.State in [dsInsert, dsEdit] then
+  begin
+    dbedtvalorpro.Enabled := True;
+    dbedtnomepro.Enabled := True;
+  end
+  else
+  begin
+    dbedtvalorpro.Enabled := False;
+    dbedtnomepro.Enabled := False;
+
+  end;
 end;
 
 
@@ -136,9 +167,10 @@ begin
   dbedtnomepro.Enabled := True;
   dbedtvalorpro.Enabled := True;
   qryDadosProduto.Active := True;
-  qryDadosProduto.Edit;
+  qryDadosProduto.Insert;
   dbedtnomepro.SetFocus;
   AtivarDesativarBotoes(nil);
+  AlterarCorCamposProdutos(nil);
 end;
 
 procedure TCadastroProdutos.btnAlterarClick(Sender: TObject);
@@ -146,8 +178,9 @@ begin
   if qryDadosProduto.Active then
   begin
     qryDadosProduto.Edit;
-    dbedtnomepro.SetFocus;
     AtivarDesativarBotoes(nil);
+    AlterarCorCamposProdutos(nil);
+    dbedtnomepro.SetFocus;
   end
   else
     ShowMessage('Não há registro para alterar!');
@@ -161,6 +194,7 @@ begin
       qryDadosProduto.Post;
       showMessage('O Registro foi salvo com sucesso!');
       AtivarDesativarBotoes(nil);
+      AlterarCorCamposProdutos(nil);
     except
       ShowMessage('Preencha os campos vazios!');
     end;
@@ -171,24 +205,31 @@ end;
 
 procedure TCadastroProdutos.btnExcluirClick(Sender: TObject);
 begin
-  if qryDadosProduto.Active then
-  begin
-    case Application.MessageBox('Deseja realmente excluir esse registro?', 'Exclusão de registro', MB_YESNO + MB_ICONQUESTION)  of
-    IDYES:
-      begin
-        qryDadosProduto.Delete;
-        qryDadosProduto.Active := False;
-        ShowMessage('O Registro foi excluído com sucesso!');
+  try
+    if qryDadosProduto.Active then
+    begin
+      case Application.MessageBox('Deseja realmente excluir esse registro?', 'Exclusão de registro', MB_YESNO + MB_ICONQUESTION)  of
+      IDYES:
+        begin
+          qryDadosProduto.Delete;
+          qryDadosProduto.Active := False;
+          ShowMessage('O Registro foi excluído com sucesso!');
 
+        end;
+      IDNO:
+        begin
+          Exit;
+        end;
       end;
-    IDNO:
+    end
+    else
+      ShowMessage('Não há registro para excluir!');
+  except
+    on e:Exception do
       begin
-        Exit;
+        MessageDlg('Erro ao tentar excluir seu produto!' + #13 + e.Message, mtError, [mbok], 0);
       end;
-    end;
-  end
-  else
-    ShowMessage('Não há registro para excluir!');
+  end;
 end;
 
 procedure TCadastroProdutos.btnCancelarClick(Sender: TObject);
@@ -199,8 +240,7 @@ begin
     dbedtvalorpro.Enabled := False;
     qryDadosProduto.Cancel;
     AtivarDesativarBotoes(nil);
-    if dbtxtcodpro.Caption <> EmptyStr then
-      qryDadosProduto.Active := False;
+    AlterarCorCamposProdutos(nil);
   end;
 end;
 
@@ -211,9 +251,8 @@ begin
     if (qryConsultaProduto.Active) and (qryConsultaProdutoidproduto.Value <> 0) then
     begin
       qryDadosProduto.Close;
-      qryDadosProduto.Parameters.ParamByName('idproduto').Value := FloatToStr(dbgrdConsultaProduto.Fields[0].Value);
+      qryDadosProduto.Parameters.ParamByName('idproduto').Value := qryConsultaProdutoidproduto.AsInteger;
       qryDadosProduto.Open;
-      qryDadosProduto.Edit;
     end
     else
     begin

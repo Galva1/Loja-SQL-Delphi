@@ -34,6 +34,9 @@ type
     qrlbl5: TQRLabel;
     QRDBText2: TQRDBText;
     qrlbl9: TQRLabel;
+    qrbndPageFooterBand1: TQRBand;
+    qrlbl10: TQRLabel;
+    QRExpr1: TQRExpr;
     procedure FormActivate(Sender: TObject);
     procedure qckrpRelatorioVendaAfterPreview(Sender: TObject);
     procedure FormCreate(Sender: TObject);

@@ -93,7 +93,6 @@ begin
   try
     Application.CreateForm(TCadastroProdutos, CadastroProdutos);
     CadastroProdutos.ShowModal;
-    CadastroProdutos.pgcCadastroProduto.ActivePageIndex := 1;
   finally
     CadastroProdutos.Free;
   end;

@@ -41,7 +41,7 @@ type
     QRSysData1: TQRSysData;
     qrbndPageFooterBand1: TQRBand;
     qrlbl10: TQRLabel;
-    qrlblTotaldeRegistros: TQRLabel;
+    QRExpr1: TQRExpr;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure qckrpRelatorioCClienteAfterPreview(Sender: TObject);

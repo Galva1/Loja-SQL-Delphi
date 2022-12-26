@@ -1,6 +1,6 @@
 object CadastroClientes1: TCadastroClientes1
-  Left = 377
-  Top = 252
+  Left = 403
+  Top = 211
   Width = 1051
   Height = 509
   Color = clBtnFace
@@ -179,7 +179,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 22
             Width = 29
-            Height = 21
+            Height = 20
             Caption = 'Cod'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -192,7 +192,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 172
             Top = 22
             Width = 42
-            Height = 21
+            Height = 20
             Caption = 'Nome'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -205,7 +205,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 74
             Width = 31
-            Height = 21
+            Height = 20
             Caption = 'CPF'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -218,7 +218,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 284
             Top = 74
             Width = 121
-            Height = 21
+            Height = 20
             Caption = 'Data nascimento'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -231,7 +231,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 126
             Width = 69
-            Height = 21
+            Height = 20
             Caption = 'Endere'#231'o'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -244,7 +244,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 178
             Width = 42
-            Height = 21
+            Height = 20
             Caption = 'Bairro'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -257,7 +257,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 240
             Top = 178
             Width = 50
-            Height = 21
+            Height = 20
             Caption = 'Cidade'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -284,7 +284,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 230
             Width = 85
-            Height = 21
+            Height = 20
             Caption = 'Observa'#231#227'o'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -297,7 +297,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 172
             Top = 46
             Width = 245
-            Height = 22
+            Height = 21
             Color = 15395562
             DataField = 'nome'
             DataSource = dsDadosCliente
@@ -308,7 +308,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 98
             Width = 193
-            Height = 22
+            Height = 21
             Color = 15395562
             DataField = 'cpf'
             DataSource = dsDadosCliente
@@ -320,7 +320,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 284
             Top = 98
             Width = 133
-            Height = 22
+            Height = 21
             Color = 15395562
             DataField = 'data_nascimento'
             DataSource = dsDadosCliente
@@ -332,7 +332,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 150
             Width = 337
-            Height = 22
+            Height = 21
             Color = 15395562
             DataField = 'Endere'#231'o'
             DataSource = dsDadosCliente
@@ -343,7 +343,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 80
             Top = 202
             Width = 149
-            Height = 22
+            Height = 21
             Color = 15395562
             DataField = 'Bairro'
             DataSource = dsDadosCliente
@@ -354,7 +354,7 @@ object CadastroClientes1: TCadastroClientes1
             Left = 240
             Top = 202
             Width = 177
-            Height = 22
+            Height = 21
             Color = 15395562
             DataField = 'Cidade'
             DataSource = dsDadosCliente
@@ -438,6 +438,7 @@ object CadastroClientes1: TCadastroClientes1
     Left = 840
     Top = 56
     object qryConsultaClienteidcliente: TAutoIncField
+      AutoGenerateValue = arAutoInc
       FieldName = 'idcliente'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       ReadOnly = True
@@ -476,14 +477,13 @@ object CadastroClientes1: TCadastroClientes1
   object qryDadosCliente: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
-    DataSource = dsConsultaCliente
     Parameters = <
       item
         Name = 'idcliente'
         Attributes = [paSigned, paNullable]
         DataType = ftInteger
         Precision = 10
-        Size = 4
+        Size = -1
         Value = Null
       end>
     SQL.Strings = (
@@ -493,6 +493,7 @@ object CadastroClientes1: TCadastroClientes1
     Left = 956
     Top = 52
     object qryDadosClienteidcliente: TAutoIncField
+      AutoGenerateValue = arDefault
       FieldName = 'idcliente'
       ReadOnly = True
     end

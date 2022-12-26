@@ -28,6 +28,9 @@ type
     qrlbl5: TQRLabel;
     qrlbl4: TQRLabel;
     qrlbl7: TQRLabel;
+    qrbndPageFooterBand1: TQRBand;
+    QRExpr1: TQRExpr;
+    qrlbl10: TQRLabel;
     procedure qckrpRelatorioCVendasAfterPreview(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);

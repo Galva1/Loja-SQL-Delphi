@@ -3,7 +3,7 @@ object RelatorioCClientes: TRelatorioCClientes
   Top = 140
   Width = 1372
   Height = 682
-  VertScrollBar.Position = 470
+  VertScrollBar.Position = 612
   Caption = 'RelatorioCClientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object RelatorioCClientes: TRelatorioCClientes
   TextHeight = 13
   object qckrpRelatorioCCliente: TQuickRep
     Left = 28
-    Top = 18
+    Top = -124
     Width = 1123
     Height = 794
     Frame.Color = clBlack
@@ -61,7 +61,7 @@ object RelatorioCClientes: TRelatorioCClientes
     PrinterSettings.OutputBin = Auto
     PrintIfEmpty = True
     SnapToGrid = True
-    Units = Native
+    Units = Pixels
     Zoom = 100
     object qrbndColumnHeaderBand1: TQRBand
       Left = 38
@@ -109,7 +109,7 @@ object RelatorioCClientes: TRelatorioCClientes
       object QRSysData1: TQRSysData
         Left = 922
         Top = 4
-        Width = 68
+        Width = 119
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -120,7 +120,7 @@ object RelatorioCClientes: TRelatorioCClientes
           44.979166666666670000
           2439.458333333333000000
           10.583333333333330000
-          179.916666666666700000)
+          314.854166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -604,68 +604,83 @@ object RelatorioCClientes: TRelatorioCClientes
       Left = 38
       Top = 135
       Width = 1047
-      Height = 34
+      Height = 25
       Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
+      Frame.DrawTop = True
+      Frame.DrawBottom = True
+      Frame.DrawLeft = True
+      Frame.DrawRight = True
       AlignToBottom = False
       Color = 13423300
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        89.958333333333330000
+        66.145833333333330000
         2770.187500000000000000)
       BandType = rbPageFooter
       object qrlbl10: TQRLabel
         Left = 8
-        Top = 8
-        Width = 109
-        Height = 21
+        Top = 3
+        Width = 130
+        Height = 19
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          55.562500000000000000
+          50.270833333333330000
           21.166666666666670000
-          21.166666666666670000
-          288.395833333333300000)
+          7.937500000000000000
+          343.958333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
         Caption = 'Total de registros: '
         Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
         Transparent = True
         WordWrap = True
-        FontSize = 10
+        FontSize = 12
       end
-      object qrlblTotaldeRegistros: TQRLabel
-        Left = 124
-        Top = 8
+      object QRExpr1: TQRExpr
+        Left = 140
+        Top = 3
         Width = 901
-        Height = 21
+        Height = 19
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          55.562500000000000000
-          328.083333333333300000
-          21.166666666666670000
+          50.270833333333330000
+          370.416666666666700000
+          7.937500000000000000
           2383.895833333333000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
         Color = clWhite
+        Master = qckrpRelatorioCCliente
+        ParentFont = False
+        ResetAfterPrint = False
         Transparent = True
         WordWrap = True
-        FontSize = 10
+        Expression = 'count'
+        FontSize = 12
       end
     end
   end

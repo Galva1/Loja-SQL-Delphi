@@ -197,8 +197,7 @@ begin
       qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
       qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
       qryIncluirItem.Post;
-
-
+      
       if qryEmitirVenda.State = dsbrowse then
         qryEmitirVenda.Edit;
       qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);

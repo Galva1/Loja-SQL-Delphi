@@ -98,7 +98,7 @@ procedure TCadastroClientes1.AlterarCorCampos(Sender: TObject);
 var
   i: Integer;
 begin
-  if qryDadosCliente.State in [dsBrowse] then
+  if qryDadosCliente.State in [dsBrowse, dsInactive] then
   begin
     edtobservacaoCliente.Color := $00EAEAEA;
     for i:=0 to ComponentCount-1 do
@@ -118,29 +118,44 @@ end;
 
 procedure TCadastroClientes1.AtivarDesativarBotoes(Sender: TObject);
 begin
+  
   btnInserir.Enabled := qryDadosCliente.State in [dsBrowse];
   btnAlterar.Enabled := qryDadosCliente.State in [dsBrowse];
   btnExcluir.Enabled := qryDadosCliente.State in [dsBrowse];
   btnSalvar.Enabled  := qryDadosCliente.State in [dsInsert, dsEdit];
   btnCancelar.Enabled:= qryDadosCliente.State in [dsInsert, dsEdit];
+  if qryDadosCliente.State in [dsInsert, dsEdit] then
+  begin
+    dbedtnomecli.Enabled := True;
+    dbedtcpfcli.Enabled := True;
+    dbedtdatacli.Enabled := True;
+    dbedtendcli.Enabled := True;
+    dbedtbairrocli.Enabled := True;
+    dbedtcidadecli.Enabled := True;
+    qryDadosCliente.Active := True;
+    edtobservacaoCliente.Enabled := True;
+  end
+  else
+  begin
+    dbedtnomecli.Enabled := False;
+    dbedtcpfcli.Enabled := False;
+    dbedtdatacli.Enabled := False;
+    dbedtendcli.Enabled := False;
+    dbedtbairrocli.Enabled := False;
+    dbedtcidadecli.Enabled := False;
+    qryDadosCliente.Active := False;
+    edtobservacaoCliente.Enabled := False;
+  end;
 end;
 
 procedure TCadastroClientes1.btnInserirClick(Sender: TObject);
 begin
-  qryConsultaCliente.Connection.Connected := true;
-  qryConsultaCliente.Connection.BeginTrans;
-  dbedtnomecli.Enabled := True;
-  dbedtcpfcli.Enabled := True;
-  dbedtdatacli.Enabled := True;
-  dbedtendcli.Enabled := True;
-  dbedtbairrocli.Enabled := True;
-  dbedtcidadecli.Enabled := True;
   qryDadosCliente.Active := True;
-  edtobservacaoCliente.Enabled := True;
-  qryDadosCliente.edit;
+  qryDadosCliente.Insert;
+  AtivarDesativarBotoes(nil);
   dbedtnomecli.SetFocus;
   AlterarCorCampos(nil);
-  AtivarDesativarBotoes(nil);
+
 end;
 
 function TCadastroClientes1.CamposValidos():Boolean;
@@ -170,7 +185,6 @@ begin
         qryDadosClienteobservacao_cliente.Value := edtobservacaoCliente.Text;
         qryDadosCliente.Post;
         showMessage('O Registro foi salvo com sucesso!');
-        qryConsultaCliente.Connection.CommitTrans;
         AlterarCorCampos(nil);
         AtivarDesativarBotoes(nil);
       except
@@ -189,9 +203,9 @@ begin
   if qryDadosCliente.Active then
   begin
     qryDadosCliente.Edit;
-    dbedtnomecli.SetFocus;
     AlterarCorCampos(nil);
     AtivarDesativarBotoes(nil);
+    dbedtnomecli.SetFocus;
   end
   else
     ShowMessage('Não há registro para alterar!');
@@ -207,6 +221,8 @@ begin
         qryDadosCliente.Delete;
         qryDadosCliente.Active := False;
         ShowMessage('O registro foi excluído com sucesso!');
+        AtivarDesativarBotoes(nil);
+        btnInserir.Enabled := True;
 
       end;
     IDNO:
@@ -225,26 +241,15 @@ begin
   try
     if qryDadosCliente.Active then
     begin
-      dbedtnomecli.Enabled     := False;
-      dbedtcpfcli.Enabled      := False;
-      dbedtdatacli.Enabled     := False;
-      dbedtendcli.Enabled      := False;
-      dbedtbairrocli.Enabled   := False;
-      dbedtcidadecli.Enabled   := False;
-      edtobservacaoCliente.Enabled := False;
-      qryConsultaCliente.Connection.RollbackTrans;
       qryDadosCliente.Cancel;
       AtivarDesativarBotoes(nil);
       AlterarCorCampos(nil);
-    if dbtxtidcli.Caption <> EmptyStr then
-      qryDadosCliente.Active := False;
-  end;
+    end;
   except
     ShowMessage('Teste');
   end;
-
-
-
+  qryDadosCliente.Close;
+  qryDadosCliente.Open;
 end;
 
 procedure TCadastroClientes1.cbbConsultaEnter(Sender: TObject);
@@ -305,13 +310,16 @@ procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);
 begin
   if pgcCadastroCliente.ActivePageIndex = 1 then
   begin
-    if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.Value <> 0)
-     then
+    if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.Value <> 0) then
     begin
       qryDadosCliente.Close;
-      qryDadosCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(dbgrdConsultaCliente.Fields[0].Value);
+      qryDadosCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
       qryDadosCliente.Open;
-      qryDadosCliente.Edit;
+      btnInserir.Enabled := False;
+      btnAlterar.Enabled := True;
+      btnSalvar.Enabled := False;
+      btnExcluir.Enabled := True;
+      btnCancelar.Enabled := True;
     end
     else
     begin

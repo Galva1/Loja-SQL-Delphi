@@ -40,7 +40,7 @@ object CadastroVendas: TCadastroVendas
     object lblFormaPagamento: TLabel
       Left = 100
       Top = 244
-      Width = 133
+      Width = 131
       Height = 20
       Caption = 'Forma pagamento'
       Font.Charset = DEFAULT_CHARSET

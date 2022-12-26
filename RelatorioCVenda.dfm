@@ -24,8 +24,8 @@ object RelatorioCVendas: TRelatorioCVendas
     Frame.Color = clBlack
     Frame.DrawTop = True
     Frame.DrawBottom = True
-    Frame.DrawLeft = False
-    Frame.DrawRight = False
+    Frame.DrawLeft = True
+    Frame.DrawRight = True
     AfterPreview = qckrpRelatorioCVendasAfterPreview
     DataSet = qryRelatorioConsultaV
     Font.Charset = DEFAULT_CHARSET
@@ -485,6 +485,88 @@ object RelatorioCVendas: TRelatorioCVendas
         Transparent = True
         WordWrap = True
         FontSize = 10
+      end
+    end
+    object qrbndPageFooterBand1: TQRBand
+      Left = 38
+      Top = 130
+      Width = 718
+      Height = 25
+      Frame.Color = clBlack
+      Frame.DrawTop = True
+      Frame.DrawBottom = True
+      Frame.DrawLeft = True
+      Frame.DrawRight = True
+      AlignToBottom = False
+      Color = 13423300
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        66.145833333333330000
+        1899.708333333333000000)
+      BandType = rbPageFooter
+      object QRExpr1: TQRExpr
+        Left = 136
+        Top = 3
+        Width = 577
+        Height = 19
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          50.270833333333330000
+          359.833333333333300000
+          7.937500000000000000
+          1526.645833333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        Color = clWhite
+        ParentFont = False
+        ResetAfterPrint = False
+        Transparent = True
+        WordWrap = True
+        Expression = 'count'
+        FontSize = 12
+      end
+      object qrlbl10: TQRLabel
+        Left = 5
+        Top = 3
+        Width = 130
+        Height = 19
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          50.270833333333330000
+          13.229166666666670000
+          7.937500000000000000
+          343.958333333333300000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Total de registros: '
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        FontSize = 12
       end
     end
   end
