@@ -1,8 +1,8 @@
 object CadastroVendas: TCadastroVendas
   Left = 232
   Top = 147
-  Width = 1301
-  Height = 653
+  Width = 1153
+  Height = 621
   Caption = 'CadastroVendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,10 +17,10 @@ object CadastroVendas: TCadastroVendas
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeral: TPanel
-    Left = 80
-    Top = 12
+    Left = 0
+    Top = 0
     Width = 617
-    Height = 565
+    Height = 561
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
@@ -72,14 +72,6 @@ object CadastroVendas: TCadastroVendas
       TabOrder = 2
       object tsCliente: TTabSheet
         Caption = 'Cliente'
-        object btnBuscar: TSpeedButton
-          Left = 344
-          Top = 32
-          Width = 45
-          Height = 28
-          Caption = 'Buscar'
-          OnClick = btnBuscarClick
-        end
         object lblcodcli: TLabel
           Left = 12
           Top = 16
@@ -157,6 +149,14 @@ object CadastroVendas: TCadastroVendas
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ParentFont = False
+        end
+        object btnBuscar: TSpeedButton
+          Left = 344
+          Top = 32
+          Width = 45
+          Height = 28
+          Caption = 'Buscar'
+          OnClick = btnBuscarClick
         end
         object dbedtcodCliente: TDBEdit
           Left = 12
@@ -587,6 +587,7 @@ object CadastroVendas: TCadastroVendas
       Top = 264
       Width = 181
       Height = 28
+      Color = 15395562
       DataField = 'idpagamento'
       DataSource = dsEmitirVenda
       Font.Charset = DEFAULT_CHARSET

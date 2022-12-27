@@ -11,13 +11,14 @@ object ConsultaVenda: TConsultaVenda
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeralConsultaVendas: TPanel
     Left = 216
     Top = 28
     Width = 517
-    Height = 465
+    Height = 413
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0

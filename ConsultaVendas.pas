@@ -29,6 +29,7 @@ type
     procedure btnimprimirVendaClick(Sender: TObject);
     procedure edtConsultaVendaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -112,6 +113,11 @@ procedure TConsultaVenda.edtConsultaVendaKeyDown(Sender: TObject;
 begin
   if Key = 13 then
     btnBuscarVendaClick(nil);
+end;
+
+procedure TConsultaVenda.FormActivate(Sender: TObject);
+begin
+  ConsultaVenda.AutoSize := True;
 end;
 
 end.

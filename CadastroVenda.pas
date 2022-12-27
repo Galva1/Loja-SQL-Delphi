@@ -126,9 +126,9 @@ begin
   try
     Application.CreateForm(TpesquisarCliente, pesquisarCliente);
     pesquisarCliente.ShowModal;
-    qryConsultaCliente.Close;
-    qryConsultaCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(pesquisarCliente.dbgrdconsultacli.Fields[0].Value);
-    qryConsultaCliente.Open;
+//    qryConsultaCliente.Close;
+//    qryConsultaCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(pesquisarCliente.dbgrdconsultacli.Fields[0].Value);
+//    qryConsultaCliente.Open;
   finally
     pesquisarCliente.Free;
   end;
@@ -145,15 +145,23 @@ end;
 procedure TCadastroVendas.FormActivate(Sender: TObject);
 begin
   edtCodProduto.SetFocus;
+  CadastroVendas.AutoSize := True;
 end;
 
 procedure TCadastroVendas.edtCodProdutoExit(Sender: TObject);
 begin
   with qryConsultaItem do
     begin
-      qryConsultaItem.Close;
-      qryConsultaItem.SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
-      qryConsultaItem.Open;
+      try
+        qryConsultaItem.Close;
+        qryConsultaItem.SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
+        qryConsultaItem.Open;
+      except
+        on e: Exception do
+        begin
+          MessageDlg('Erro ao tentar incluir produto'+#13+e.Message, mtError, [mbok], 0);
+        end;
+      end;
     end;
     if pnlvalorTotal.Caption <> '0' then
       CadastroVendas.edtqtdprodutoExit(nil);
@@ -178,8 +186,6 @@ begin
     edtCodProdutoExit(nil);
   if pnlvalorTotal.Caption <> '0' then
     CadastroVendas.edtqtdprodutoExit(nil);
-
-
 end;
 
 procedure TCadastroVendas.btnIncluirClick(Sender: TObject);
@@ -189,24 +195,29 @@ begin
     qryIncluirItem.Open;
   if edtCodProduto.Text <> '0' then
   begin
-    try
-      qryIncluirItem.Insert;
-      qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
-      qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
-      qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
-      qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
-      qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
-      qryIncluirItem.Post;
-      
-      if qryEmitirVenda.State = dsbrowse then
-        qryEmitirVenda.Edit;
-      qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
-      qryEmitirVenda.Post;
-    except
-      on e: Exception do
-      begin
-        qryIncluirItem.Cancel;
-        MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
+    if (edtqtdproduto.Text = '0') then
+      ShowMessage('Digite uma quantidade válida.')
+    else
+    begin
+      try
+        qryIncluirItem.Insert;
+        qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
+        qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
+        qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
+        qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
+        qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
+        qryIncluirItem.Post;
+
+        if qryEmitirVenda.State = dsbrowse then
+          qryEmitirVenda.Edit;
+        qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+        qryEmitirVenda.Post;
+      except
+        on e: Exception do
+        begin
+          qryIncluirItem.Cancel;
+          MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
+        end;
       end;
     end;
   end
@@ -226,6 +237,7 @@ begin
     qryPagamento.Open;
 
   try
+    dblkcbbidpagamento.Color := clWindow;
     btnIncluir.Enabled                := True;
     qryEmitirVenda.Insert;
     qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
@@ -310,7 +322,7 @@ end;
 procedure TCadastroVendas.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if qryEmitirVenda.Connection.Connected then
+  if qryEmitirVenda.Connection.InTransaction then
   begin
     if qryEmitirVenda.State in [dsedit, dsinsert] then
       qryEmitirVenda.CancelUpdates;

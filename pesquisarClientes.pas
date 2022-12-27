@@ -32,6 +32,7 @@ type
     procedure btnSelecionarCliClick(Sender: TObject);
     procedure btnSaircliClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -105,6 +106,18 @@ procedure TpesquisarCliente.FormActivate(Sender: TObject);
 begin
   edtConsulta.SetFocus;
 
+end;
+
+procedure TpesquisarCliente.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if qryConsultaCliente.Active then
+  begin
+    CadastroVendas.qryConsultaCliente.Close;
+    CadastroVendas.qryConsultaCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(pesquisarCliente.dbgrdconsultacli.Fields[0].Value);
+    CadastroVendas.qryConsultaCliente.Open;
+    CadastroVendas.btnNovaVenda.Enabled := True;
+  end;
 end;
 
 end.
