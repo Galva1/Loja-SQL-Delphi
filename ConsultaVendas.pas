@@ -29,6 +29,7 @@ type
     procedure btnimprimirVendaClick(Sender: TObject);
     procedure edtConsultaVendaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,11 +50,6 @@ begin
   if (edtConsultaVenda.Text) <> EmptyStr then
   begin
     try
-//      ID Venda
-//      Data
-//      ID Cliente
-//      Nome Cliente
-//      CPF
       qryConsultaVenda.Close;
       qryConsultaVenda.SQL.Clear;
       qryConsultaVenda.SQL.Add('select venda.*, cliente.nome, cliente.cpf from venda');
@@ -86,7 +82,7 @@ begin
   begin
     qryConsultaVenda.Close;
     qryConsultaVenda.SQL.Clear;
-    qryConsultaVenda.SQL.Add('select * from venda innerjoin cliente on cliente.idcliente = venda.idcliente');
+    qryConsultaVenda.SQL.Add('select * from venda inner join cliente on cliente.idcliente = venda.idcliente');
     qryConsultaVenda.Open;
   end;
 end;
@@ -117,6 +113,11 @@ procedure TConsultaVenda.edtConsultaVendaKeyDown(Sender: TObject;
 begin
   if Key = 13 then
     btnBuscarVendaClick(nil);
+end;
+
+procedure TConsultaVenda.FormActivate(Sender: TObject);
+begin
+  ConsultaVenda.AutoSize := True;
 end;
 
 end.

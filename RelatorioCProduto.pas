@@ -17,17 +17,25 @@ type
     QRSysData1: TQRSysData;
     qrlbl1: TQRLabel;
     QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    qrchldbndChildBand1: TQRChildBand;
+    qrlbl9: TQRLabel;
     qrlbl2: TQRLabel;
     qrlbl3: TQRLabel;
-    QRDBText2: TQRDBText;
     qrlbl4: TQRLabel;
-    QRDBText3: TQRDBText;
+    qrbndPageFooterBand1: TQRBand;
+    QRExpr1: TQRExpr;
+    qrlbl10: TQRLabel;
     procedure qckrpRelatorioCProdutosAfterPreview(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure qrbndDetailBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
+    contador: Integer;
     { Public declarations }
   end;
 
@@ -48,12 +56,23 @@ end;
 procedure TRelatorioCProdutos.FormCreate(Sender: TObject);
 begin
   qryRelatorioConsultaP.Active := True;
+  contador := 0;
 end;
 
 procedure TRelatorioCProdutos.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   qryRelatorioConsultaP.Active := False;
+end;
+
+procedure TRelatorioCProdutos.qrbndDetailBand1BeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+  if Odd(contador) then
+  qrbndDetailBand1.Color := clWhite
+  else
+    qrbndDetailBand1.color := $00EEEEEE;
+  contador := contador+1;
 end;
 
 end.

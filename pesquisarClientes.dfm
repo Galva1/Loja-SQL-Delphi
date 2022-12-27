@@ -12,6 +12,7 @@ object pesquisarCliente: TpesquisarCliente
   Font.Style = []
   OldCreateOrder = False
   OnActivate = FormActivate
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPesquisarClienteGeral: TPanel

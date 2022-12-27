@@ -50,7 +50,7 @@ object CadastroProdutos: TCadastroProdutos
       Top = 41
       Width = 545
       Height = 412
-      ActivePage = ts1
+      ActivePage = ts2
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroProdutoChange
@@ -272,6 +272,7 @@ object CadastroProdutos: TCadastroProdutos
               Top = 116
               Width = 169
               Height = 21
+              Color = 15395562
               DataField = 'nome'
               DataSource = dsDadosProduto
               Enabled = False
@@ -282,9 +283,12 @@ object CadastroProdutos: TCadastroProdutos
               Top = 172
               Width = 169
               Height = 21
+              BiDiMode = bdLeftToRight
+              Color = 15395562
               DataField = 'valor_produto'
               DataSource = dsDadosProduto
               Enabled = False
+              ParentBiDiMode = False
               TabOrder = 1
             end
           end
@@ -327,7 +331,6 @@ object CadastroProdutos: TCadastroProdutos
   object qryDadosProduto: TADOQuery
     Connection = LojaMenu.conLoja
     CursorType = ctStatic
-    DataSource = dsConsultaProduto
     Parameters = <
       item
         Name = 'idproduto'
@@ -344,6 +347,7 @@ object CadastroProdutos: TCadastroProdutos
     Left = 640
     Top = 144
     object AutoIncField1: TAutoIncField
+      AutoGenerateValue = arAutoInc
       FieldName = 'idproduto'
       ReadOnly = True
     end
