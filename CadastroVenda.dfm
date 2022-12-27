@@ -455,6 +455,8 @@ object CadastroVendas: TCadastroVendas
           Top = 28
           Width = 81
           Height = 28
+          Color = 15395562
+          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -489,6 +491,8 @@ object CadastroVendas: TCadastroVendas
           Top = 28
           Width = 65
           Height = 28
+          Color = 15395562
+          Enabled = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -533,6 +537,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
           TabOrder = 5
           OnClick = btnIncluirClick
+          OnKeyDown = btnIncluirKeyDown
         end
       end
     end
@@ -600,6 +605,7 @@ object CadastroVendas: TCadastroVendas
       ListSource = dsPagamento
       ParentFont = False
       TabOrder = 8
+      OnCloseUp = dblkcbbidpagamentoCloseUp
     end
     object edtobservacaovenda: TEdit
       Left = 8

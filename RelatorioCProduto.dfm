@@ -272,6 +272,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
         Color = clWhite
         DataSet = qryRelatorioConsultaP
         DataField = 'valor_produto'
+        Mask = 'R$ ###,##0.00'
         Transparent = True
         WordWrap = True
         FontSize = 10

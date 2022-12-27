@@ -21,7 +21,6 @@ type
     QRDBidProduto: TQRDBText;
     QRDBitemUnidades: TQRDBText;
     QRDBvalorItem: TQRDBText;
-    QRDBvalorTotal: TQRDBText;
     qrlbl1: TQRLabel;
     qrchldbndChildBand1: TQRChildBand;
     qrlbl6: TQRLabel;
@@ -37,6 +36,26 @@ type
     qrlbl10: TQRLabel;
     QRExpr1: TQRExpr;
     qrlbl11: TQRLabel;
+    qrlbl12: TQRLabel;
+    QRDBvalorTotal: TQRDBText;
+    qryRelatorioVendaidvenda: TAutoIncField;
+    qryRelatorioVendavalor: TBCDField;
+    qryRelatorioVendaidcliente: TIntegerField;
+    qryRelatorioVendadata_venda: TDateField;
+    qryRelatorioVendaidpagamento: TIntegerField;
+    qryRelatorioVendaobservacao_venda: TMemoField;
+    qryRelatorioVendaitem_unidades: TIntegerField;
+    qryRelatorioVendavalor_item: TFloatField;
+    qryRelatorioVendaidproduto: TAutoIncField;
+    qryRelatorioVendanome: TWideStringField;
+    qryRelatorioVendanome_1: TStringField;
+    qryRelatorioVendacpf: TBCDField;
+    qryRelatorioVendadata_nascimento: TDateField;
+    qryRelatorioVendaEndereo: TStringField;
+    qryRelatorioVendaBairro: TWideStringField;
+    qryRelatorioVendaCidade: TWideStringField;
+    qryRelatorioVendaTotal: TFloatField;
+    QRDBText4: TQRDBText;
     procedure FormActivate(Sender: TObject);
     procedure qckrpRelatorioVendaAfterPreview(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -85,3 +104,4 @@ begin
 end;
 
 end.
+

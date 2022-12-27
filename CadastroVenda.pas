@@ -106,6 +106,9 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edtCodProdutoKeyPress(Sender: TObject; var Key: Char);
     procedure edtqtdprodutoKeyPress(Sender: TObject; var Key: Char);
+    procedure dblkcbbidpagamentoCloseUp(Sender: TObject);
+    procedure btnIncluirKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -144,7 +147,6 @@ end;
 
 procedure TCadastroVendas.FormActivate(Sender: TObject);
 begin
-  edtCodProduto.SetFocus;
   CadastroVendas.AutoSize := True;
 end;
 
@@ -153,6 +155,7 @@ begin
   with qryConsultaItem do
     begin
       try
+        edtqtdproduto.SetFocus;
         qryConsultaItem.Close;
         qryConsultaItem.SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
         qryConsultaItem.Open;
@@ -237,7 +240,12 @@ begin
     qryPagamento.Open;
 
   try
-    dblkcbbidpagamento.Color := clWindow;
+    dblkcbbidpagamento.Color          := clWindow;
+    edtCodProduto.Color               := clWindow;
+    edtqtdproduto.Color               := clWindow;
+    edtCodProduto.Enabled             := True;
+    edtqtdproduto.Enabled             := True;
+    dblkcbbidpagamento.SetFocus;
     btnIncluir.Enabled                := True;
     qryEmitirVenda.Insert;
     qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
@@ -349,6 +357,18 @@ begin
     Beep;
     Key := #0;
   end;
+end;
+
+procedure TCadastroVendas.dblkcbbidpagamentoCloseUp(Sender: TObject);
+begin
+  edtCodProduto.SetFocus;
+end;
+
+procedure TCadastroVendas.btnIncluirKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = 13 then
+    btnIncluirClick(nil);
 end;
 
 end.

@@ -286,6 +286,7 @@ object RelatorioCVendas: TRelatorioCVendas
         Color = clWhite
         DataSet = qryRelatorioConsultaV
         DataField = 'valor'
+        Mask = 'R$ ###,##0.00'
         Transparent = True
         WordWrap = True
         FontSize = 10
