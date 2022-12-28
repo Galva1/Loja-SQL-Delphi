@@ -290,6 +290,7 @@ object CadastroProdutos: TCadastroProdutos
               Enabled = False
               ParentBiDiMode = False
               TabOrder = 1
+              OnKeyPress = dbedtvalorproKeyPress
             end
           end
         end
