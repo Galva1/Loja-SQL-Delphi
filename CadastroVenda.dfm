@@ -363,7 +363,7 @@ object CadastroVendas: TCadastroVendas
         object lblCodProduto: TLabel
           Left = 32
           Top = 5
-          Width = 69
+          Width = 74
           Height = 20
           Caption = 'Cod. Prod.'
           Font.Charset = DEFAULT_CHARSET
@@ -544,7 +544,7 @@ object CadastroVendas: TCadastroVendas
           Top = 4
           Width = 21
           Height = 21
-          Caption = '!'
+          Caption = '?'
           Enabled = False
           TabOrder = 6
           OnClick = btnConsultaItemClick

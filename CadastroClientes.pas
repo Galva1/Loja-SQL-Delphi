@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ADODB, StdCtrls, DBCtrls, ComCtrls, ExtCtrls, Loja, Grids,
-  DBGrids, Buttons, Mask, IBDatabase, DataBkr, ToolWin;
+  DBGrids, Buttons, Mask, IBDatabase, DataBkr, ToolWin, Clipbrd, StrUtils;
 
 type
   TCadastroClientes1 = class(TForm)
@@ -62,6 +62,7 @@ type
     lbl1: TLabel;
     qryDadosClienteobservacao_cliente: TMemoField;
     qryConsultaClienteobservacao_cliente: TMemoField;
+    btnEditarCadCliente: TButton;
     procedure btnInserirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure AtivarDesativarBotoes(Sender: TObject);
@@ -74,11 +75,26 @@ type
       Shift: TShiftState);
     procedure ConsultarClientes(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure pgcCadastroClienteChange(Sender: TObject);
     function CamposValidos():Boolean;
     procedure dbedtdatacliKeyPress(Sender: TObject; var Key: Char);
     procedure dbedtcpfcliKeyPress(Sender: TObject; var Key: Char);
     procedure AlterarCorCampos(Sender: TObject);
+    procedure dbgrdConsultaClienteDblClick(Sender: TObject);
+    procedure btnEditarCadClienteClick(Sender: TObject);
+    procedure dbedtnomecliKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtnomecliMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure dbedtcpfcliMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure dbedtdatacliMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure dbedtendcliMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure dbedtbairrocliMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure dbedtcidadecliMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure NaoCopiarColar(Categoria: TCustomEdit);
 
   private
     { Private declarations }
@@ -282,8 +298,14 @@ begin
         qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' = '+QuotedStr(Trim(edtConsulta.Text)));
         qryConsultaCliente.Open;
         if qryConsultaCliente.IsEmpty then
+        begin
+          btnEditarCadCliente.Enabled := False;
+          qryConsultaCliente.Close;
           ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+        end;
       except
+        qryConsultaCliente.Close;
+        btnEditarCadCliente.Enabled := False;
         ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
       end;
 
@@ -298,6 +320,7 @@ end;
 
 procedure TCadastroClientes1.btnBuscarClick(Sender: TObject);
 begin
+  btnEditarCadCliente.Enabled := True;
   case cbbConsulta.ItemIndex of
   0:
     ConsultarClientes(nil);
@@ -321,34 +344,6 @@ begin
   
 end;
 
-procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);
-begin
-  if pgcCadastroCliente.ActivePageIndex = 1 then
-  begin
-    if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.Value <> 0) then
-    begin
-      qryDadosCliente.Close;
-      qryDadosCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
-      edtobservacaoCliente.Text := qryConsultaClienteobservacao_cliente.AsString;
-      qryDadosCliente.Open;
-      btnInserir.Enabled := False;
-      btnAlterar.Enabled := True;
-      btnSalvar.Enabled := False;
-      btnExcluir.Enabled := True;
-      btnCancelar.Enabled := True;
-    end
-    else
-    begin
-      btnInserir.Enabled := True;
-      btnAlterar.Enabled := False;
-      btnSalvar.Enabled := False;
-      btnExcluir.Enabled := False;
-      btnCancelar.Enabled := True;
-    end;
-
-  end;
-end;
-
 procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -360,17 +355,6 @@ begin
 
   if (Length(dbedtdatacli.Text)=10) and not(Key in[#8])then
     Key := #0
-  else
-    if not(Key in[#8]) then
-    begin
-
-      if Length(dbedtdatacli.Text)=2 then
-        dbedtdatacli.Text := dbedtdatacli.Text + '/';
-      if Length(dbedtdatacli.Text)=5 then
-        dbedtdatacli.Text := dbedtdatacli.Text + '/';
-      dbedtdatacli.SelStart := Length(dbedtdatacli.Text);
-    end;
-
 end;
 
 procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
@@ -380,4 +364,87 @@ begin
     Key := #0;
 end;
 
+procedure TCadastroClientes1.dbgrdConsultaClienteDblClick(Sender: TObject);
+begin
+  pgcCadastroCliente.ActivePage := ts2;
+  if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.AsInteger <> 0) then
+  begin
+    qryDadosCliente.Close;
+    qryDadosCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
+    edtobservacaoCliente.Text := qryConsultaClienteobservacao_cliente.AsString;
+    qryDadosCliente.Open;
+    btnInserir.Enabled := False;
+    btnAlterar.Enabled := True;
+    btnSalvar.Enabled := False;
+    btnExcluir.Enabled := True;
+    btnCancelar.Enabled := True;
+  end
+  else
+  begin
+    btnInserir.Enabled := True;
+    btnAlterar.Enabled := False;
+    btnSalvar.Enabled := False;
+    btnExcluir.Enabled := False;
+    btnCancelar.Enabled := True;
+  end;
+
+end;
+
+procedure TCadastroClientes1.btnEditarCadClienteClick(Sender: TObject);
+begin
+  dbgrdConsultaClienteDblClick(nil);
+end;
+
+procedure TCadastroClientes1.dbedtnomecliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #22 then
+    Key:= #0;
+end;
+
+procedure TCadastroClientes1.dbedtnomecliMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  NaoCopiarColar(dbedtnomecli);
+end;
+
+procedure TCadastroClientes1.dbedtcpfcliMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  NaoCopiarColar(dbedtcpfcli);
+end;
+
+procedure TCadastroClientes1.dbedtdatacliMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  NaoCopiarColar(dbedtdatacli);
+end;
+
+procedure TCadastroClientes1.dbedtendcliMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  NaoCopiarColar(dbedtendcli);
+end;
+
+procedure TCadastroClientes1.dbedtbairrocliMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  NaoCopiarColar(dbedtbairrocli);
+end;
+
+procedure TCadastroClientes1.dbedtcidadecliMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  NaoCopiarColar(dbedtcidadecli);
+end;
+
+procedure TCadastroClientes1.NaoCopiarColar(Categoria: TCustomEdit);
+begin
+  Clipboard.Destroy;
+  if Categoria.SelLength > 0 then
+    Categoria.SelLength := 0;
+  Clipboard.AsText := '';
+end;
 end.
+
+

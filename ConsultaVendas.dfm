@@ -107,6 +107,7 @@ object ConsultaVenda: TConsultaVenda
       ParentFont = False
       TabOrder = 2
       Text = 'ID Venda'
+      OnChange = cbbConsultaChange
       Items.Strings = (
         'ID Venda'
         'Data'
@@ -127,6 +128,8 @@ object ConsultaVenda: TConsultaVenda
       ParentFont = False
       TabOrder = 3
       OnKeyDown = edtConsultaVendaKeyDown
+      OnKeyPress = edtConsultaVendaKeyPress
+      OnMouseDown = edtConsultaVendaMouseDown
     end
     object btnBuscarVenda: TButton
       Left = 448
@@ -143,6 +146,7 @@ object ConsultaVenda: TConsultaVenda
       Width = 89
       Height = 29
       Caption = 'Imprimir'
+      Enabled = False
       TabOrder = 5
       OnClick = btnimprimirVendaClick
     end

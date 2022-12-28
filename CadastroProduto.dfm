@@ -18,7 +18,7 @@ object CadastroProdutos: TCadastroProdutos
     Left = 0
     Top = 0
     Width = 545
-    Height = 453
+    Height = 497
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
@@ -49,20 +49,29 @@ object CadastroProdutos: TCadastroProdutos
       Left = 0
       Top = 41
       Width = 545
-      Height = 412
-      ActivePage = ts2
+      Height = 456
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
-      OnChange = pgcCadastroProdutoChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel
           Left = 8
           Top = 4
           Width = 517
-          Height = 381
+          Height = 417
           Color = 14934999
           TabOrder = 4
+          object btnEditarCadProduto: TButton
+            Left = 444
+            Top = 380
+            Width = 61
+            Height = 29
+            Caption = 'Editar'
+            Enabled = False
+            TabOrder = 0
+            OnClick = btnEditarCadProdutoClick
+          end
         end
         object dbgrdConsultaProduto: TDBGrid
           Left = 20
@@ -78,6 +87,7 @@ object CadastroProdutos: TCadastroProdutos
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDblClick = dbgrdConsultaProdutoDblClick
           Columns = <
             item
               Expanded = False
@@ -124,7 +134,7 @@ object CadastroProdutos: TCadastroProdutos
         object edtConsultaProduto: TEdit
           Left = 160
           Top = 16
-          Width = 245
+          Width = 285
           Height = 28
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -136,7 +146,7 @@ object CadastroProdutos: TCadastroProdutos
           OnKeyDown = edtConsultaProdutoKeyDown
         end
         object btnBuscarProduto: TButton
-          Left = 428
+          Left = 452
           Top = 16
           Width = 61
           Height = 29
@@ -152,12 +162,12 @@ object CadastroProdutos: TCadastroProdutos
           Left = 8
           Top = 4
           Width = 517
-          Height = 365
+          Height = 417
           Color = 14934999
           TabOrder = 0
           object btnInserir: TButton
             Left = 84
-            Top = 316
+            Top = 352
             Width = 69
             Height = 49
             Caption = 'Inserir'
@@ -166,7 +176,7 @@ object CadastroProdutos: TCadastroProdutos
           end
           object btnSalvar: TButton
             Left = 220
-            Top = 316
+            Top = 352
             Width = 69
             Height = 49
             Caption = 'Salvar'
@@ -176,7 +186,7 @@ object CadastroProdutos: TCadastroProdutos
           end
           object btnExcluir: TButton
             Left = 288
-            Top = 316
+            Top = 352
             Width = 69
             Height = 49
             Caption = 'Excluir'
@@ -186,7 +196,7 @@ object CadastroProdutos: TCadastroProdutos
           end
           object btnCancelar: TButton
             Left = 356
-            Top = 316
+            Top = 352
             Width = 69
             Height = 49
             Caption = 'Cancelar'
@@ -195,7 +205,7 @@ object CadastroProdutos: TCadastroProdutos
           end
           object btnAlterar: TButton
             Left = 152
-            Top = 316
+            Top = 352
             Width = 69
             Height = 49
             Caption = 'Alterar'
@@ -205,7 +215,7 @@ object CadastroProdutos: TCadastroProdutos
           end
           object pnl3: TPanel
             Left = 152
-            Top = 28
+            Top = 44
             Width = 205
             Height = 265
             BevelOuter = bvNone
@@ -277,6 +287,7 @@ object CadastroProdutos: TCadastroProdutos
               DataSource = dsDadosProduto
               Enabled = False
               TabOrder = 0
+              OnMouseDown = dbedtnomeproMouseDown
             end
             object dbedtvalorpro: TDBEdit
               Left = 8
@@ -290,7 +301,9 @@ object CadastroProdutos: TCadastroProdutos
               Enabled = False
               ParentBiDiMode = False
               TabOrder = 1
+              OnChange = dbedtvalorproChange
               OnKeyPress = dbedtvalorproKeyPress
+              OnMouseDown = dbedtvalorproMouseDown
             end
           end
         end

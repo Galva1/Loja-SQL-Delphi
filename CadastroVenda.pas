@@ -253,6 +253,7 @@ begin
     qryEmitirVendadata_venda.Value    := Now();
     QryEmitirVendavalor.Value         := 0;
     qryEmitirVenda.Post;
+    btnNovaVenda.Enabled := False;
   except
     on e:Exception do
     begin
@@ -271,7 +272,7 @@ begin
       begin
         try
           qryEmitirVenda.Connection.RollbackTrans;
-          qryEmitirVenda.Connection.Connected := False;
+          //qryEmitirVenda.Connection.Connected := False;
           ShowMessage('A venda foi cancelada com sucesso!');
           CadastroVendas.Close;
         except
@@ -373,6 +374,7 @@ begin
     Application.CreateForm(TCadastroProdutos, CadastroProdutos);
     CadastroProdutos.lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
     CadastroProdutos.pgcCadastroProduto.Pages[1].Destroy;
+    CadastroProdutos.btnEditarCadProduto.Destroy;
     CadastroProdutos.ShowModal;
     if CadastroProdutos.qryConsultaProduto.Active then
     begin

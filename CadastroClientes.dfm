@@ -1,8 +1,8 @@
 object CadastroClientes1: TCadastroClientes1
-  Left = 403
-  Top = 211
-  Width = 1051
-  Height = 509
+  Left = 312
+  Top = 74
+  Width = 1081
+  Height = 675
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,15 +16,15 @@ object CadastroClientes1: TCadastroClientes1
   object pnlGeralCC: TPanel
     Left = 0
     Top = 0
-    Width = 545
-    Height = 453
+    Width = 541
+    Height = 493
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
     object pnlBarraPesquisa: TPanel
       Left = 0
       Top = 0
-      Width = 545
+      Width = 541
       Height = 37
       Align = alTop
       BevelOuter = bvNone
@@ -47,21 +47,30 @@ object CadastroClientes1: TCadastroClientes1
     object pgcCadastroCliente: TPageControl
       Left = 0
       Top = 37
-      Width = 545
-      Height = 416
-      ActivePage = ts1
+      Width = 541
+      Height = 456
+      ActivePage = ts2
       Align = alClient
       TabOrder = 1
-      OnChange = pgcCadastroClienteChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel
           Left = 8
           Top = 4
           Width = 517
-          Height = 381
+          Height = 417
           Color = 14934999
           TabOrder = 4
+          object btnEditarCadCliente: TButton
+            Left = 440
+            Top = 378
+            Width = 61
+            Height = 33
+            Caption = 'Editar'
+            Enabled = False
+            TabOrder = 0
+            OnClick = btnEditarCadClienteClick
+          end
         end
         object dbgrdConsultaCliente: TDBGrid
           Left = 20
@@ -77,6 +86,7 @@ object CadastroClientes1: TCadastroClientes1
           TitleFont.Height = -11
           TitleFont.Name = 'MS Sans Serif'
           TitleFont.Style = []
+          OnDblClick = dbgrdConsultaClienteDblClick
           Columns = <
             item
               Expanded = False
@@ -144,7 +154,7 @@ object CadastroClientes1: TCadastroClientes1
         object edtConsulta: TEdit
           Left = 160
           Top = 16
-          Width = 245
+          Width = 285
           Height = 28
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -156,8 +166,8 @@ object CadastroClientes1: TCadastroClientes1
           OnKeyDown = edtConsultaKeyDown
         end
         object btnBuscar: TButton
-          Left = 424
-          Top = 16
+          Left = 452
+          Top = 14
           Width = 61
           Height = 33
           Caption = 'Buscar'
@@ -172,12 +182,12 @@ object CadastroClientes1: TCadastroClientes1
           Left = 8
           Top = 4
           Width = 517
-          Height = 365
+          Height = 417
           Color = 14934999
           TabOrder = 0
           object lblCodCadastroCliente: TLabel
             Left = 80
-            Top = 22
+            Top = 38
             Width = 29
             Height = 20
             Caption = 'Cod'
@@ -190,7 +200,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroNomeCliente: TLabel
             Left = 172
-            Top = 22
+            Top = 38
             Width = 42
             Height = 20
             Caption = 'Nome'
@@ -203,7 +213,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroCPFCliente: TLabel
             Left = 80
-            Top = 74
+            Top = 90
             Width = 31
             Height = 20
             Caption = 'CPF'
@@ -216,7 +226,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroDataNascCliente: TLabel
             Left = 284
-            Top = 74
+            Top = 90
             Width = 121
             Height = 20
             Caption = 'Data nascimento'
@@ -229,7 +239,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroEndCliente: TLabel
             Left = 80
-            Top = 126
+            Top = 142
             Width = 69
             Height = 20
             Caption = 'Endere'#231'o'
@@ -242,7 +252,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroBairroCliente: TLabel
             Left = 80
-            Top = 178
+            Top = 194
             Width = 42
             Height = 20
             Caption = 'Bairro'
@@ -255,7 +265,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lblCadastroCidadeCliente: TLabel
             Left = 240
-            Top = 178
+            Top = 194
             Width = 50
             Height = 20
             Caption = 'Cidade'
@@ -268,7 +278,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbtxtidcli: TDBText
             Left = 80
-            Top = 46
+            Top = 62
             Width = 57
             Height = 30
             DataField = 'idcliente'
@@ -282,7 +292,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object lbl1: TLabel
             Left = 80
-            Top = 230
+            Top = 246
             Width = 85
             Height = 20
             Caption = 'Observa'#231#227'o'
@@ -295,7 +305,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object dbedtnomecli: TDBEdit
             Left = 172
-            Top = 46
+            Top = 62
             Width = 245
             Height = 21
             Color = 15395562
@@ -303,10 +313,12 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 0
+            OnKeyPress = dbedtnomecliKeyPress
+            OnMouseDown = dbedtnomecliMouseDown
           end
           object dbedtcpfcli: TDBEdit
             Left = 80
-            Top = 98
+            Top = 114
             Width = 193
             Height = 21
             Color = 15395562
@@ -315,10 +327,11 @@ object CadastroClientes1: TCadastroClientes1
             Enabled = False
             TabOrder = 1
             OnKeyPress = dbedtcpfcliKeyPress
+            OnMouseDown = dbedtcpfcliMouseDown
           end
           object dbedtdatacli: TDBEdit
             Left = 284
-            Top = 98
+            Top = 114
             Width = 133
             Height = 21
             Color = 15395562
@@ -327,10 +340,11 @@ object CadastroClientes1: TCadastroClientes1
             Enabled = False
             TabOrder = 2
             OnKeyPress = dbedtdatacliKeyPress
+            OnMouseDown = dbedtdatacliMouseDown
           end
           object dbedtendcli: TDBEdit
             Left = 80
-            Top = 150
+            Top = 166
             Width = 337
             Height = 21
             Color = 15395562
@@ -338,10 +352,11 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 3
+            OnMouseDown = dbedtendcliMouseDown
           end
           object dbedtbairrocli: TDBEdit
             Left = 80
-            Top = 202
+            Top = 218
             Width = 149
             Height = 21
             Color = 15395562
@@ -349,10 +364,11 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 4
+            OnMouseDown = dbedtbairrocliMouseDown
           end
           object dbedtcidadecli: TDBEdit
             Left = 240
-            Top = 202
+            Top = 218
             Width = 177
             Height = 21
             Color = 15395562
@@ -360,10 +376,11 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 5
+            OnMouseDown = dbedtcidadecliMouseDown
           end
           object btnInserir: TButton
             Left = 80
-            Top = 316
+            Top = 348
             Width = 69
             Height = 49
             Caption = 'Inserir'
@@ -372,7 +389,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object btnSalvar: TButton
             Left = 216
-            Top = 316
+            Top = 348
             Width = 69
             Height = 49
             Caption = 'Salvar'
@@ -382,7 +399,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object btnExcluir: TButton
             Left = 284
-            Top = 316
+            Top = 348
             Width = 69
             Height = 49
             Caption = 'Excluir'
@@ -392,7 +409,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object btnCancelar: TButton
             Left = 352
-            Top = 316
+            Top = 348
             Width = 69
             Height = 49
             Caption = 'Cancelar'
@@ -401,7 +418,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object btnAlterar: TButton
             Left = 148
-            Top = 316
+            Top = 348
             Width = 69
             Height = 49
             Caption = 'Alterar'
@@ -411,7 +428,7 @@ object CadastroClientes1: TCadastroClientes1
           end
           object edtobservacaoCliente: TEdit
             Left = 80
-            Top = 258
+            Top = 274
             Width = 345
             Height = 21
             Color = 15395562
@@ -512,6 +529,7 @@ object CadastroClientes1: TCadastroClientes1
     end
     object dtfldDadosClientedata_nascimento: TDateField
       FieldName = 'data_nascimento'
+      EditMask = '!99/99/0000;1;_'
     end
     object qryDadosClienteEndereo: TStringField
       FieldName = 'Endere'#231'o'

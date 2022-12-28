@@ -43,6 +43,7 @@ type
     lbl2: TLabel;
     dbtxtcodpro: TDBText;
     lbl1: TLabel;
+    btnEditarCadProduto: TButton;
     procedure btnBuscarProdutoClick(Sender: TObject);
     procedure ConsultarProduto(Sender:TObject);
     procedure edtConsultaProdutoKeyDown(Sender: TObject; var Key: Word;
@@ -54,11 +55,18 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure pgcCadastroProdutoChange(Sender: TObject);
     procedure AlterarCorCamposProdutos (Sender: TObject);
     procedure dbedtvalorproKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtnomeproMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure dbedtvalorproMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure dbedtvalorproChange(Sender: TObject);
+    procedure dbgrdConsultaProdutoDblClick(Sender: TObject);
+    procedure btnEditarCadProdutoClick(Sender: TObject);
   private
     { Private declarations }
+    TemVirgula: Boolean;
   public
     { Public declarations }
   end;
@@ -67,6 +75,8 @@ var
   CadastroProdutos: TCadastroProdutos;
 
 implementation
+
+uses CadastroClientes;
 
 {$R *.dfm}
 
@@ -102,10 +112,14 @@ begin
           qryConsultaProduto.SQL.Add('where '+LowerCase(cbbConsultaProduto.Text)+' = '+QuotedStr(Trim(edtConsultaProduto.Text)));
           qryConsultaProduto.Open;
         if qryConsultaProduto.IsEmpty then
+          qryConsultaProduto.Close;
+          btnEditarCadProduto.Enabled := False;
           ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
       except
-        ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
         qryConsultaProduto.Close;
+        btnEditarCadProduto.Enabled := False;
+        ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
+
       end;
 
     end
@@ -140,6 +154,7 @@ end;
 procedure TCadastroProdutos.FormCreate(Sender: TObject);
 begin
   CadastroProdutos.AutoSize := True;
+  TemVirgula := false;
 end;
 
 procedure TCadastroProdutos.AtivarDesativarBotoes(Sender: TObject);
@@ -245,33 +260,94 @@ begin
   end;
 end;
 
-procedure TCadastroProdutos.pgcCadastroProdutoChange(Sender: TObject);
+procedure TCadastroProdutos.dbedtvalorproKeyPress(Sender: TObject;
+  var Key: Char);
+  var
+    i: Integer;
 begin
-  if pgcCadastroProduto.ActivePageIndex = 1 then
+  if not(Key in ['0'..'9',#13,#8,',']) then
+    Key := #0;
+
+  if Key = ',' then
   begin
-    if (qryConsultaProduto.Active) and (qryConsultaProdutoidproduto.Value <> 0) then
+    for i:=1 to Length(dbedtvalorpro.Text) do
+    begin
+      if dbedtvalorpro.Text[i] = ',' then
+      begin
+        TemVirgula := True;
+        Break;
+      end
+      else
+        TemVirgula := False;
+    end;
+    if TemVirgula then
+      Key := #0;
+  end;
+
+end;
+
+procedure TCadastroProdutos.dbedtnomeproMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(dbedtnomepro);
+end;
+
+procedure TCadastroProdutos.dbedtvalorproMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(dbedtvalorpro);
+end;
+
+procedure TCadastroProdutos.dbedtvalorproChange(Sender: TObject);
+var
+  i, VerificarVirgula: Integer;
+begin
+  VerificarVirgula := 0;
+  try
+    for i:= 1 to Length(dbedtvalorpro.Text) do
+    begin
+      VerificarVirgula :=  StrToInt(dbedtvalorpro.Text[i]);
+    end;
+    TemVirgula := False;
+  except
+    TemVirgula := True;
+  end;
+end;
+
+procedure TCadastroProdutos.dbgrdConsultaProdutoDblClick(Sender: TObject);
+begin
+  pgcCadastroProduto.ActivePage := ts2;
+  if (qryConsultaProduto.Active) and (qryConsultaProdutoidproduto.AsInteger <> 0) then
+  begin
+    if pgcCadastroProduto.PageCount > 1 then
     begin
       qryDadosProduto.Close;
       qryDadosProduto.Parameters.ParamByName('idproduto').Value := qryConsultaProdutoidproduto.AsInteger;
       qryDadosProduto.Open;
+      btnInserir.Enabled := False;
+      btnAlterar.Enabled := True;
+      btnSalvar.Enabled := False;
+      btnExcluir.Enabled := True;
+      btnCancelar.Enabled := True;
     end
     else
     begin
-      btnInserir.Enabled := True;
-      btnAlterar.Enabled := False;
-      btnSalvar.Enabled := False;
-      btnExcluir.Enabled := False;
-      btnCancelar.Enabled := True;
+      CadastroProdutos.Close;
     end;
-
+  end
+  else
+  begin
+    btnInserir.Enabled := True;
+    btnAlterar.Enabled := False;
+    btnSalvar.Enabled := False;
+    btnExcluir.Enabled := False;
+    btnCancelar.Enabled := True;
   end;
 end;
 
-procedure TCadastroProdutos.dbedtvalorproKeyPress(Sender: TObject;
-  var Key: Char);
+procedure TCadastroProdutos.btnEditarCadProdutoClick(Sender: TObject);
 begin
-  if not(Key in ['0'..'9',#13,#8,',']) then
-    Key := #0;
+  dbgrdConsultaProdutoDblClick(nil);
 end;
 
 end.

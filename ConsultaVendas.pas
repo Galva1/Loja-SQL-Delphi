@@ -30,6 +30,10 @@ type
     procedure edtConsultaVendaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormActivate(Sender: TObject);
+    procedure edtConsultaVendaKeyPress(Sender: TObject; var Key: Char);
+    procedure edtConsultaVendaMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure cbbConsultaChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +45,7 @@ var
 
 implementation
 
-uses Loja, RelatorioVenda;
+uses Loja, RelatorioVenda, CadastroClientes;
 
 {$R *.dfm}
 
@@ -69,11 +73,18 @@ begin
         ShowMessage('Preencha o filtro!');
       end;
       qryConsultaVenda.Open;
+      btnimprimirVenda.Enabled := True;
       if qryConsultaVenda.IsEmpty then
-          ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+      begin
+        qryConsultaVenda.Close;
+        btnimprimirVenda.Enabled := False;
+        ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+      end;
     except
       on e: Exception do
       begin
+        qryConsultaVenda.Close;
+        btnimprimirVenda.Enabled := False;
         MessageDlg('Erro ao tentar procurar venda'+#13+e.Message, mtError, [mbok], 0);
       end;
     end;
@@ -90,12 +101,10 @@ end;
 procedure TConsultaVenda.btnBuscarVendaClick(Sender: TObject);
 begin
   ConsultarVenda(nil);
-  
 end;
 
 procedure TConsultaVenda.btnimprimirVendaClick(Sender: TObject);
 begin
-
   try
     Application.CreateForm(TRelatorioVendas, RelatorioVendas);
     RelatorioVendas.qryRelatorioVenda.Close;
@@ -120,4 +129,37 @@ begin
   ConsultaVenda.AutoSize := True;
 end;
 
+procedure TConsultaVenda.edtConsultaVendaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if (Length(edtConsultaVenda.Text)=50) and not(Key in[#8]) then
+    Key := #0;
+
+  if cbbConsulta.ItemIndex = 1 then
+    if (Length(edtConsultaVenda.Text)=10) and not(Key in[#8])then
+      Key := #0
+    else
+      if not(Key in[#8]) then
+      begin
+        if (Length(edtConsultaVenda.Text)=2) or (Length(edtConsultaVenda.Text)=5) then
+          edtConsultaVenda.Text := edtConsultaVenda.Text + '/';
+        edtConsultaVenda.SelStart := Length(edtConsultaVenda.Text);
+      end;
+
+end;
+
+procedure TConsultaVenda.edtConsultaVendaMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtConsultaVenda);
+end;
+
+procedure TConsultaVenda.cbbConsultaChange(Sender: TObject);
+begin
+  edtConsultaVenda.Text := '';
+end;
+
 end.
+
+
+
