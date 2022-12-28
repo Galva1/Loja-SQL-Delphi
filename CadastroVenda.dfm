@@ -1,8 +1,8 @@
 object CadastroVendas: TCadastroVendas
-  Left = 232
-  Top = 147
-  Width = 1153
-  Height = 621
+  Left = 201
+  Top = 123
+  Width = 1112
+  Height = 626
   Caption = 'CadastroVendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -361,9 +361,9 @@ object CadastroVendas: TCadastroVendas
       object tsItem: TTabSheet
         Caption = 'Item'
         object lblCodProduto: TLabel
-          Left = 12
+          Left = 32
           Top = 5
-          Width = 74
+          Width = 69
           Height = 20
           Caption = 'Cod. Prod.'
           Font.Charset = DEFAULT_CHARSET
@@ -451,9 +451,9 @@ object CadastroVendas: TCadastroVendas
             end>
         end
         object edtCodProduto: TEdit
-          Left = 12
+          Left = 32
           Top = 28
-          Width = 81
+          Width = 69
           Height = 28
           Color = 15395562
           Enabled = False
@@ -472,7 +472,7 @@ object CadastroVendas: TCadastroVendas
         object dbedtnome: TDBEdit
           Left = 112
           Top = 28
-          Width = 173
+          Width = 181
           Height = 28
           Color = 15395562
           DataField = 'nome'
@@ -489,7 +489,7 @@ object CadastroVendas: TCadastroVendas
         object edtqtdproduto: TEdit
           Left = 304
           Top = 28
-          Width = 65
+          Width = 73
           Height = 28
           Color = 15395562
           Enabled = False
@@ -508,7 +508,7 @@ object CadastroVendas: TCadastroVendas
         object pnlvalorTotal: TPanel
           Left = 388
           Top = 28
-          Width = 105
+          Width = 113
           Height = 29
           Alignment = taLeftJustify
           BevelInner = bvRaised
@@ -538,6 +538,16 @@ object CadastroVendas: TCadastroVendas
           TabOrder = 5
           OnClick = btnIncluirClick
           OnKeyDown = btnIncluirKeyDown
+        end
+        object btnConsultaItem: TButton
+          Left = 4
+          Top = 4
+          Width = 21
+          Height = 21
+          Caption = '!'
+          Enabled = False
+          TabOrder = 6
+          OnClick = btnConsultaItemClick
         end
       end
     end
@@ -605,7 +615,6 @@ object CadastroVendas: TCadastroVendas
       ListSource = dsPagamento
       ParentFont = False
       TabOrder = 8
-      OnCloseUp = dblkcbbidpagamentoCloseUp
     end
     object edtobservacaovenda: TEdit
       Left = 8
@@ -681,7 +690,7 @@ object CadastroVendas: TCadastroVendas
         'o'
       'where 1 = 0')
     Left = 724
-    Top = 332
+    Top = 336
     object qryEmitirVendaidvenda: TAutoIncField
       FieldName = 'idvenda'
       ReadOnly = True

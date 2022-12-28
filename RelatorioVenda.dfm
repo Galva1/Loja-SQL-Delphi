@@ -83,7 +83,7 @@ object RelatorioVendas: TRelatorioVendas
       object QRSysData1: TQRSysData
         Left = 595
         Top = 3
-        Width = 119
+        Width = 68
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -94,7 +94,7 @@ object RelatorioVendas: TRelatorioVendas
           44.979166666666670000
           1574.270833333333000000
           7.937500000000000000
-          314.854166666666700000)
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -393,7 +393,7 @@ object RelatorioVendas: TRelatorioVendas
           1661.583333333333000000
           10.583333333333330000
           224.895833333333300000)
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
@@ -405,7 +405,7 @@ object RelatorioVendas: TRelatorioVendas
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
-        Mask = 'R$ ###,##0.00'
+        Mask = '###,##0.00'
         ParentFont = False
         Transparent = True
         WordWrap = True
@@ -645,11 +645,11 @@ object RelatorioVendas: TRelatorioVendas
           1661.583333333333000000
           5.291666666666667000
           224.895833333333300000)
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Total'
+        Caption = 'Total (R$)'
         Color = clWhite
         Transparent = True
         WordWrap = True
@@ -765,7 +765,7 @@ object RelatorioVendas: TRelatorioVendas
       object qrlbl12: TQRLabel
         Left = 244
         Top = 3
-        Width = 80
+        Width = 114
         Height = 19
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -776,12 +776,12 @@ object RelatorioVendas: TRelatorioVendas
           50.270833333333330000
           645.583333333333300000
           7.937500000000000000
-          211.666666666666700000)
+          301.625000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Valor Total:'
+        Caption = 'Valor Total (R$):'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -794,9 +794,9 @@ object RelatorioVendas: TRelatorioVendas
         FontSize = 12
       end
       object QRDBvalorTotal: TQRDBText
-        Left = 328
+        Left = 360
         Top = 3
-        Width = 385
+        Width = 353
         Height = 19
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -805,9 +805,9 @@ object RelatorioVendas: TRelatorioVendas
         Frame.DrawRight = False
         Size.Values = (
           50.270833333333330000
-          867.833333333333300000
+          952.500000000000000000
           7.937500000000000000
-          1018.645833333333000000)
+          933.979166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -820,6 +820,7 @@ object RelatorioVendas: TRelatorioVendas
         Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = []
+        Mask = '###,##0.00'
         ParentFont = False
         Transparent = True
         WordWrap = True

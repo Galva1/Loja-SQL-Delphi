@@ -279,14 +279,14 @@ object RelatorioCVendas: TRelatorioCVendas
           1481.666666666667000000
           2.645833333333333000
           404.812500000000000000)
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
         DataSet = qryRelatorioConsultaV
         DataField = 'valor'
-        Mask = 'R$ ###,##0.00'
+        Mask = '###,##0.00'
         Transparent = True
         WordWrap = True
         FontSize = 10
@@ -477,11 +477,11 @@ object RelatorioCVendas: TRelatorioCVendas
           1481.666666666667000000
           5.291666666666667000
           404.812500000000000000)
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Valor Total:'
+        Caption = 'Valor Total (R$)'
         Color = clWhite
         Transparent = True
         WordWrap = True

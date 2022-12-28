@@ -265,14 +265,14 @@ object RelatorioCProdutos: TRelatorioCProdutos
           1428.750000000000000000
           5.291666666666667000
           457.729166666666700000)
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
         DataSet = qryRelatorioConsultaP
         DataField = 'valor_produto'
-        Mask = 'R$ ###,##0.00'
+        Mask = '###,##0.00'
         Transparent = True
         WordWrap = True
         FontSize = 10
@@ -361,11 +361,11 @@ object RelatorioCProdutos: TRelatorioCProdutos
           1428.750000000000000000
           5.291666666666667000
           457.729166666666700000)
-        Alignment = taLeftJustify
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Valor'
+        Caption = 'Valor (R$)'
         Color = clWhite
         Transparent = True
         WordWrap = True

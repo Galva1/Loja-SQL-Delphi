@@ -61,6 +61,7 @@ type
     edtobservacaoCliente: TEdit;
     lbl1: TLabel;
     qryDadosClienteobservacao_cliente: TMemoField;
+    qryConsultaClienteobservacao_cliente: TMemoField;
     procedure btnInserirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure AtivarDesativarBotoes(Sender: TObject);
@@ -145,6 +146,7 @@ begin
     dbedtcidadecli.Enabled := False;
     qryDadosCliente.Active := False;
     edtobservacaoCliente.Enabled := False;
+
   end;
 end;
 
@@ -327,6 +329,7 @@ begin
     begin
       qryDadosCliente.Close;
       qryDadosCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
+      edtobservacaoCliente.Text := qryConsultaClienteobservacao_cliente.AsString;
       qryDadosCliente.Open;
       btnInserir.Enabled := False;
       btnAlterar.Enabled := True;

@@ -49,7 +49,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 545
       Height = 416
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroClienteChange
@@ -467,6 +467,10 @@ object CadastroClientes1: TCadastroClientes1
     object qryConsultaClienteCidade: TWideStringField
       FieldName = 'Cidade'
       Size = 50
+    end
+    object qryConsultaClienteobservacao_cliente: TMemoField
+      FieldName = 'observacao_cliente'
+      BlobType = ftMemo
     end
   end
   object dsConsultaCliente: TDataSource
