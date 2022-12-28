@@ -189,7 +189,7 @@ object RelatorioVendas: TRelatorioVendas
       object QRDBText3: TQRDBText
         Left = 540
         Top = 4
-        Width = 89
+        Width = 85
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -200,7 +200,7 @@ object RelatorioVendas: TRelatorioVendas
           44.979166666666670000
           1428.750000000000000000
           10.583333333333330000
-          235.479166666666700000)
+          224.895833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -346,38 +346,6 @@ object RelatorioVendas: TRelatorioVendas
         WordWrap = True
         FontSize = 10
       end
-      object QRDBvalorTotal: TQRDBText
-        Left = 624
-        Top = 4
-        Width = 89
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          1651.000000000000000000
-          10.583333333333330000
-          235.479166666666700000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = False
-        AutoStretch = False
-        Color = clWhite
-        DataSet = qryRelatorioVenda
-        DataField = 'valor'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-        WordWrap = True
-        FontSize = 10
-      end
       object QRDBText2: TQRDBText
         Left = 264
         Top = 4
@@ -405,6 +373,39 @@ object RelatorioVendas: TRelatorioVendas
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        FontSize = 10
+      end
+      object QRDBText4: TQRDBText
+        Left = 628
+        Top = 4
+        Width = 85
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1661.583333333333000000
+          10.583333333333330000
+          224.895833333333300000)
+        Alignment = taRightJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qryRelatorioVenda
+        DataField = 'Total'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = '###,##0.00'
         ParentFont = False
         Transparent = True
         WordWrap = True
@@ -630,9 +631,9 @@ object RelatorioVendas: TRelatorioVendas
         FontSize = 10
       end
       object qrlbl5: TQRLabel
-        Left = 624
+        Left = 628
         Top = 2
-        Width = 89
+        Width = 85
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -641,14 +642,14 @@ object RelatorioVendas: TRelatorioVendas
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1651.000000000000000000
+          1661.583333333333000000
           5.291666666666667000
-          235.479166666666700000)
-        Alignment = taLeftJustify
+          224.895833333333300000)
+        Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Total'
+        Caption = 'Total (R$)'
         Color = clWhite
         Transparent = True
         WordWrap = True
@@ -732,7 +733,7 @@ object RelatorioVendas: TRelatorioVendas
       object QRExpr1: TQRExpr
         Left = 136
         Top = 3
-        Width = 577
+        Width = 105
         Height = 19
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -743,7 +744,7 @@ object RelatorioVendas: TRelatorioVendas
           50.270833333333330000
           359.833333333333300000
           7.937500000000000000
-          1526.645833333333000000)
+          277.812500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -759,6 +760,70 @@ object RelatorioVendas: TRelatorioVendas
         Transparent = True
         WordWrap = True
         Expression = 'count'
+        FontSize = 12
+      end
+      object qrlbl12: TQRLabel
+        Left = 244
+        Top = 3
+        Width = 114
+        Height = 19
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          50.270833333333330000
+          645.583333333333300000
+          7.937500000000000000
+          301.625000000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Valor Total (R$):'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        FontSize = 12
+      end
+      object QRDBvalorTotal: TQRDBText
+        Left = 360
+        Top = 3
+        Width = 353
+        Height = 19
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          50.270833333333330000
+          952.500000000000000000
+          7.937500000000000000
+          933.979166666666700000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qryRelatorioVenda
+        DataField = 'valor'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = '###,##0.00'
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
         FontSize = 12
       end
     end
@@ -781,7 +846,8 @@ object RelatorioVendas: TRelatorioVendas
         ' produto.idproduto, '
       
         'produto.nome, cliente.nome, cliente.cpf, cliente.data_nascimento' +
-        ', cliente.Endere'#231'o, cliente.Bairro, cliente.Cidade'
+        ', cliente.Endere'#231'o, cliente.Bairro, cliente.Cidade, item_venda.v' +
+        'alor_item * item_venda.item_unidades as Total'
       'from item_venda'
       'inner join venda on venda.idvenda = item_venda.idvenda'
       'inner join cliente on cliente.idcliente = venda.idcliente'
@@ -789,6 +855,70 @@ object RelatorioVendas: TRelatorioVendas
       'where venda.idvenda = :idvenda')
     Left = 944
     Top = 416
+    object qryRelatorioVendaidvenda: TAutoIncField
+      FieldName = 'idvenda'
+      ReadOnly = True
+    end
+    object qryRelatorioVendavalor: TBCDField
+      FieldName = 'valor'
+      Precision = 19
+    end
+    object qryRelatorioVendaidcliente: TIntegerField
+      FieldName = 'idcliente'
+    end
+    object qryRelatorioVendadata_venda: TDateField
+      FieldName = 'data_venda'
+    end
+    object qryRelatorioVendaidpagamento: TIntegerField
+      FieldName = 'idpagamento'
+    end
+    object qryRelatorioVendaobservacao_venda: TMemoField
+      FieldName = 'observacao_venda'
+      BlobType = ftMemo
+    end
+    object qryRelatorioVendaitem_unidades: TIntegerField
+      FieldName = 'item_unidades'
+    end
+    object qryRelatorioVendavalor_item: TFloatField
+      FieldName = 'valor_item'
+    end
+    object qryRelatorioVendaidproduto: TAutoIncField
+      FieldName = 'idproduto'
+      ReadOnly = True
+    end
+    object qryRelatorioVendanome: TWideStringField
+      FieldName = 'nome'
+      FixedChar = True
+      Size = 50
+    end
+    object qryRelatorioVendanome_1: TStringField
+      FieldName = 'nome_1'
+      Size = 50
+    end
+    object qryRelatorioVendacpf: TBCDField
+      FieldName = 'cpf'
+      Precision = 18
+      Size = 0
+    end
+    object qryRelatorioVendadata_nascimento: TDateField
+      FieldName = 'data_nascimento'
+    end
+    object qryRelatorioVendaEndereo: TStringField
+      FieldName = 'Endere'#231'o'
+      Size = 50
+    end
+    object qryRelatorioVendaBairro: TWideStringField
+      FieldName = 'Bairro'
+      Size = 50
+    end
+    object qryRelatorioVendaCidade: TWideStringField
+      FieldName = 'Cidade'
+      Size = 50
+    end
+    object qryRelatorioVendaTotal: TFloatField
+      FieldName = 'Total'
+      ReadOnly = True
+    end
   end
   object dsRelatorioVenda: TDataSource
     DataSet = qryRelatorioVenda

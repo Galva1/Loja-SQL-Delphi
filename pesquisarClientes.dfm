@@ -16,16 +16,16 @@ object pesquisarCliente: TpesquisarCliente
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPesquisarClienteGeral: TPanel
-    Left = 152
-    Top = 68
-    Width = 405
-    Height = 281
+    Left = 100
+    Top = 56
+    Width = 525
+    Height = 381
     Color = clWhite
     TabOrder = 0
     object pnlTopoPesqCliente: TPanel
       Left = 1
       Top = 1
-      Width = 403
+      Width = 523
       Height = 32
       Align = alTop
       Color = 13423300
@@ -48,8 +48,14 @@ object pesquisarCliente: TpesquisarCliente
       Left = 12
       Top = 44
       Width = 69
-      Height = 21
-      ItemHeight = 13
+      Height = 28
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ItemHeight = 20
+      ParentFont = False
       TabOrder = 1
       Text = 'ID'
       Items.Strings = (
@@ -60,27 +66,45 @@ object pesquisarCliente: TpesquisarCliente
     object edtConsulta: TEdit
       Left = 88
       Top = 44
-      Width = 241
-      Height = 21
+      Width = 357
+      Height = 28
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
       OnKeyDown = edtConsultaKeyDown
     end
     object btnbuscar: TButton
-      Left = 336
-      Top = 44
-      Width = 49
-      Height = 21
+      Left = 450
+      Top = 40
+      Width = 61
+      Height = 33
       Caption = 'Buscar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 3
       OnClick = btnbuscarClick
     end
     object dbgrdconsultacli: TDBGrid
       Left = 12
       Top = 76
-      Width = 373
-      Height = 161
+      Width = 501
+      Height = 257
       DataSource = dsConsultaCliente
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ParentFont = False
       ReadOnly = True
       TabOrder = 4
       TitleFont.Charset = DEFAULT_CHARSET
@@ -92,21 +116,27 @@ object pesquisarCliente: TpesquisarCliente
         item
           Expanded = False
           FieldName = 'idcliente'
+          Title.Caption = 'Id'
+          Width = 34
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
+          Title.Caption = 'Nome'
+          Width = 254
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'cpf'
+          Title.Caption = 'CPF'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'data_nascimento'
+          Title.Caption = 'Data de nascimento'
           Visible = True
         end
         item
@@ -126,21 +156,33 @@ object pesquisarCliente: TpesquisarCliente
         end>
     end
     object btnSelecionarCli: TButton
-      Left = 268
-      Top = 244
-      Width = 53
-      Height = 29
+      Left = 359
+      Top = 336
+      Width = 73
+      Height = 37
       Caption = 'Selecionar'
       Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 5
       OnClick = btnSelecionarCliClick
     end
     object btnSaircli: TButton
-      Left = 332
-      Top = 244
-      Width = 53
-      Height = 29
+      Left = 439
+      Top = 336
+      Width = 73
+      Height = 37
       Caption = 'Sair'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 6
       OnClick = btnSaircliClick
     end

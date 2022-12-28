@@ -105,6 +105,7 @@ end;
 procedure TpesquisarCliente.FormActivate(Sender: TObject);
 begin
   edtConsulta.SetFocus;
+  pesquisarCliente.AutoSize := True;
 
 end;
 

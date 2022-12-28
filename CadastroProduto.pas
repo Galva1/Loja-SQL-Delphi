@@ -56,6 +56,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure pgcCadastroProdutoChange(Sender: TObject);
     procedure AlterarCorCamposProdutos (Sender: TObject);
+    procedure dbedtvalorproKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -264,6 +265,13 @@ begin
     end;
 
   end;
+end;
+
+procedure TCadastroProdutos.dbedtvalorproKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not(Key in ['0'..'9',#13,#8,',']) then
+    Key := #0;
 end;
 
 end.

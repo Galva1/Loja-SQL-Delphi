@@ -61,6 +61,7 @@ type
     edtobservacaoCliente: TEdit;
     lbl1: TLabel;
     qryDadosClienteobservacao_cliente: TMemoField;
+    qryConsultaClienteobservacao_cliente: TMemoField;
     procedure btnInserirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure AtivarDesativarBotoes(Sender: TObject);
@@ -145,6 +146,7 @@ begin
     dbedtcidadecli.Enabled := False;
     qryDadosCliente.Active := False;
     edtobservacaoCliente.Enabled := False;
+
   end;
 end;
 
@@ -187,6 +189,7 @@ begin
         showMessage('O Registro foi salvo com sucesso!');
         AlterarCorCampos(nil);
         AtivarDesativarBotoes(nil);
+        edtobservacaoCliente.Text := '';
       except
         ShowMessage('Preencha os campos vazios!');
       end;
@@ -213,26 +216,34 @@ end;
 
 procedure TCadastroClientes1.btnExcluirClick(Sender: TObject);
 begin
-  if qryDadosCliente.Active then
-  begin
-    case Application.MessageBox('Deseja realmente excluir esse registro?', 'Exclusão de registro', MB_YESNO + MB_ICONQUESTION)  of
-    IDYES:
-      begin
-        qryDadosCliente.Delete;
-        qryDadosCliente.Active := False;
-        ShowMessage('O registro foi excluído com sucesso!');
-        AtivarDesativarBotoes(nil);
-        btnInserir.Enabled := True;
+  try
+    if qryDadosCliente.Active then
+    begin
+      case Application.MessageBox('Deseja realmente excluir esse registro?', 'Exclusão de registro', MB_YESNO + MB_ICONQUESTION)  of
+      IDYES:
+        begin
+          qryDadosCliente.Delete;
+          qryDadosCliente.Active := False;
+          ShowMessage('O registro foi excluído com sucesso!');
+          AtivarDesativarBotoes(nil);
+          btnInserir.Enabled := True;
+          edtobservacaoCliente.Text := '';
 
+        end;
+      IDNO:
+        begin
+          Exit;
+        end;
       end;
-    IDNO:
-      begin
-        Exit;
-      end;
+    end
+    else
+      ShowMessage('Não há registro para excluir!');
+  except
+    on e: Exception do
+    begin
+      MessageDlg('O registro não pode ser excluído'+#13+e.Message, mtError, [mbok], 0);
     end;
-  end
-  else
-    ShowMessage('Não há registro para excluir!');
+  end;
 
 end;
 
@@ -244,9 +255,13 @@ begin
       qryDadosCliente.Cancel;
       AtivarDesativarBotoes(nil);
       AlterarCorCampos(nil);
+      edtobservacaoCliente.Text := '';
     end;
   except
-    ShowMessage('Teste');
+    on e: Exception do
+    begin
+      MessageDlg('O registro não pode ser cancelado'+#13+e.Message, mtError, [mbok], 0);
+    end;
   end;
   qryDadosCliente.Close;
   qryDadosCliente.Open;
@@ -314,6 +329,7 @@ begin
     begin
       qryDadosCliente.Close;
       qryDadosCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
+      edtobservacaoCliente.Text := qryConsultaClienteobservacao_cliente.AsString;
       qryDadosCliente.Open;
       btnInserir.Enabled := False;
       btnAlterar.Enabled := True;

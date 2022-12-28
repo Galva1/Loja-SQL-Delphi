@@ -3,7 +3,7 @@ object RelatorioCClientes: TRelatorioCClientes
   Top = 140
   Width = 1372
   Height = 682
-  VertScrollBar.Position = 612
+  VertScrollBar.Position = 188
   Caption = 'RelatorioCClientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object RelatorioCClientes: TRelatorioCClientes
   TextHeight = 13
   object qckrpRelatorioCCliente: TQuickRep
     Left = 28
-    Top = -124
+    Top = 300
     Width = 1123
     Height = 794
     Frame.Color = clBlack
@@ -109,7 +109,7 @@ object RelatorioCClientes: TRelatorioCClientes
       object QRSysData1: TQRSysData
         Left = 922
         Top = 4
-        Width = 119
+        Width = 68
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -120,7 +120,7 @@ object RelatorioCClientes: TRelatorioCClientes
           44.979166666666670000
           2439.458333333333000000
           10.583333333333330000
-          314.854166666666700000)
+          179.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -234,6 +234,7 @@ object RelatorioCClientes: TRelatorioCClientes
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
+        Mask = '###,###,###-##'
         ParentFont = False
         Transparent = True
         WordWrap = True

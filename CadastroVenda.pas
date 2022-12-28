@@ -88,6 +88,7 @@ type
     lbl2: TLabel;
     qryEmitirVendaobservacao_venda: TMemoField;
     edtobservacaovenda: TEdit;
+    btnConsultaItem: TButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -106,6 +107,9 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edtCodProdutoKeyPress(Sender: TObject; var Key: Char);
     procedure edtqtdprodutoKeyPress(Sender: TObject; var Key: Char);
+    procedure btnIncluirKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btnConsultaItemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -117,7 +121,7 @@ var
 
 implementation
 
-uses pesquisarClientes, Loja;
+uses pesquisarClientes, Loja, CadastroProduto;
 
 {$R *.dfm}
 
@@ -144,7 +148,6 @@ end;
 
 procedure TCadastroVendas.FormActivate(Sender: TObject);
 begin
-  edtCodProduto.SetFocus;
   CadastroVendas.AutoSize := True;
 end;
 
@@ -237,7 +240,13 @@ begin
     qryPagamento.Open;
 
   try
-    dblkcbbidpagamento.Color := clWindow;
+    dblkcbbidpagamento.Color          := clWindow;
+    edtCodProduto.Color               := clWindow;
+    edtqtdproduto.Color               := clWindow;
+    edtCodProduto.Enabled             := True;
+    edtqtdproduto.Enabled             := True;
+    btnConsultaItem.Enabled           := True;
+    dblkcbbidpagamento.SetFocus;
     btnIncluir.Enabled                := True;
     qryEmitirVenda.Insert;
     qryEmitirVendaidcliente.AsInteger := qryConsultaClienteidcliente.AsInteger;
@@ -348,6 +357,31 @@ begin
   begin
     Beep;
     Key := #0;
+  end;
+end;
+
+procedure TCadastroVendas.btnIncluirKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = 13 then
+    btnIncluirClick(nil);
+end;
+
+procedure TCadastroVendas.btnConsultaItemClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TCadastroProdutos, CadastroProdutos);
+    CadastroProdutos.lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
+    CadastroProdutos.pgcCadastroProduto.Pages[1].Destroy;
+    CadastroProdutos.ShowModal;
+    if CadastroProdutos.qryConsultaProduto.Active then
+    begin
+      CadastroVendas.edtCodProduto.Text := CadastroProdutos.qryConsultaProdutoidproduto.AsString;
+      edtCodProdutoExit(nil);
+      edtqtdproduto.SetFocus;
+    end;
+  finally
+    CadastroProdutos.Free;
   end;
 end;
 
