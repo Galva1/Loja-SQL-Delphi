@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ADODB, StdCtrls, DBCtrls, ComCtrls, ExtCtrls, Loja, Grids,
-  DBGrids, Buttons, Mask, IBDatabase, DataBkr, ToolWin, Clipbrd, StrUtils;
+  DBGrids, Buttons, Mask, IBDatabase, DataBkr, ToolWin, Clipbrd, StrUtils, DateUtils;
 
 type
   TCadastroClientes1 = class(TForm)
@@ -95,7 +95,6 @@ type
     procedure dbedtcidadecliMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure NaoCopiarColar(Categoria: TCustomEdit);
-
   private
     { Private declarations }
   public
@@ -348,13 +347,10 @@ procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
   var Key: Char);
 begin
   if not (Key in['0'..'9',#8, #27, #32]) then
-  begin
-    Beep;
     Key := #0;
-  end;
 
-  if (Length(dbedtdatacli.Text)=10) and not(Key in[#8])then
-    Key := #0
+//  if (Length(dbedtdatacli.Text)=10) and not(Key in[#8])then
+//    Key := #0
 end;
 
 procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
@@ -445,6 +441,7 @@ begin
     Categoria.SelLength := 0;
   Clipboard.AsText := '';
 end;
+
 end.
 
 

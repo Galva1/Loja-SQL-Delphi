@@ -110,6 +110,12 @@ type
     procedure btnIncluirKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnConsultaItemClick(Sender: TObject);
+    procedure edtCodProdutoMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure edtqtdprodutoMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure edtobservacaovendaMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -121,7 +127,7 @@ var
 
 implementation
 
-uses pesquisarClientes, Loja, CadastroProduto;
+uses pesquisarClientes, Loja, CadastroProduto, CadastroClientes;
 
 {$R *.dfm}
 
@@ -385,6 +391,24 @@ begin
   finally
     CadastroProdutos.Free;
   end;
+end;
+
+procedure TCadastroVendas.edtCodProdutoMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtCodProduto);
+end;
+
+procedure TCadastroVendas.edtqtdprodutoMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtqtdproduto);
+end;
+
+procedure TCadastroVendas.edtobservacaovendaMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtobservacaovenda);
 end;
 
 end.

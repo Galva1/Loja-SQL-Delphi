@@ -468,6 +468,7 @@ object CadastroVendas: TCadastroVendas
           OnExit = edtCodProdutoExit
           OnKeyDown = edtCodProdutoKeyDown
           OnKeyPress = edtCodProdutoKeyPress
+          OnMouseDown = edtCodProdutoMouseDown
         end
         object dbedtnome: TDBEdit
           Left = 112
@@ -504,6 +505,7 @@ object CadastroVendas: TCadastroVendas
           OnExit = edtqtdprodutoExit
           OnKeyDown = edtqtdprodutoKeyDown
           OnKeyPress = edtqtdprodutoKeyPress
+          OnMouseDown = edtqtdprodutoMouseDown
         end
         object pnlvalorTotal: TPanel
           Left = 388
@@ -622,6 +624,7 @@ object CadastroVendas: TCadastroVendas
       Width = 365
       Height = 21
       TabOrder = 9
+      OnMouseDown = edtobservacaovendaMouseDown
     end
   end
   object qryConsultaCliente: TADOQuery

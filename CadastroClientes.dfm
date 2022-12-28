@@ -49,7 +49,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 541
       Height = 456
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       object ts1: TTabSheet
