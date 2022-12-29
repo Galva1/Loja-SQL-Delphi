@@ -53,6 +53,7 @@ object CadastroProdutos: TCadastroProdutos
       ActivePage = ts1
       Align = alClient
       TabOrder = 1
+      OnChange = pgcCadastroProdutoChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel

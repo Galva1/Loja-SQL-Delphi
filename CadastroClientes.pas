@@ -95,6 +95,7 @@ type
     procedure dbedtcidadecliMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure NaoCopiarColar(Categoria: TCustomEdit);
+    procedure pgcCadastroClienteChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -348,9 +349,7 @@ procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
 begin
   if not (Key in['0'..'9',#8, #27, #32]) then
     Key := #0;
-
-//  if (Length(dbedtdatacli.Text)=10) and not(Key in[#8])then
-//    Key := #0
+    
 end;
 
 procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
@@ -440,6 +439,15 @@ begin
   if Categoria.SelLength > 0 then
     Categoria.SelLength := 0;
   Clipboard.AsText := '';
+end;
+
+procedure TCadastroClientes1.pgcCadastroClienteChange(Sender: TObject);
+begin
+  if qryConsultaCliente.Active then
+  begin
+    qryConsultaCliente.Close;
+    qryConsultaCliente.Open;
+  end;
 end;
 
 end.

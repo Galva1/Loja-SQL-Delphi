@@ -64,6 +64,7 @@ type
     procedure dbedtvalorproChange(Sender: TObject);
     procedure dbgrdConsultaProdutoDblClick(Sender: TObject);
     procedure btnEditarCadProdutoClick(Sender: TObject);
+    procedure pgcCadastroProdutoChange(Sender: TObject);
   private
     { Private declarations }
     TemVirgula: Boolean;
@@ -110,16 +111,18 @@ begin
           qryConsultaProduto.SQL.Add('where idproduto = '+QuotedStr(Trim(edtConsultaProduto.Text)))
         else
           qryConsultaProduto.SQL.Add('where '+LowerCase(cbbConsultaProduto.Text)+' = '+QuotedStr(Trim(edtConsultaProduto.Text)));
+
           qryConsultaProduto.Open;
         if qryConsultaProduto.IsEmpty then
+        begin
           qryConsultaProduto.Close;
           btnEditarCadProduto.Enabled := False;
           ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
+        end;
       except
         qryConsultaProduto.Close;
         btnEditarCadProduto.Enabled := False;
         ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
-
       end;
 
     end
@@ -133,12 +136,12 @@ end;
 
 procedure TCadastroProdutos.btnBuscarProdutoClick(Sender: TObject);
 begin
-
-case cbbConsultaProduto.ItemIndex of
-  0:
-    ConsultarProduto(nil);
-  1:
-    ConsultarProduto(nil);
+  btnEditarCadProduto.Enabled := True;
+  case cbbConsultaProduto.ItemIndex of
+    0:
+      ConsultarProduto(nil);
+    1:
+      ConsultarProduto(nil);
   else
     ShowMessage('Selecione um filtro!')
   end;
@@ -348,6 +351,16 @@ end;
 procedure TCadastroProdutos.btnEditarCadProdutoClick(Sender: TObject);
 begin
   dbgrdConsultaProdutoDblClick(nil);
+end;
+
+procedure TCadastroProdutos.pgcCadastroProdutoChange(Sender: TObject);
+begin
+  if qryConsultaProduto.Active then
+  begin
+    qryConsultaProduto.Close;
+    qryConsultaProduto.Open;
+  end;
+
 end;
 
 end.

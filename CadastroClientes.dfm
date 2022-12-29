@@ -1,6 +1,6 @@
 object CadastroClientes1: TCadastroClientes1
-  Left = 312
-  Top = 74
+  Left = 342
+  Top = 166
   Width = 1081
   Height = 675
   Color = clBtnFace
@@ -52,6 +52,7 @@ object CadastroClientes1: TCadastroClientes1
       ActivePage = ts1
       Align = alClient
       TabOrder = 1
+      OnChange = pgcCadastroClienteChange
       object ts1: TTabSheet
         Caption = 'Consulta'
         object pnl2: TPanel
