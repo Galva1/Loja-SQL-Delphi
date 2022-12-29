@@ -530,7 +530,7 @@ object CadastroClientes1: TCadastroClientes1
     end
     object dtfldDadosClientedata_nascimento: TDateField
       FieldName = 'data_nascimento'
-      OnChange = dtfldDadosClientedata_nascimentoChange
+      OnValidate = dtfldDadosClientedata_nascimentoValidate
       EditMask = '!99/99/0000;1;_'
     end
     object qryDadosClienteEndereo: TStringField

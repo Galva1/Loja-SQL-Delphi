@@ -96,11 +96,12 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure NaoCopiarColar(Categoria: TCustomEdit);
     procedure pgcCadastroClienteChange(Sender: TObject);
-    procedure dtfldDadosClientedata_nascimentoChange(Sender: TField);
+    procedure dtfldDadosClientedata_nascimentoValidate(Sender: TField);
   private
     { Private declarations }
+
   public
-    { Public declarations }
+     
   end;
 
 var
@@ -201,7 +202,6 @@ begin
   // Cidade
   if dbedtcidadecli.Text = '' then
     erro := erro+'Cidade: Campo Vazio'+#13;
-
   if erro = '' then
     Result := True
   else
@@ -465,7 +465,7 @@ begin
   end;
 end;
 
-procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoChange(
+procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoValidate(
   Sender: TField);
   var
     Ano,
@@ -476,15 +476,10 @@ begin
   Mes := StrToInt(Copy(dbedtdatacli.Text, 4, 2));
   Ano := StrToInt(Copy(dbedtdatacli.Text, 7, 4));
   if not IsValidDate(Dia, Mes, Ano) then
-    ShowMessage('Não é uma data valida')
-  else
   begin
-    if Ano < 1900 then
-      ShowMessage('Ano Inválido');
+    ShowMessage('Não é uma data valida')
   end;
-
 end;
-
 end.
 
 
