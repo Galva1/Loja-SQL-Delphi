@@ -73,7 +73,6 @@ begin
         ShowMessage('Preencha o filtro!');
       end;
       qryConsultaVenda.Open;
-      btnimprimirVenda.Enabled := True;
       if qryConsultaVenda.IsEmpty then
       begin
         qryConsultaVenda.Close;
@@ -100,6 +99,7 @@ end;
 
 procedure TConsultaVenda.btnBuscarVendaClick(Sender: TObject);
 begin
+  btnimprimirVenda.Enabled:=True;
   ConsultarVenda(nil);
 end;
 

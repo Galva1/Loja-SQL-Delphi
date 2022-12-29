@@ -96,6 +96,7 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure NaoCopiarColar(Categoria: TCustomEdit);
     procedure pgcCadastroClienteChange(Sender: TObject);
+    procedure dtfldDadosClientedata_nascimentoChange(Sender: TField);
   private
     { Private declarations }
   public
@@ -177,20 +178,34 @@ begin
 end;
 
 function TCadastroClientes1.CamposValidos():Boolean;
-var erro: String;
+  var
+  erro: String;
 begin
   Result := False;
   erro := '';
-  // CPF
-  if not (Length(dbedtcpfcli.Text) = 11) then
-    erro := erro+'CPF ';
+  //Nome
+  if dbedtnomecli.Text = '' then
+    erro := erro+'Nome: Campo Vazio'+#13;
+    // CPF
+  if (Length(dbedtcpfcli.Text) <> 11) then
+    erro := erro+'CPF: Campo Vazio'+#13;
   // Data Nasc.
   if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/') ) then
-    erro := erro+'Data Nasc. ';
+    erro := erro+'Data Nasc: Campo Vazio'+#13;
+  //Endereço
+  if dbedtendcli.Text = '' then
+    erro := erro+'Endereço: Campo Vazio'+#13;
+  //Bairro
+  if dbedtbairrocli.Text = '' then
+    erro := erro+'Bairro: Campo Vazio'+#13;
+  // Cidade
+  if dbedtcidadecli.Text = '' then
+    erro := erro+'Cidade: Campo Vazio'+#13;
+
   if erro = '' then
     Result := True
   else
-    showMessage('Corrija os campos: '+erro);
+    showMessage('Corrija os campos:'+#13+erro);
 end;
 
 procedure TCadastroClientes1.btnSalvarClick(Sender: TObject);
@@ -448,6 +463,26 @@ begin
     qryConsultaCliente.Close;
     qryConsultaCliente.Open;
   end;
+end;
+
+procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoChange(
+  Sender: TField);
+  var
+    Ano,
+    Mes,
+    Dia: word;
+begin
+  Ano := StrToInt(Copy(dbedtdatacli.Text, 1, 2));
+  Mes := StrToInt(Copy(dbedtdatacli.Text, 4, 2));
+  Ano := StrToInt(Copy(dbedtdatacli.Text, 7, 4));
+  if not IsValidDate(Dia, Mes, Ano) then
+    ShowMessage('Não é uma data valida')
+  else
+  begin
+    if Ano < 1900 then
+      ShowMessage('Ano Inválido');
+  end;
+
 end;
 
 end.

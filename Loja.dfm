@@ -396,7 +396,7 @@ object LojaMenu: TLojaMenu
         Width = 101
         Height = 37
         BevelOuter = bvLowered
-        Caption = 'Relat'#243'rio'
+        Caption = 'Relat'#243'rios'
         Color = 13423300
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNone

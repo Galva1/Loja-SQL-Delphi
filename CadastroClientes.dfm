@@ -49,7 +49,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 541
       Height = 456
-      ActivePage = ts1
+      ActivePage = ts2
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroClienteChange
@@ -530,6 +530,7 @@ object CadastroClientes1: TCadastroClientes1
     end
     object dtfldDadosClientedata_nascimento: TDateField
       FieldName = 'data_nascimento'
+      OnChange = dtfldDadosClientedata_nascimentoChange
       EditMask = '!99/99/0000;1;_'
     end
     object qryDadosClienteEndereo: TStringField
