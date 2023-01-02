@@ -96,7 +96,8 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure NaoCopiarColar(Categoria: TCustomEdit);
     procedure pgcCadastroClienteChange(Sender: TObject);
-    procedure dtfldDadosClientedata_nascimentoValidate(Sender: TField);
+    procedure dtfldDadosClientedata_nascimentoSetText(Sender: TField;
+      const Text: String);
   private
     { Private declarations }
 
@@ -217,18 +218,18 @@ begin
       try
         qryDadosClienteobservacao_cliente.Value := edtobservacaoCliente.Text;
         qryDadosCliente.Post;
-        showMessage('O Registro foi salvo com sucesso!');
+        MessageDlg('O registro foi salvo com sucesso', mtInformation, [mbok], 0);
         AlterarCorCampos(nil);
         AtivarDesativarBotoes(nil);
         edtobservacaoCliente.Text := '';
       except
-        ShowMessage('Preencha os campos vazios!');
+        MessageDlg('Preencha os campos vazios.', mtError, [mbok], 0);
       end;
     end;
 
   end
   else
-    ShowMessage('Não há registro para salvar!');
+    MessageDlg('Não há registro para salvar', mtError, [mbok], 0);
 
 end;
 
@@ -242,11 +243,12 @@ begin
     dbedtnomecli.SetFocus;
   end
   else
-    ShowMessage('Não há registro para alterar!');
+    MessageDlg('O registro não pode ser Alterado'+#13, mtError, [mbok], 0);
 end;
 
 procedure TCadastroClientes1.btnExcluirClick(Sender: TObject);
 begin
+
   try
     if qryDadosCliente.Active then
     begin
@@ -255,7 +257,7 @@ begin
         begin
           qryDadosCliente.Delete;
           qryDadosCliente.Active := False;
-          ShowMessage('O registro foi excluído com sucesso!');
+          MessageDlg('O registro foi excluido com sucesso', mtInformation, [mbok], 0);
           AtivarDesativarBotoes(nil);
           btnInserir.Enabled := True;
           edtobservacaoCliente.Text := '';
@@ -364,7 +366,7 @@ procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
 begin
   if not (Key in['0'..'9',#8, #27, #32]) then
     Key := #0;
-    
+   
 end;
 
 procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
@@ -465,8 +467,8 @@ begin
   end;
 end;
 
-procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoValidate(
-  Sender: TField);
+procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoSetText(
+  Sender: TField; const Text: String);
   var
     Ano,
     Mes,
@@ -477,9 +479,10 @@ begin
   Ano := StrToInt(Copy(dbedtdatacli.Text, 7, 4));
   if not IsValidDate(Dia, Mes, Ano) then
   begin
-    ShowMessage('Não é uma data valida')
+    MessageDlg('Não é uma data válida', mtWarning, [mbAbort], 0);
   end;
 end;
+
 end.
 
 
