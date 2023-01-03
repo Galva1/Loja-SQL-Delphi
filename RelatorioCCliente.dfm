@@ -234,7 +234,7 @@ object RelatorioCClientes: TRelatorioCClientes
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
-        Mask = '###,###,###-##'
+        Mask = '#########-##'
         ParentFont = False
         Transparent = True
         WordWrap = True

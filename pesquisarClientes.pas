@@ -33,6 +33,7 @@ type
     procedure btnSaircliClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure dbgrdconsultacliDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,8 +63,14 @@ begin
           qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' = '+QuotedStr(Trim(edtConsulta.Text)));
         qryConsultaCliente.Open;
         if qryConsultaCliente.IsEmpty then
+        begin
+          qryConsultaCliente.Close;
+          btnSelecionarCli.Enabled := False;
           ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+        end;
       except
+        qryConsultaCliente.Close;
+        btnSelecionarCli.Enabled := False;
         ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
       end;
 
@@ -112,13 +119,19 @@ end;
 procedure TpesquisarCliente.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  if qryConsultaCliente.Active then
+  if (qryConsultaCliente.Active) and (qryConsultaClienteidcliente.AsInteger <> 0) then
   begin
     CadastroVendas.qryConsultaCliente.Close;
-    CadastroVendas.qryConsultaCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(pesquisarCliente.dbgrdconsultacli.Fields[0].Value);
+    CadastroVendas.qryConsultaCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
     CadastroVendas.qryConsultaCliente.Open;
     CadastroVendas.btnNovaVenda.Enabled := True;
   end;
+end;
+
+procedure TpesquisarCliente.dbgrdconsultacliDblClick(Sender: TObject);
+begin
+  if qryConsultaCliente.Active then
+    btnSelecionarCliClick(nil);
 end;
 
 end.

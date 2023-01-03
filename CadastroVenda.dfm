@@ -275,9 +275,9 @@ object CadastroVendas: TCadastroVendas
       object lblNomeTela: TLabel
         Left = 8
         Top = 8
-        Width = 199
+        Width = 132
         Height = 25
-        Caption = 'EMISS'#195'O DE VENDA'
+        Caption = 'NOVA VENDA'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -21
@@ -363,7 +363,7 @@ object CadastroVendas: TCadastroVendas
         object lblCodProduto: TLabel
           Left = 32
           Top = 5
-          Width = 69
+          Width = 74
           Height = 20
           Caption = 'Cod. Prod.'
           Font.Charset = DEFAULT_CHARSET
@@ -429,24 +429,25 @@ object CadastroVendas: TCadastroVendas
             item
               Expanded = False
               FieldName = 'idproduto'
+              Title.Caption = 'ID'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'nomeproduto'
-              Width = 259
+              Title.Caption = 'Nome'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'valor_item'
-              Width = 132
+              Title.Caption = 'Valor'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'item_unidades'
-              Width = 111
+              Title.Caption = 'Unidades'
               Visible = True
             end>
         end
@@ -468,6 +469,7 @@ object CadastroVendas: TCadastroVendas
           OnExit = edtCodProdutoExit
           OnKeyDown = edtCodProdutoKeyDown
           OnKeyPress = edtCodProdutoKeyPress
+          OnMouseDown = edtCodProdutoMouseDown
         end
         object dbedtnome: TDBEdit
           Left = 112
@@ -504,6 +506,7 @@ object CadastroVendas: TCadastroVendas
           OnExit = edtqtdprodutoExit
           OnKeyDown = edtqtdprodutoKeyDown
           OnKeyPress = edtqtdprodutoKeyPress
+          OnMouseDown = edtqtdprodutoMouseDown
         end
         object pnlvalorTotal: TPanel
           Left = 388
@@ -544,7 +547,7 @@ object CadastroVendas: TCadastroVendas
           Top = 4
           Width = 21
           Height = 21
-          Caption = '!'
+          Caption = '?'
           Enabled = False
           TabOrder = 6
           OnClick = btnConsultaItemClick
@@ -622,6 +625,7 @@ object CadastroVendas: TCadastroVendas
       Width = 365
       Height = 21
       TabOrder = 9
+      OnMouseDown = edtobservacaovendaMouseDown
     end
   end
   object qryConsultaCliente: TADOQuery
@@ -767,15 +771,11 @@ object CadastroVendas: TCadastroVendas
       'where 1 = 0')
     Left = 724
     Top = 384
-    object qryIncluirItemiditem_venda: TAutoIncField
-      FieldName = 'iditem_venda'
-      ReadOnly = True
-    end
-    object qryIncluirItemidvenda: TIntegerField
-      FieldName = 'idvenda'
-    end
     object qryIncluirItemidproduto: TIntegerField
       FieldName = 'idproduto'
+    end
+    object qryIncluirItemidvenda: TAutoIncField
+      FieldName = 'idvenda'
     end
     object qryIncluirItemitem_unidades: TIntegerField
       FieldName = 'item_unidades'
@@ -787,6 +787,10 @@ object CadastroVendas: TCadastroVendas
       FieldName = 'nomeproduto'
       FixedChar = True
       Size = 30
+    end
+    object qryIncluirItemiditem_venda: TAutoIncField
+      FieldName = 'iditem_venda'
+      ReadOnly = True
     end
   end
   object dsPagamento: TDataSource

@@ -79,16 +79,16 @@ type
     qryEmitirVendadata_venda: TDateField;
     qryEmitirVendaidpagamento: TIntegerField;
     qryEmitirVendanomepagamento: TWideStringField;
-    qryIncluirItemiditem_venda: TAutoIncField;
-    qryIncluirItemidvenda: TIntegerField;
     qryIncluirItemidproduto: TIntegerField;
     qryIncluirItemitem_unidades: TIntegerField;
     qryIncluirItemvalor_item: TFloatField;
-    qryIncluirItemnomeproduto: TStringField;
     lbl2: TLabel;
     qryEmitirVendaobservacao_venda: TMemoField;
     edtobservacaovenda: TEdit;
     btnConsultaItem: TButton;
+    qryIncluirItemidvenda: TAutoIncField;
+    qryIncluirItemnomeproduto: TStringField;
+    qryIncluirItemiditem_venda: TAutoIncField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -110,6 +110,12 @@ type
     procedure btnIncluirKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnConsultaItemClick(Sender: TObject);
+    procedure edtCodProdutoMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure edtqtdprodutoMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure edtobservacaovendaMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -121,7 +127,7 @@ var
 
 implementation
 
-uses pesquisarClientes, Loja, CadastroProduto;
+uses pesquisarClientes, Loja, CadastroProduto, CadastroClientes;
 
 {$R *.dfm}
 
@@ -199,16 +205,20 @@ begin
   if edtCodProduto.Text <> '0' then
   begin
     if (edtqtdproduto.Text = '0') then
-      ShowMessage('Digite uma quantidade válida.')
+    begin
+      MessageDlg('Digite uma quantidade válida.', mtError, [mbok], 0);
+      qryIncluirItem.Close;
+    end
     else
     begin
+      qryIncluirItem.Open;
       try
         qryIncluirItem.Insert;
-        qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
-        qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
-        qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
-        qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
-        qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
+        qryIncluirItemidvenda.Value           := qryEmitirVendaidvenda.Value;
+        qryIncluirItemitem_unidades.Value     := StrToInt(edtqtdproduto.Text);
+        qryIncluirItemnomeproduto.AsString    := dbedtnome.Text;
+        qryIncluirItemvalor_item.Value        := qryConsultaItemvalor_produto.Value;
+        qryIncluirItemidproduto.value         := StrToInt(edtCodProduto.text);
         qryIncluirItem.Post;
 
         if qryEmitirVenda.State = dsbrowse then
@@ -225,7 +235,7 @@ begin
     end;
   end
   else
-    ShowMessage('Insira um código de produto.');
+    MessageDlg('Insira um código de produto.', mtError, [mbok], 0);
 end;
 
 procedure TCadastroVendas.btnNovaVendaClick(Sender: TObject);
@@ -253,6 +263,7 @@ begin
     qryEmitirVendadata_venda.Value    := Now();
     QryEmitirVendavalor.Value         := 0;
     qryEmitirVenda.Post;
+    btnNovaVenda.Enabled := False;
   except
     on e:Exception do
     begin
@@ -271,11 +282,11 @@ begin
       begin
         try
           qryEmitirVenda.Connection.RollbackTrans;
-          qryEmitirVenda.Connection.Connected := False;
-          ShowMessage('A venda foi cancelada com sucesso!');
+          //qryEmitirVenda.Connection.Connected := False;
+          MessageDlg('A venda foi cancelada com sucesso!', mtConfirmation, [mbok], 0);
           CadastroVendas.Close;
         except
-          ShowMessage('Não foi possível cancelar a sua venda.');
+          MessageDlg('Não foi possível cancelar a sua venda.', mtWarning, [mbok], 0);
         end;
       end;
     IDNO:
@@ -305,7 +316,7 @@ begin
           qryEmitirVenda.Edit;
           qryEmitirVendaobservacao_venda.Value := edtobservacaovenda.Text;
           qryEmitirVenda.Post;
-          ShowMessage('A venda foi concluída com sucesso!');
+          MessageDlg('A venda foi concluida com sucesso!', mtConfirmation, [mbok], 0);
           qryEmitirVenda.Connection.CommitTrans;
           CadastroVendas.Close;
           qryEmitirVenda.Connection.Connected := False;
@@ -373,6 +384,7 @@ begin
     Application.CreateForm(TCadastroProdutos, CadastroProdutos);
     CadastroProdutos.lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
     CadastroProdutos.pgcCadastroProduto.Pages[1].Destroy;
+    CadastroProdutos.btnEditarCadProduto.Destroy;
     CadastroProdutos.ShowModal;
     if CadastroProdutos.qryConsultaProduto.Active then
     begin
@@ -383,6 +395,24 @@ begin
   finally
     CadastroProdutos.Free;
   end;
+end;
+
+procedure TCadastroVendas.edtCodProdutoMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtCodProduto);
+end;
+
+procedure TCadastroVendas.edtqtdprodutoMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtqtdproduto);
+end;
+
+procedure TCadastroVendas.edtobservacaovendaMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  CadastroClientes1.NaoCopiarColar(edtobservacaovenda);
 end;
 
 end.
