@@ -3,7 +3,7 @@ object CadastroProdutos: TCadastroProdutos
   Top = 164
   Width = 798
   Height = 563
-  Caption = 'CadastroProduto'
+  Caption = 'Cadastro Produtos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

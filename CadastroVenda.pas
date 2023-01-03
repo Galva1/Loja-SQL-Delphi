@@ -89,6 +89,7 @@ type
     qryIncluirItemidvenda: TAutoIncField;
     qryIncluirItemnomeproduto: TStringField;
     qryIncluirItemiditem_venda: TAutoIncField;
+    btnRemoverItemVenda: TButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -117,6 +118,7 @@ type
     procedure edtobservacaovendaMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btnRemoverItemVendaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -201,6 +203,7 @@ end;
 procedure TCadastroVendas.btnIncluirClick(Sender: TObject);
 begin
   btnConfirmar.Enabled := True;
+  btnRemoverItemVenda.Enabled := True;
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
   if edtCodProduto.Text <> '0' then
@@ -420,6 +423,23 @@ procedure TCadastroVendas.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key in ['v'] then
     Key := #0;
+end;
+
+procedure TCadastroVendas.btnRemoverItemVendaClick(Sender: TObject);
+var
+  i: integer;
+begin
+  if qryIncluirItem.Active then
+  begin
+    if qryIncluirItem.State in [dsBrowse] then
+    begin
+      if MessageDlg('Deseja excluir o registro?', mtConfirmation, mbYesNoCancel, 0) = mrYes then
+      begin
+        qryIncluirItem.Close;
+        qryIncluirItem.Open;
+      end;
+    end;
+  end;
 end;
 
 end.

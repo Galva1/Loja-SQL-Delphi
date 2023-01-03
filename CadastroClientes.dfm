@@ -3,7 +3,7 @@ object CadastroClientes1: TCadastroClientes1
   Top = 166
   Width = 1081
   Height = 675
-  Caption = '0'
+  Caption = 'Cadastro Clientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,7 +31,7 @@ object CadastroClientes1: TCadastroClientes1
       BevelOuter = bvNone
       Color = 13423300
       TabOrder = 0
-      object lbl8: TLabel
+      object lblCadastroCliente: TLabel
         Left = 4
         Top = 4
         Width = 248

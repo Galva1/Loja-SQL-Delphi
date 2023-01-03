@@ -1,9 +1,9 @@
 object LojaMenu: TLojaMenu
-  Left = 257
-  Top = 202
+  Left = 392
+  Top = 175
   Width = 1088
   Height = 563
-  Caption = 'LojaMenu'
+  Caption = 'Loja'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

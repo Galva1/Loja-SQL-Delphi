@@ -42,7 +42,7 @@ type
     btnSalvar: TButton;
     btnExcluir: TButton;
     btnCancelar: TButton;
-    lbl8: TLabel;
+    lblCadastroCliente: TLabel;
     qryDadosCliente: TADOQuery;
     dsDadosCliente: TDataSource;
     qryDadosClienteidcliente: TAutoIncField;
@@ -391,7 +391,7 @@ begin
     qryDadosCliente.Parameters.ParamByName('idcliente').Value := qryConsultaClienteidcliente.AsInteger;
     edtobservacaoCliente.Text := qryConsultaClienteobservacao_cliente.AsString;
     qryDadosCliente.Open;
-    btnInserir.Enabled := False;
+    btnInserir.Enabled := True;
     btnAlterar.Enabled := True;
     btnSalvar.Enabled := False;
     btnExcluir.Enabled := True;
@@ -471,6 +471,10 @@ begin
     qryConsultaCliente.Close;
     qryConsultaCliente.Open;
   end;
+  if pgcCadastroCliente.ActivePage = ts1 then
+    lblCadastroCliente.Caption := 'CADASTRO DE CLIENTES'
+  else
+    lblCadastroCliente.Caption := 'CONSULTA DE CLIENTES';
 end;
 
 procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoSetText(

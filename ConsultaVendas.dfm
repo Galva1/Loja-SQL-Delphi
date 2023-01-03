@@ -3,7 +3,7 @@ object ConsultaVenda: TConsultaVenda
   Top = 107
   Width = 1088
   Height = 563
-  Caption = 'ConsultaVenda'
+  Caption = 'Consulta Vendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

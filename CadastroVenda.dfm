@@ -3,7 +3,7 @@ object CadastroVendas: TCadastroVendas
   Top = 123
   Width = 1112
   Height = 626
-  Caption = 'CadastroVendas'
+  Caption = 'Cadastro Vendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object CadastroVendas: TCadastroVendas
     Left = 0
     Top = 0
     Width = 617
-    Height = 561
+    Height = 585
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
@@ -53,7 +53,7 @@ object CadastroVendas: TCadastroVendas
     end
     object lbl2: TLabel
       Left = 8
-      Top = 513
+      Top = 537
       Width = 89
       Height = 20
       Caption = 'Observa'#231#227'o:'
@@ -356,14 +356,14 @@ object CadastroVendas: TCadastroVendas
       Left = 0
       Top = 296
       Width = 617
-      Height = 213
+      Height = 241
       ActivePage = tsItem
       TabOrder = 3
       object tsItem: TTabSheet
         Caption = 'Item'
         object lblCodProduto: TLabel
           Left = 32
-          Top = 5
+          Top = 21
           Width = 74
           Height = 20
           Caption = 'Cod. Prod.'
@@ -376,7 +376,7 @@ object CadastroVendas: TCadastroVendas
         end
         object lblDesc: TLabel
           Left = 112
-          Top = 5
+          Top = 21
           Width = 71
           Height = 20
           Caption = 'Descri'#231#227'o'
@@ -389,7 +389,7 @@ object CadastroVendas: TCadastroVendas
         end
         object lblQTD: TLabel
           Left = 304
-          Top = 5
+          Top = 21
           Width = 30
           Height = 20
           Caption = 'Qtd.'
@@ -402,7 +402,7 @@ object CadastroVendas: TCadastroVendas
         end
         object lblValorTotal: TLabel
           Left = 388
-          Top = 5
+          Top = 21
           Width = 76
           Height = 20
           Caption = 'Valor Total'
@@ -415,7 +415,7 @@ object CadastroVendas: TCadastroVendas
         end
         object dbgrdprodutos: TDBGrid
           Left = 8
-          Top = 76
+          Top = 104
           Width = 593
           Height = 105
           DataSource = dsIncluirItem
@@ -457,7 +457,7 @@ object CadastroVendas: TCadastroVendas
         end
         object edtCodProduto: TEdit
           Left = 32
-          Top = 28
+          Top = 44
           Width = 69
           Height = 28
           Color = 15395562
@@ -477,7 +477,7 @@ object CadastroVendas: TCadastroVendas
         end
         object dbedtnome: TDBEdit
           Left = 112
-          Top = 28
+          Top = 44
           Width = 181
           Height = 28
           Color = 15395562
@@ -494,7 +494,7 @@ object CadastroVendas: TCadastroVendas
         end
         object edtqtdproduto: TEdit
           Left = 304
-          Top = 28
+          Top = 44
           Width = 73
           Height = 28
           Color = 15395562
@@ -514,7 +514,7 @@ object CadastroVendas: TCadastroVendas
         end
         object pnlvalorTotal: TPanel
           Left = 388
-          Top = 28
+          Top = 44
           Width = 113
           Height = 29
           Alignment = taLeftJustify
@@ -530,8 +530,8 @@ object CadastroVendas: TCadastroVendas
           TabOrder = 4
         end
         object btnIncluir: TButton
-          Left = 512
-          Top = 20
+          Left = 516
+          Top = 4
           Width = 81
           Height = 41
           Caption = 'Incluir'
@@ -548,7 +548,7 @@ object CadastroVendas: TCadastroVendas
         end
         object btnConsultaItem: TButton
           Left = 4
-          Top = 4
+          Top = 20
           Width = 21
           Height = 21
           Caption = '?'
@@ -556,11 +556,27 @@ object CadastroVendas: TCadastroVendas
           TabOrder = 6
           OnClick = btnConsultaItemClick
         end
+        object btnRemoverItemVenda: TButton
+          Left = 516
+          Top = 56
+          Width = 81
+          Height = 41
+          Caption = 'Remover'
+          Enabled = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 7
+          OnClick = btnRemoverItemVendaClick
+        end
       end
     end
     object btnConfirmar: TButton
       Left = 408
-      Top = 528
+      Top = 552
       Width = 97
       Height = 29
       Caption = 'Confirmar'
@@ -570,7 +586,7 @@ object CadastroVendas: TCadastroVendas
     end
     object btnCancelar: TButton
       Left = 516
-      Top = 528
+      Top = 552
       Width = 97
       Height = 29
       Caption = 'Cancelar'
@@ -625,7 +641,7 @@ object CadastroVendas: TCadastroVendas
     end
     object edtobservacaovenda: TEdit
       Left = 8
-      Top = 536
+      Top = 560
       Width = 365
       Height = 21
       TabOrder = 9

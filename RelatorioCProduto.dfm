@@ -3,7 +3,7 @@ object RelatorioCProdutos: TRelatorioCProdutos
   Top = 143
   Width = 1088
   Height = 563
-  Caption = 'RelatorioCProdutos'
+  Caption = 'Relat'#243'rio Produtos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

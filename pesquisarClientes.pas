@@ -26,6 +26,7 @@ type
     qryConsultaClienteEndereo: TStringField;
     qryConsultaClienteBairro: TWideStringField;
     qryConsultaClienteCidade: TWideStringField;
+    btnCadastrarCliente: TButton;
     procedure btnbuscarClick(Sender: TObject);
     procedure edtConsultaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -34,6 +35,7 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgrdconsultacliDblClick(Sender: TObject);
+    procedure btnCadastrarClienteClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,7 +47,7 @@ var
 
 implementation
 
-uses Loja, CadastroVenda;
+uses Loja, CadastroVenda, CadastroClientes;
 
 {$R *.dfm}
 
@@ -132,6 +134,23 @@ procedure TpesquisarCliente.dbgrdconsultacliDblClick(Sender: TObject);
 begin
   if qryConsultaCliente.Active then
     btnSelecionarCliClick(nil);
+end;
+
+procedure TpesquisarCliente.btnCadastrarClienteClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TCadastroClientes1, CadastroClientes1);
+    CadastroClientes1.pgcCadastroCliente.Pages[0].Destroy;
+    CadastroClientes1.lblCadastroCliente.Caption := 'CADASTRO DE CLIENTES';
+    CadastroClientes1.ShowModal;
+    if qryConsultaCliente.Active then
+    begin
+      qryConsultaCliente.Close;
+      qryConsultaCliente.Open;
+    end;
+  finally
+    CadastroClientes1.Free;
+  end;
 end;
 
 end.

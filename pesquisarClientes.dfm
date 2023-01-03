@@ -187,6 +187,21 @@ object pesquisarCliente: TpesquisarCliente
       TabOrder = 6
       OnClick = btnSaircliClick
     end
+    object btnCadastrarCliente: TButton
+      Left = 11
+      Top = 336
+      Width = 73
+      Height = 37
+      Caption = 'Cadastrar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      OnClick = btnCadastrarClienteClick
+    end
   end
   object qryConsultaCliente: TADOQuery
     Connection = LojaMenu.conLoja

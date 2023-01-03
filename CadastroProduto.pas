@@ -331,7 +331,7 @@ begin
       qryDadosProduto.Close;
       qryDadosProduto.Parameters.ParamByName('idproduto').Value := qryConsultaProdutoidproduto.AsInteger;
       qryDadosProduto.Open;
-      btnInserir.Enabled := False;
+      btnInserir.Enabled := True;
       btnAlterar.Enabled := True;
       btnSalvar.Enabled := False;
       btnExcluir.Enabled := True;
