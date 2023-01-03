@@ -62,7 +62,12 @@ begin
       0:
         qryConsultaVenda.SQL.Add('where venda.idvenda = '+ QuotedStr(edtConsultaVenda.Text));
       1:
-        qryConsultaVenda.SQL.Add('where venda.data_venda ='+ QuotedStr(edtConsultaVenda.Text));
+        begin
+          qryConsultaVenda.SQL.Clear;
+          qryConsultaVenda.SQL.Add('select venda.*, cliente.nome, cliente.cpf,format(venda.data_venda,'+QuotedStr('dd/MM/yyyy')+') as datavenda from venda');
+          qryConsultaVenda.SQL.Add('inner join cliente on cliente.idcliente = venda.idcliente');
+          qryConsultaVenda.SQL.Add('where venda.data_venda ='+ QuotedStr(edtConsultaVenda.Text));
+        end;
       2:
         qryConsultaVenda.SQL.Add('where venda.idcliente ='+ QuotedStr(edtConsultaVenda.Text));
       3:
@@ -132,6 +137,12 @@ end;
 procedure TConsultaVenda.edtConsultaVendaKeyPress(Sender: TObject;
   var Key: Char);
 begin
+
+  if not (Key in['0'..'9',#8, #27, #32]) then
+  begin
+    Key := #0;
+  end;
+
   if (Length(edtConsultaVenda.Text)=50) and not(Key in[#8]) then
     Key := #0;
 
