@@ -98,6 +98,10 @@ type
     procedure pgcCadastroClienteChange(Sender: TObject);
     procedure dtfldDadosClientedata_nascimentoSetText(Sender: TField;
       const Text: String);
+    procedure dbedtendcliKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtbairrocliKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtcidadecliKeyPress(Sender: TObject; var Key: Char);
+    procedure edtConsultaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
 
@@ -409,8 +413,8 @@ end;
 procedure TCadastroClientes1.dbedtnomecliKeyPress(Sender: TObject;
   var Key: Char);
 begin
-  if Key = #22 then
-    Key:= #0;
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
 end;
 
 procedure TCadastroClientes1.dbedtnomecliMouseDown(Sender: TObject;
@@ -482,6 +486,34 @@ begin
     Abort;
   end;
   Sender.Value := Text;
+end;
+
+procedure TCadastroClientes1.dbedtendcliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
+end;
+
+procedure TCadastroClientes1.dbedtbairrocliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
+end;
+
+procedure TCadastroClientes1.dbedtcidadecliKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
+end;
+
+procedure TCadastroClientes1.edtConsultaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
 end;
 
 end.

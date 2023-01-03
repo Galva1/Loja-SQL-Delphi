@@ -50,7 +50,7 @@ object CadastroProdutos: TCadastroProdutos
       Top = 41
       Width = 545
       Height = 456
-      ActivePage = ts1
+      ActivePage = ts2
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroProdutoChange
@@ -145,6 +145,7 @@ object CadastroProdutos: TCadastroProdutos
           ParentFont = False
           TabOrder = 2
           OnKeyDown = edtConsultaProdutoKeyDown
+          OnKeyPress = edtConsultaProdutoKeyPress
         end
         object btnBuscarProduto: TButton
           Left = 452
@@ -288,6 +289,7 @@ object CadastroProdutos: TCadastroProdutos
               DataSource = dsDadosProduto
               Enabled = False
               TabOrder = 0
+              OnKeyPress = dbedtnomeproKeyPress
               OnMouseDown = dbedtnomeproMouseDown
             end
             object dbedtvalorpro: TDBEdit

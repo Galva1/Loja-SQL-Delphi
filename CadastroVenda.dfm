@@ -14,6 +14,7 @@ object CadastroVendas: TCadastroVendas
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeral: TPanel
@@ -436,18 +437,21 @@ object CadastroVendas: TCadastroVendas
               Expanded = False
               FieldName = 'nomeproduto'
               Title.Caption = 'Nome'
+              Width = 226
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'valor_item'
               Title.Caption = 'Valor'
+              Width = 146
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'item_unidades'
               Title.Caption = 'Unidades'
+              Width = 127
               Visible = True
             end>
         end

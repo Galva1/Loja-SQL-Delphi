@@ -65,6 +65,8 @@ type
     procedure dbgrdConsultaProdutoDblClick(Sender: TObject);
     procedure btnEditarCadProdutoClick(Sender: TObject);
     procedure pgcCadastroProdutoChange(Sender: TObject);
+    procedure edtConsultaProdutoKeyPress(Sender: TObject; var Key: Char);
+    procedure dbedtnomeproKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     TemVirgula: Boolean;
@@ -362,6 +364,20 @@ begin
     qryConsultaProduto.Open;
   end;
 
+end;
+
+procedure TCadastroProdutos.edtConsultaProdutoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
+end;
+
+procedure TCadastroProdutos.dbedtnomeproKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
+    Key := #0;
 end;
 
 end.
