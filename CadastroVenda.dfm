@@ -775,9 +775,7 @@ object CadastroVendas: TCadastroVendas
       FieldName = 'idproduto'
     end
     object qryIncluirItemidvenda: TAutoIncField
-      AutoGenerateValue = arAutoInc
       FieldName = 'idvenda'
-      ReadOnly = True
     end
     object qryIncluirItemitem_unidades: TIntegerField
       FieldName = 'item_unidades'
@@ -791,7 +789,6 @@ object CadastroVendas: TCadastroVendas
       Size = 30
     end
     object qryIncluirItemiditem_venda: TAutoIncField
-      AutoGenerateValue = arAutoInc
       FieldName = 'iditem_venda'
       ReadOnly = True
     end
