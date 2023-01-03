@@ -193,7 +193,9 @@ begin
   if dbedtnomecli.Text = '' then
     erro := erro+'Nome: Campo Vazio'+#13;
     // CPF
-  if (Length(dbedtcpfcli.Text) <> 11) then
+  if (Length(dbedtcpfcli.Text) <> 11) and (dbedtcpfcli.Text <> '')  then
+    erro := erro+'CPF: Campo Invalido'+#13;
+  if dbedtcpfcli.Text = '' then
     erro := erro+'CPF: Campo Vazio'+#13;
   // Data Nasc.
   if not(((copy(dbedtdatacli.Text,3,1)) = '/') and (copy(dbedtdatacli.Text,6,1) = '/') ) then
@@ -362,6 +364,7 @@ end;
 procedure TCadastroClientes1.FormCreate(Sender: TObject);
 begin
   CadastroClientes1.AutoSize := True;
+  pgcCadastroCliente.ActivePage := ts1;
 end;
 
 procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
@@ -485,6 +488,13 @@ begin
     MessageDlg('Não é uma data válida', mtWarning, [mbOK], 0);
     Abort;
   end;
+
+  if Ano < 1900 then
+  begin
+    MessageDlg('Não é uma data válida', mtWarning, [mbOK], 0);
+    Abort;
+  end;
+
   Sender.Value := Text;
 end;
 
