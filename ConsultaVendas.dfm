@@ -1,6 +1,6 @@
 object ConsultaVenda: TConsultaVenda
-  Left = 311
-  Top = 220
+  Left = 331
+  Top = 107
   Width = 1088
   Height = 563
   Caption = 'ConsultaVenda'

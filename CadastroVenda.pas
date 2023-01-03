@@ -116,6 +116,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure edtobservacaovendaMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -413,6 +414,12 @@ procedure TCadastroVendas.edtobservacaovendaMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   CadastroClientes1.NaoCopiarColar(edtobservacaovenda);
+end;
+
+procedure TCadastroVendas.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key in ['v'] then
+    Key := #0;
 end;
 
 end.

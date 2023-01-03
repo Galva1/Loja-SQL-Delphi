@@ -341,6 +341,7 @@ object RelatorioVendas: TRelatorioVendas
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = []
+        Mask = '###,##0.00'
         ParentFont = False
         Transparent = True
         WordWrap = True
@@ -599,7 +600,7 @@ object RelatorioVendas: TRelatorioVendas
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
-        Caption = 'Custo'
+        Caption = 'Valor (R$)'
         Color = clWhite
         Transparent = True
         WordWrap = True

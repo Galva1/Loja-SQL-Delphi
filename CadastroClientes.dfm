@@ -50,7 +50,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 541
       Height = 456
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroClienteChange
@@ -166,6 +166,7 @@ object CadastroClientes1: TCadastroClientes1
           ParentFont = False
           TabOrder = 2
           OnKeyDown = edtConsultaKeyDown
+          OnKeyPress = edtConsultaKeyPress
         end
         object btnBuscar: TButton
           Left = 452
@@ -354,6 +355,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 3
+            OnKeyPress = dbedtendcliKeyPress
             OnMouseDown = dbedtendcliMouseDown
           end
           object dbedtbairrocli: TDBEdit
@@ -366,6 +368,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 4
+            OnKeyPress = dbedtbairrocliKeyPress
             OnMouseDown = dbedtbairrocliMouseDown
           end
           object dbedtcidadecli: TDBEdit
@@ -378,6 +381,7 @@ object CadastroClientes1: TCadastroClientes1
             DataSource = dsDadosCliente
             Enabled = False
             TabOrder = 5
+            OnKeyPress = dbedtcidadecliKeyPress
             OnMouseDown = dbedtcidadecliMouseDown
           end
           object btnInserir: TButton
