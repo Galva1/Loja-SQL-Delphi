@@ -50,7 +50,7 @@ object CadastroProdutos: TCadastroProdutos
       Top = 41
       Width = 545
       Height = 456
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroProdutoChange

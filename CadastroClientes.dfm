@@ -50,7 +50,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 541
       Height = 456
-      ActivePage = ts1
+      ActivePage = ts2
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroClienteChange

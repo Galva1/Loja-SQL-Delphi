@@ -161,6 +161,7 @@ procedure TCadastroProdutos.FormCreate(Sender: TObject);
 begin
   CadastroProdutos.AutoSize := True;
   TemVirgula := false;
+  pgcCadastroProduto.ActivePage := ts1;
 end;
 
 procedure TCadastroProdutos.AtivarDesativarBotoes(Sender: TObject);

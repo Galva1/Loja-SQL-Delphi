@@ -73,11 +73,11 @@ begin
 end;
 
 procedure TLojaMenu.pnlCadastroClienteClick(Sender: TObject);
+
 begin
   try
     Application.CreateForm(TCadastroClientes1, CadastroClientes1);
     CadastroClientes1.ShowModal;
-    CadastroClientes1.pgcCadastroCliente.ActivePageIndex := 1;
   finally
     CadastroClientes1.Free;
   end;

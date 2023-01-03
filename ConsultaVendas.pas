@@ -75,14 +75,14 @@ begin
       4:
         qryConsultaVenda.SQL.Add('where cliente.cpf ='+ QuotedStr(edtConsultaVenda.Text));
       else
-        ShowMessage('Preencha o filtro!');
+        MessageDlg('Preencha o filtro!', mtError, [mbok], 0);
       end;
       qryConsultaVenda.Open;
       if qryConsultaVenda.IsEmpty then
       begin
         qryConsultaVenda.Close;
         btnimprimirVenda.Enabled := False;
-        ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+        MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
       end;
     except
       on e: Exception do

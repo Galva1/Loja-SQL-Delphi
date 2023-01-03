@@ -66,12 +66,12 @@ begin
         begin
           qryConsultaCliente.Close;
           btnSelecionarCli.Enabled := False;
-          ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+          MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
         end;
       except
         qryConsultaCliente.Close;
         btnSelecionarCli.Enabled := False;
-        ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+        MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
       end;
 
     end
@@ -94,7 +94,7 @@ end;
 procedure TpesquisarCliente.btnSelecionarCliClick(Sender: TObject);
 begin
   if qryConsultaCliente.IsEmpty then
-    ShowMessage('Selecione um campo.')
+    MessageDlg('Selecione um campo!', mtError, [mbok], 0)
   else
   begin
     pesquisarCliente.Close;
