@@ -117,12 +117,12 @@ begin
         begin
           qryConsultaProduto.Close;
           btnEditarCadProduto.Enabled := False;
-          ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
+          MessageDlg('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
         end;
       except
         qryConsultaProduto.Close;
         btnEditarCadProduto.Enabled := False;
-        ShowMessage('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!');
+        MessageDlg('Este ' + LowerCase(cbbConsultaProduto.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
       end;
 
     end
@@ -136,14 +136,15 @@ end;
 
 procedure TCadastroProdutos.btnBuscarProdutoClick(Sender: TObject);
 begin
-  btnEditarCadProduto.Enabled := True;
+  if btnEditarCadProduto <> nil then
+    btnEditarCadProduto.Enabled := True;
   case cbbConsultaProduto.ItemIndex of
     0:
       ConsultarProduto(nil);
     1:
       ConsultarProduto(nil);
   else
-    ShowMessage('Selecione um filtro!')
+    MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
   end;
 end;
 
@@ -202,7 +203,7 @@ begin
     dbedtnomepro.SetFocus;
   end
   else
-    ShowMessage('Não há registro para alterar!');
+    MessageDlg('Não há registro para alterar!', mtError, [mbok], 0);
 end;
 
 procedure TCadastroProdutos.btnSalvarClick(Sender: TObject);
@@ -211,15 +212,15 @@ begin
   begin
     try
       qryDadosProduto.Post;
-      showMessage('O Registro foi salvo com sucesso!');
+      MessageDlg('O Registro foi salvo com sucesso!', mtInformation, [mbok], 0);
       AtivarDesativarBotoes(nil);
       AlterarCorCamposProdutos(nil);
     except
-      ShowMessage('Preencha os campos vazios!');
+      MessageDlg('Preencha os campos vazios!', mtError, [mbok], 0);
     end;
   end
   else
-    ShowMessage('Não há registro para salvar!');
+    MessageDlg('Não há registro para salvar', mtError, [mbok], 0);
 end;
 
 procedure TCadastroProdutos.btnExcluirClick(Sender: TObject);
@@ -232,7 +233,7 @@ begin
         begin
           qryDadosProduto.Delete;
           qryDadosProduto.Active := False;
-          ShowMessage('O Registro foi excluído com sucesso!');
+          MessageDlg('O Registro foi excluído com sucesso', mtError, [mbok], 0);
 
         end;
       IDNO:
@@ -242,7 +243,7 @@ begin
       end;
     end
     else
-      ShowMessage('Não há registro para excluir!');
+      MessageDlg('Não há registro para excluir' + #13, mtError, [mbok], 0);
   except
     on e:Exception do
       begin

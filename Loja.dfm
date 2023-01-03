@@ -463,7 +463,7 @@ object LojaMenu: TLojaMenu
         Top = 0
         Width = 101
         Height = 29
-        Caption = 'Emitir'
+        Caption = 'Nova Venda'
         Color = 13423300
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

@@ -79,16 +79,16 @@ type
     qryEmitirVendadata_venda: TDateField;
     qryEmitirVendaidpagamento: TIntegerField;
     qryEmitirVendanomepagamento: TWideStringField;
-    qryIncluirItemiditem_venda: TAutoIncField;
-    qryIncluirItemidvenda: TIntegerField;
     qryIncluirItemidproduto: TIntegerField;
     qryIncluirItemitem_unidades: TIntegerField;
     qryIncluirItemvalor_item: TFloatField;
-    qryIncluirItemnomeproduto: TStringField;
     lbl2: TLabel;
     qryEmitirVendaobservacao_venda: TMemoField;
     edtobservacaovenda: TEdit;
     btnConsultaItem: TButton;
+    qryIncluirItemidvenda: TAutoIncField;
+    qryIncluirItemnomeproduto: TStringField;
+    qryIncluirItemiditem_venda: TAutoIncField;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -205,16 +205,20 @@ begin
   if edtCodProduto.Text <> '0' then
   begin
     if (edtqtdproduto.Text = '0') then
-      ShowMessage('Digite uma quantidade válida.')
+    begin
+      MessageDlg('Digite uma quantidade válida.', mtError, [mbok], 0);
+      qryIncluirItem.Close;
+    end
     else
     begin
+      qryIncluirItem.Open;
       try
         qryIncluirItem.Insert;
-        qryIncluirItemidvenda.Value       := qryEmitirVendaidvenda.Value;
-        qryIncluirItemitem_unidades.Value := StrToInt(edtqtdproduto.Text);
-        qryIncluirItemnomeproduto.AsString       := dbedtnome.Text;
-        qryIncluirItemvalor_item.Value    := qryConsultaItemvalor_produto.Value;
-        qryIncluirItemidproduto.value     := StrToInt(edtCodProduto.text);
+        qryIncluirItemidvenda.Value           := qryEmitirVendaidvenda.Value;
+        qryIncluirItemitem_unidades.Value     := StrToInt(edtqtdproduto.Text);
+        qryIncluirItemnomeproduto.AsString    := dbedtnome.Text;
+        qryIncluirItemvalor_item.Value        := qryConsultaItemvalor_produto.Value;
+        qryIncluirItemidproduto.value         := StrToInt(edtCodProduto.text);
         qryIncluirItem.Post;
 
         if qryEmitirVenda.State = dsbrowse then
@@ -231,7 +235,7 @@ begin
     end;
   end
   else
-    ShowMessage('Insira um código de produto.');
+    MessageDlg('Insira um código de produto.', mtError, [mbok], 0);
 end;
 
 procedure TCadastroVendas.btnNovaVendaClick(Sender: TObject);
@@ -279,10 +283,10 @@ begin
         try
           qryEmitirVenda.Connection.RollbackTrans;
           //qryEmitirVenda.Connection.Connected := False;
-          ShowMessage('A venda foi cancelada com sucesso!');
+          MessageDlg('A venda foi cancelada com sucesso!', mtConfirmation, [mbok], 0);
           CadastroVendas.Close;
         except
-          ShowMessage('Não foi possível cancelar a sua venda.');
+          MessageDlg('Não foi possível cancelar a sua venda.', mtWarning, [mbok], 0);
         end;
       end;
     IDNO:
@@ -312,7 +316,7 @@ begin
           qryEmitirVenda.Edit;
           qryEmitirVendaobservacao_venda.Value := edtobservacaovenda.Text;
           qryEmitirVenda.Post;
-          ShowMessage('A venda foi concluída com sucesso!');
+          MessageDlg('A venda foi concluida com sucesso!', mtConfirmation, [mbok], 0);
           qryEmitirVenda.Connection.CommitTrans;
           CadastroVendas.Close;
           qryEmitirVenda.Connection.Connected := False;

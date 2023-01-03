@@ -275,9 +275,9 @@ object CadastroVendas: TCadastroVendas
       object lblNomeTela: TLabel
         Left = 8
         Top = 8
-        Width = 199
+        Width = 132
         Height = 25
-        Caption = 'EMISS'#195'O DE VENDA'
+        Caption = 'NOVA VENDA'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -21
@@ -429,24 +429,25 @@ object CadastroVendas: TCadastroVendas
             item
               Expanded = False
               FieldName = 'idproduto'
+              Title.Caption = 'ID'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'nomeproduto'
-              Width = 259
+              Title.Caption = 'Nome'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'valor_item'
-              Width = 132
+              Title.Caption = 'Valor'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'item_unidades'
-              Width = 111
+              Title.Caption = 'Unidades'
               Visible = True
             end>
         end
@@ -770,15 +771,13 @@ object CadastroVendas: TCadastroVendas
       'where 1 = 0')
     Left = 724
     Top = 384
-    object qryIncluirItemiditem_venda: TAutoIncField
-      FieldName = 'iditem_venda'
-      ReadOnly = True
-    end
-    object qryIncluirItemidvenda: TIntegerField
-      FieldName = 'idvenda'
-    end
     object qryIncluirItemidproduto: TIntegerField
       FieldName = 'idproduto'
+    end
+    object qryIncluirItemidvenda: TAutoIncField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'idvenda'
+      ReadOnly = True
     end
     object qryIncluirItemitem_unidades: TIntegerField
       FieldName = 'item_unidades'
@@ -790,6 +789,11 @@ object CadastroVendas: TCadastroVendas
       FieldName = 'nomeproduto'
       FixedChar = True
       Size = 30
+    end
+    object qryIncluirItemiditem_venda: TAutoIncField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'iditem_venda'
+      ReadOnly = True
     end
   end
   object dsPagamento: TDataSource

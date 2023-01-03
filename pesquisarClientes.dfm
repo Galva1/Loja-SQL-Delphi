@@ -112,6 +112,7 @@ object pesquisarCliente: TpesquisarCliente
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDblClick = dbgrdconsultacliDblClick
       Columns = <
         item
           Expanded = False

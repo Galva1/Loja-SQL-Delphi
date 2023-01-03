@@ -206,7 +206,7 @@ begin
   if erro = '' then
     Result := True
   else
-    showMessage('Corrija os campos:'+#13+erro);
+    MessageDlg('Corrija os campos:'+#13+erro, mtError, [mbok], 0);
 end;
 
 procedure TCadastroClientes1.btnSalvarClick(Sender: TObject);
@@ -270,7 +270,7 @@ begin
       end;
     end
     else
-      ShowMessage('Não há registro para excluir!');
+      MessageDlg('Não há registro para excluir.', mtError, [mbok], 0);
   except
     on e: Exception do
     begin
@@ -318,12 +318,12 @@ begin
         begin
           btnEditarCadCliente.Enabled := False;
           qryConsultaCliente.Close;
-          ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+          MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
         end;
       except
         qryConsultaCliente.Close;
         btnEditarCadCliente.Enabled := False;
-        ShowMessage('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!');
+        MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
       end;
 
     end
@@ -344,7 +344,7 @@ begin
   1:
     ConsultarClientes(nil);
   else
-    ShowMessage('Selecione um filtro!')
+    MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
   end;
 end;
 
@@ -358,15 +358,13 @@ end;
 procedure TCadastroClientes1.FormCreate(Sender: TObject);
 begin
   CadastroClientes1.AutoSize := True;
-  
 end;
 
 procedure TCadastroClientes1.dbedtdatacliKeyPress(Sender: TObject;
   var Key: Char);
 begin
-  if not (Key in['0'..'9',#8, #27, #32]) then
+ if not (Key in['0'..'9',#8, #27, #32]) then
     Key := #0;
-   
 end;
 
 procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
@@ -374,6 +372,7 @@ procedure TCadastroClientes1.dbedtcpfcliKeyPress(Sender: TObject;
 begin
   if (Length(dbedtcpfcli.Text)=11) and not(Key in [#8]) then
     Key := #0;
+
 end;
 
 procedure TCadastroClientes1.dbgrdConsultaClienteDblClick(Sender: TObject);
@@ -474,13 +473,15 @@ procedure TCadastroClientes1.dtfldDadosClientedata_nascimentoSetText(
     Mes,
     Dia: word;
 begin
-  Ano := StrToInt(Copy(dbedtdatacli.Text, 1, 2));
+  Dia := StrToInt(Copy(dbedtdatacli.Text, 1, 2));
   Mes := StrToInt(Copy(dbedtdatacli.Text, 4, 2));
   Ano := StrToInt(Copy(dbedtdatacli.Text, 7, 4));
-  if not IsValidDate(Dia, Mes, Ano) then
+  if not IsValidDate(Ano, Mes, Dia) then
   begin
-    MessageDlg('Não é uma data válida', mtWarning, [mbAbort], 0);
+    MessageDlg('Não é uma data válida', mtWarning, [mbOK], 0);
+    Abort;
   end;
+  Sender.Value := Text;
 end;
 
 end.

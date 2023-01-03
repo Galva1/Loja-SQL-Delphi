@@ -3,6 +3,7 @@ object CadastroClientes1: TCadastroClientes1
   Top = 166
   Width = 1081
   Height = 675
+  Caption = '0'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
