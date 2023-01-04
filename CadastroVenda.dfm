@@ -1,8 +1,8 @@
 object CadastroVendas: TCadastroVendas
-  Left = 203
-  Top = 124
+  Left = 287
+  Top = 37
   Width = 1112
-  Height = 626
+  Height = 782
   Caption = 'Cadastro Vendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,9 +20,9 @@ object CadastroVendas: TCadastroVendas
   TextHeight = 13
   object pnlGeral: TPanel
     Left = 0
-    Top = 0
+    Top = 40
     Width = 617
-    Height = 585
+    Height = 629
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
@@ -54,7 +54,7 @@ object CadastroVendas: TCadastroVendas
     end
     object lbl2: TLabel
       Left = 8
-      Top = 537
+      Top = 579
       Width = 89
       Height = 20
       Caption = 'Observa'#231#227'o:'
@@ -356,9 +356,9 @@ object CadastroVendas: TCadastroVendas
     end
     object pgcItem: TPageControl
       Left = 0
-      Top = 296
+      Top = 304
       Width = 617
-      Height = 241
+      Height = 273
       ActivePage = tsItem
       TabOrder = 3
       object tsItem: TTabSheet
@@ -418,8 +418,8 @@ object CadastroVendas: TCadastroVendas
         object dbgrdprodutos: TDBGrid
           Left = 8
           Top = 104
-          Width = 593
-          Height = 105
+          Width = 589
+          Height = 133
           DataSource = dsIncluirItem
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
@@ -439,21 +439,21 @@ object CadastroVendas: TCadastroVendas
               Expanded = False
               FieldName = 'nomeproduto'
               Title.Caption = 'Nome'
-              Width = 226
+              Width = 260
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'valor_item'
               Title.Caption = 'Valor (R$)'
-              Width = 146
+              Width = 138
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'item_unidades'
               Title.Caption = 'Unidades'
-              Width = 127
+              Width = 97
               Visible = True
             end>
         end
@@ -578,8 +578,8 @@ object CadastroVendas: TCadastroVendas
       end
     end
     object btnConfirmar: TButton
-      Left = 408
-      Top = 552
+      Left = 407
+      Top = 594
       Width = 97
       Height = 29
       Caption = 'Confirmar'
@@ -588,8 +588,8 @@ object CadastroVendas: TCadastroVendas
       OnClick = btnConfirmarClick
     end
     object btnCancelar: TButton
-      Left = 516
-      Top = 552
+      Left = 510
+      Top = 594
       Width = 97
       Height = 29
       Caption = 'Cancelar'
@@ -644,7 +644,7 @@ object CadastroVendas: TCadastroVendas
     end
     object edtobservacaovenda: TEdit
       Left = 8
-      Top = 560
+      Top = 602
       Width = 365
       Height = 21
       TabOrder = 9

@@ -63,31 +63,37 @@ object ConsultaVenda: TConsultaVenda
         item
           Expanded = False
           FieldName = 'idvenda'
+          Title.Caption = 'ID Venda'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'valor'
+          Title.Caption = 'Valor'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'idcliente'
+          Title.Caption = 'ID Cliente'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'data_venda'
+          Title.Caption = 'Data da venda'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
+          Title.Caption = 'Nome Cliente'#13#10
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'cpf'
+          Title.Caption = 'CPF'
           Visible = True
         end>
     end

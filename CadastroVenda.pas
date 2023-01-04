@@ -215,13 +215,11 @@ end;
 
 procedure TCadastroVendas.btnIncluirClick(Sender: TObject);
 begin
-  btnConfirmar.Enabled := True;
-  btnRemoverItemVenda.Enabled := True;
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
-  if (edtCodProduto.Text <> '0') and (edtCodProduto.Text <> '')then
+  if (edtCodProduto.Text <> '0') or (edtCodProduto.Text <> EmptyStr)then
   begin
-    if ((edtqtdproduto.Text = '0') and (edtqtdproduto.Text = EmptyStr)) then
+    if ((edtqtdproduto.Text = '0') or (edtqtdproduto.Text = EmptyStr)) then
     begin
       MessageDlg('Digite uma quantidade válida.', mtError, [mbok], 0);
       if qryIncluirItem.IsEmpty then
@@ -243,6 +241,8 @@ begin
 
         qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
         qryEmitirVenda.Post;
+        btnConfirmar.Enabled := True;
+        btnRemoverItemVenda.Enabled := True;
         InseriuObjeto(nil);
 
       except
@@ -460,9 +460,16 @@ begin
     begin
       if MessageDlg('Deseja excluir o registro '+Trim(qryIncluirItem.FieldByName('nomeproduto').AsString)+'?', mtConfirmation, mbYesNoCancel, 0) = mrYes then
       begin
+        if qryEmitirVenda.State = dsbrowse then
+          qryEmitirVenda.Edit;
+        qryEmitirVendavalor.Value := qryEmitirVendavalor.Value - (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+        qryEmitirVenda.Post;
         qryIncluirItem.Delete;
         if qryIncluirItem.IsEmpty then
+        begin
           btnRemoverItemVenda.Enabled := False;
+          btnConfirmar.Enabled := False;
+        end;
       end;
     end;
   end;
