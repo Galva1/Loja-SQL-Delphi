@@ -1,6 +1,6 @@
 object pesquisarCliente: TpesquisarCliente
-  Left = 494
-  Top = 198
+  Left = 495
+  Top = 199
   Width = 760
   Height = 562
   Caption = 'pesquisarCliente'
@@ -113,6 +113,7 @@ object pesquisarCliente: TpesquisarCliente
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnDblClick = dbgrdconsultacliDblClick
+      OnKeyDown = dbgrdconsultacliKeyDown
       Columns = <
         item
           Expanded = False

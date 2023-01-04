@@ -1,6 +1,6 @@
 object CadastroVendas: TCadastroVendas
-  Left = 201
-  Top = 123
+  Left = 203
+  Top = 124
   Width = 1112
   Height = 626
   Caption = 'Cadastro Vendas'
@@ -15,6 +15,7 @@ object CadastroVendas: TCadastroVendas
   OnClose = FormClose
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlGeral: TPanel
@@ -151,14 +152,6 @@ object CadastroVendas: TCadastroVendas
           Font.Style = []
           ParentFont = False
         end
-        object btnBuscar: TSpeedButton
-          Left = 344
-          Top = 32
-          Width = 45
-          Height = 28
-          Caption = 'Buscar'
-          OnClick = btnBuscarClick
-        end
         object dbedtcodCliente: TDBEdit
           Left = 12
           Top = 36
@@ -260,6 +253,15 @@ object CadastroVendas: TCadastroVendas
           Font.Style = []
           ParentFont = False
           TabOrder = 5
+        end
+        object btnBuscar: TButton
+          Left = 344
+          Top = 32
+          Width = 65
+          Height = 31
+          Caption = 'Buscar'
+          TabOrder = 6
+          OnClick = btnBuscarClick
         end
       end
     end
@@ -403,9 +405,9 @@ object CadastroVendas: TCadastroVendas
         object lblValorTotal: TLabel
           Left = 388
           Top = 21
-          Width = 76
+          Width = 111
           Height = 20
-          Caption = 'Valor Total'
+          Caption = 'Valor Total (R$)'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -443,7 +445,7 @@ object CadastroVendas: TCadastroVendas
             item
               Expanded = False
               FieldName = 'valor_item'
-              Title.Caption = 'Valor'
+              Title.Caption = 'Valor (R$)'
               Width = 146
               Visible = True
             end
@@ -507,6 +509,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
           TabOrder = 3
           Text = '0'
+          OnChange = edtqtdprodutoChange
           OnExit = edtqtdprodutoExit
           OnKeyDown = edtqtdprodutoKeyDown
           OnKeyPress = edtqtdprodutoKeyPress

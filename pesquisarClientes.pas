@@ -36,6 +36,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgrdconsultacliDblClick(Sender: TObject);
     procedure btnCadastrarClienteClick(Sender: TObject);
+    procedure dbgrdconsultacliKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -101,6 +103,7 @@ begin
   begin
     pesquisarCliente.Close;
     CadastroVendas.btnNovaVenda.Enabled := True;
+    CadastroVendas.btnNovaVenda.SetFocus;
   end;
 
 
@@ -109,6 +112,8 @@ end;
 procedure TpesquisarCliente.btnSaircliClick(Sender: TObject);
 begin
   pesquisarCliente.Close;
+  if not qryConsultaCliente.Active then
+    CadastroVendas.btnNovaVenda.SetFocus;
 end;
 
 procedure TpesquisarCliente.FormActivate(Sender: TObject);
@@ -151,6 +156,13 @@ begin
   finally
     CadastroClientes1.Free;
   end;
+end;
+
+procedure TpesquisarCliente.dbgrdconsultacliKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Key = 13 then
+    btnSelecionarCliClick(nil);
 end;
 
 end.

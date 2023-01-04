@@ -1,6 +1,6 @@
 object LojaMenu: TLojaMenu
-  Left = 392
-  Top = 175
+  Left = 334
+  Top = 176
   Width = 1088
   Height = 563
   Caption = 'Loja'
