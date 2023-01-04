@@ -236,7 +236,7 @@ begin
         begin
           qryDadosProduto.Delete;
           qryDadosProduto.Active := False;
-          MessageDlg('O Registro foi excluído com sucesso', mtError, [mbok], 0);
+          MessageDlg('O Registro foi excluído com sucesso', mtConfirmation, [mbok], 0);
 
         end;
       IDNO:
@@ -364,6 +364,11 @@ begin
     qryConsultaProduto.Close;
     qryConsultaProduto.Open;
   end;
+  if pgcCadastroProduto.ActivePage = ts1 then
+    lblCadastroProdutoLogo.Caption := 'CADASTRO DE PRODUTOS'
+  else
+    lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
+
 
 end;
 

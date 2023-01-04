@@ -84,12 +84,12 @@ type
     lbl2: TLabel;
     qryEmitirVendaobservacao_venda: TMemoField;
     edtobservacaovenda: TEdit;
-    btnConsultaItem: TButton;
     qryIncluirItemidvenda: TAutoIncField;
     qryIncluirItemnomeproduto: TStringField;
     qryIncluirItemiditem_venda: TAutoIncField;
     btnRemoverItemVenda: TButton;
     btnBuscar: TButton;
+    btnConsultaItem: TSpeedButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -122,6 +122,7 @@ type
     procedure InseriuObjeto(Sender: TObject);
     procedure edtqtdprodutoChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnConsultaItem1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -169,6 +170,27 @@ begin
         Close;
         SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
         Open;
+        if (dbedtnome.Text = EmptyStr) then
+          if (edtCodProduto.Text <> '0') and (edtCodProduto.Text <> EmptyStr) then
+            if MessageDlg('Produto não encontrado no sistema!'+#13+'Gostaria de inserir?', mtInformation, [mbYes, mbNo], 0) = mrYes then
+              begin
+                try
+                  Application.CreateForm(TCadastroProdutos, CadastroProdutos);
+                  CadastroProdutos.pgcCadastroProduto.Pages[0].Destroy;
+                  CadastroProdutos.ShowModal;
+                  edtCodProduto.Text := CadastroProdutos.dbtxtcodpro.Caption;
+                  if CadastroProdutos.dbtxtcodpro.Caption <> EmptyStr then
+                    edtCodProdutoExit(nil)
+                  else
+                    edtCodProduto.Text := '0';
+
+                finally
+                  CadastroProdutos.Free;
+                end;
+              end
+              else
+                InseriuObjeto(nil);
+
       except
         on e: Exception do
         begin
@@ -390,6 +412,8 @@ begin
     Beep;
     Key := #0;
   end;
+  if (Length(edtCodProduto.Text) = 7) and (not(Key in [#8]))then
+    Key := #0;
 end;
 
 procedure TCadastroVendas.edtqtdprodutoKeyPress(Sender: TObject;
@@ -483,6 +507,26 @@ end;
 procedure TCadastroVendas.FormShow(Sender: TObject);
 begin
   btnBuscar.SetFocus;
+end;
+
+procedure TCadastroVendas.btnConsultaItem1Click(Sender: TObject);
+begin
+  if dbedtNumeroVenda.Text <> EmptyStr then
+    try
+      Application.CreateForm(TCadastroProdutos, CadastroProdutos);
+      CadastroProdutos.lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
+      CadastroProdutos.pgcCadastroProduto.Pages[1].Destroy;
+      CadastroProdutos.btnEditarCadProduto.Destroy;
+      CadastroProdutos.ShowModal;
+      if CadastroProdutos.qryConsultaProduto.Active then
+      begin
+        CadastroVendas.edtCodProduto.Text := CadastroProdutos.qryConsultaProdutoidproduto.AsString;
+        edtCodProdutoExit(nil);
+        edtqtdproduto.SetFocus;
+      end;
+    finally
+      CadastroProdutos.Free;
+    end;
 end;
 
 end.
