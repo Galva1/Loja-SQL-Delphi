@@ -104,6 +104,7 @@ type
     procedure dbedtcidadecliKeyPress(Sender: TObject; var Key: Char);
     procedure edtConsultaKeyPress(Sender: TObject; var Key: Char);
     procedure btnCadastrarClienteClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
 
@@ -538,6 +539,12 @@ begin
   pgcCadastroCliente.ActivePage := ts2;
   qryDadosCliente.Active := True;
   btnInserirClick(nil);
+end;
+
+procedure TCadastroClientes1.FormActivate(Sender: TObject);
+begin
+  if pgcCadastroCliente.ActivePage = ts2 then
+    btnInserirClick(nil);
 end;
 
 end.

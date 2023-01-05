@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, ExtCtrls, StdCtrls, DB, ADODB;
+  Dialogs, Menus, ExtCtrls, StdCtrls, DB, ADODB, Mask, DBCtrls;
 
 type
   TLojaMenu = class(TForm)

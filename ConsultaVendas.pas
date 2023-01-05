@@ -71,7 +71,7 @@ begin
       2:
         qryConsultaVenda.SQL.Add('where venda.idcliente ='+ QuotedStr(edtConsultaVenda.Text));
       3:
-        qryConsultaVenda.SQL.Add('where cliente.nome ='+ QuotedStr(edtConsultaVenda.Text));
+        qryConsultaVenda.SQL.Add('where cliente.nome LIKE'+ LowerCase(QuotedStr('%'+edtConsultaVenda.Text+'%')));
       4:
         qryConsultaVenda.SQL.Add('where cliente.cpf ='+ QuotedStr(edtConsultaVenda.Text));
       else
@@ -137,11 +137,10 @@ end;
 procedure TConsultaVenda.edtConsultaVendaKeyPress(Sender: TObject;
   var Key: Char);
 begin
+  if cbbConsulta.ItemIndex <> 3 then
+    if not (Key in['0'..'9',#8, #27, #32]) then
+      Key := #0;
 
-  if not (Key in['0'..'9',#8, #27, #32]) then
-  begin
-    Key := #0;
-  end;
 
   if (Length(edtConsultaVenda.Text)=50) and not(Key in[#8]) then
     Key := #0;

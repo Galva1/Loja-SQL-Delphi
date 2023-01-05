@@ -11,6 +11,7 @@ object CadastroClientes1: TCadastroClientes1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -78,7 +79,7 @@ object CadastroClientes1: TCadastroClientes1
             Top = 378
             Width = 61
             Height = 33
-            Caption = 'Cadastrar'
+            Caption = 'Novo'
             TabOrder = 1
             OnClick = btnCadastrarClienteClick
           end

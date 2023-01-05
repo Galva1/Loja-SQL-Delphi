@@ -79,7 +79,7 @@ object CadastroProdutos: TCadastroProdutos
             Top = 380
             Width = 61
             Height = 29
-            Caption = 'Cadastrar'
+            Caption = 'Novo'
             TabOrder = 1
             OnClick = btnCadastrarProdutoClick
           end

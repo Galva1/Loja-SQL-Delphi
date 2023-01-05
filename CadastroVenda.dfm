@@ -140,7 +140,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
         end
         object lbl1: TLabel
-          Left = 444
+          Left = 472
           Top = 68
           Width = 44
           Height = 16
@@ -223,7 +223,7 @@ object CadastroVendas: TCadastroVendas
         object dbedtbairrocli: TDBEdit
           Left = 344
           Top = 88
-          Width = 89
+          Width = 117
           Height = 24
           Color = 15395562
           DataField = 'Bairro'
@@ -238,7 +238,7 @@ object CadastroVendas: TCadastroVendas
           TabOrder = 4
         end
         object dbedtcidcli: TDBEdit
-          Left = 444
+          Left = 472
           Top = 88
           Width = 145
           Height = 24

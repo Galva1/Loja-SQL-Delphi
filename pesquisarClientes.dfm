@@ -49,12 +49,15 @@ object pesquisarCliente: TpesquisarCliente
       Top = 44
       Width = 69
       Height = 28
+      AutoDropDown = True
+      Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ItemHeight = 20
+      ItemIndex = 0
       ParentFont = False
       TabOrder = 1
       Text = 'ID'

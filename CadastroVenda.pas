@@ -536,7 +536,8 @@ end;
 
 procedure TCadastroVendas.btnNovoItemClick(Sender: TObject);
 begin
-  AbrirTelaNovoProduto(nil);
+  if dbedtNumeroVenda.Text <> EmptyStr then
+    AbrirTelaNovoProduto(nil);
 end;
 
 end.

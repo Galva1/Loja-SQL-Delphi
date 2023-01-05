@@ -67,7 +67,9 @@ begin
         0:
           qryConsultaCliente.SQL.Add('where cliente.idcliente = ' + QuotedStr(Trim(edtConsulta.Text)));
         1:
-          qryConsultaCliente.SQL.Add('where cliente.nome = ' + LowerCase(QuotedStr(Trim('%'+edtConsulta.Text+'%'))));
+          qryConsultaCliente.SQL.Add('where cliente.nome LIKE ' + LowerCase(QuotedStr(Trim('%'+edtConsulta.Text+'%'))));
+        2:
+          qryConsultaCliente.SQL.Add('where cliente.cpf = ' + QuotedStr(Trim(edtConsulta.Text)));
 
         else
           MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
