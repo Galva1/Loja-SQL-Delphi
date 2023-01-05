@@ -44,6 +44,7 @@ type
     dbtxtcodpro: TDBText;
     lbl1: TLabel;
     btnEditarCadProduto: TButton;
+    btnCadastrarProduto: TButton;
     procedure btnBuscarProdutoClick(Sender: TObject);
     procedure ConsultarProduto(Sender:TObject);
     procedure edtConsultaProdutoKeyDown(Sender: TObject; var Key: Word;
@@ -67,6 +68,8 @@ type
     procedure pgcCadastroProdutoChange(Sender: TObject);
     procedure edtConsultaProdutoKeyPress(Sender: TObject; var Key: Char);
     procedure dbedtnomeproKeyPress(Sender: TObject; var Key: Char);
+    procedure btnCadastrarProdutoClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
     TemVirgula: Boolean;
@@ -236,7 +239,7 @@ begin
         begin
           qryDadosProduto.Delete;
           qryDadosProduto.Active := False;
-          MessageDlg('O Registro foi excluído com sucesso', mtError, [mbok], 0);
+          MessageDlg('O Registro foi excluído com sucesso', mtConfirmation, [mbok], 0);
 
         end;
       IDNO:
@@ -331,7 +334,7 @@ begin
       qryDadosProduto.Close;
       qryDadosProduto.Parameters.ParamByName('idproduto').Value := qryConsultaProdutoidproduto.AsInteger;
       qryDadosProduto.Open;
-      btnInserir.Enabled := False;
+      btnInserir.Enabled := True;
       btnAlterar.Enabled := True;
       btnSalvar.Enabled := False;
       btnExcluir.Enabled := True;
@@ -364,6 +367,11 @@ begin
     qryConsultaProduto.Close;
     qryConsultaProduto.Open;
   end;
+  if pgcCadastroProduto.ActivePage = ts1 then
+    lblCadastroProdutoLogo.Caption := 'CADASTRO DE PRODUTOS'
+  else
+    lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
+
 
 end;
 
@@ -379,6 +387,19 @@ procedure TCadastroProdutos.dbedtnomeproKeyPress(Sender: TObject;
 begin
   if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
     Key := #0;
+end;
+
+procedure TCadastroProdutos.btnCadastrarProdutoClick(Sender: TObject);
+begin
+  pgcCadastroProduto.ActivePage := ts2;
+  qryDadosProduto.Active := True;
+  btnInserirClick(nil);
+end;
+
+procedure TCadastroProdutos.FormActivate(Sender: TObject);
+begin
+  if pgcCadastroProduto.ActivePage = ts2 then
+    CadastroProdutos.btnInserirClick(nil);
 end;
 
 end.

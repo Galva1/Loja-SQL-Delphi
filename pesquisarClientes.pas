@@ -26,6 +26,7 @@ type
     qryConsultaClienteEndereo: TStringField;
     qryConsultaClienteBairro: TWideStringField;
     qryConsultaClienteCidade: TWideStringField;
+    btnCadastrarCliente: TButton;
     procedure btnbuscarClick(Sender: TObject);
     procedure edtConsultaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -34,6 +35,9 @@ type
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbgrdconsultacliDblClick(Sender: TObject);
+    procedure btnCadastrarClienteClick(Sender: TObject);
+    procedure dbgrdconsultacliKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -45,7 +49,7 @@ var
 
 implementation
 
-uses Loja, CadastroVenda;
+uses Loja, CadastroVenda, CadastroClientes;
 
 {$R *.dfm}
 
@@ -55,12 +59,22 @@ begin
   if Trim(edtConsulta.Text) <> EmptyStr then
     begin
       try
+        qryConsultaCliente.Close;
         qryConsultaCliente.SQL.Clear;
         qryConsultaCliente.SQL.Add('Select * from cliente');
-        if cbbConsulta.Text = 'ID' then
-          qryConsultaCliente.SQL.Add('where cliente.idcliente'+' = '+QuotedStr(Trim(edtConsulta.Text)))
+        case cbbConsulta.ItemIndex of
+
+        0:
+          qryConsultaCliente.SQL.Add('where cliente.idcliente = ' + QuotedStr(Trim(edtConsulta.Text)));
+        1:
+          qryConsultaCliente.SQL.Add('where cliente.nome LIKE ' + LowerCase(QuotedStr(Trim('%'+edtConsulta.Text+'%'))));
+        2:
+          qryConsultaCliente.SQL.Add('where cliente.cpf = ' + QuotedStr(Trim(edtConsulta.Text)));
+
         else
-          qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' = '+QuotedStr(Trim(edtConsulta.Text)));
+          MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
+
+        end;
         qryConsultaCliente.Open;
         if qryConsultaCliente.IsEmpty then
         begin
@@ -68,12 +82,12 @@ begin
           btnSelecionarCli.Enabled := False;
           MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
         end;
+
       except
         qryConsultaCliente.Close;
         btnSelecionarCli.Enabled := False;
         MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
       end;
-
     end
   else
     begin
@@ -99,6 +113,7 @@ begin
   begin
     pesquisarCliente.Close;
     CadastroVendas.btnNovaVenda.Enabled := True;
+    CadastroVendas.btnNovaVenda.SetFocus;
   end;
 
 
@@ -107,6 +122,8 @@ end;
 procedure TpesquisarCliente.btnSaircliClick(Sender: TObject);
 begin
   pesquisarCliente.Close;
+  if not qryConsultaCliente.Active then
+    CadastroVendas.btnNovaVenda.SetFocus;
 end;
 
 procedure TpesquisarCliente.FormActivate(Sender: TObject);
@@ -131,6 +148,30 @@ end;
 procedure TpesquisarCliente.dbgrdconsultacliDblClick(Sender: TObject);
 begin
   if qryConsultaCliente.Active then
+    btnSelecionarCliClick(nil);
+end;
+
+procedure TpesquisarCliente.btnCadastrarClienteClick(Sender: TObject);
+begin
+  try
+    Application.CreateForm(TCadastroClientes1, CadastroClientes1);
+    CadastroClientes1.pgcCadastroCliente.Pages[0].Destroy;
+    CadastroClientes1.lblCadastroCliente.Caption := 'CADASTRO DE CLIENTES';
+    CadastroClientes1.ShowModal;
+    if qryConsultaCliente.Active then
+    begin
+      qryConsultaCliente.Close;
+      qryConsultaCliente.Open;
+    end;
+  finally
+    CadastroClientes1.Free;
+  end;
+end;
+
+procedure TpesquisarCliente.dbgrdconsultacliKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Key = 13 then
     btnSelecionarCliClick(nil);
 end;
 

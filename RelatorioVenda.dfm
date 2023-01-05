@@ -1,9 +1,9 @@
 object RelatorioVendas: TRelatorioVendas
-  Left = 216
-  Top = 116
+  Left = 66
+  Top = 34
   Width = 1310
   Height = 739
-  Caption = 'RelatorioVendas'
+  Caption = 'Relat'#243'rio Venda'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

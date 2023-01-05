@@ -1,9 +1,9 @@
 object ConsultaVenda: TConsultaVenda
-  Left = 331
-  Top = 107
+  Left = 334
+  Top = 108
   Width = 1088
   Height = 563
-  Caption = 'ConsultaVenda'
+  Caption = 'Consulta Vendas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -47,9 +47,9 @@ object ConsultaVenda: TConsultaVenda
     end
     object dbgrdConsultaVenda: TDBGrid
       Left = 8
-      Top = 128
+      Top = 108
       Width = 501
-      Height = 229
+      Height = 249
       DataSource = dsConsultaVenda
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
@@ -63,31 +63,38 @@ object ConsultaVenda: TConsultaVenda
         item
           Expanded = False
           FieldName = 'idvenda'
+          Title.Caption = 'ID Venda'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'valor'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'idcliente'
+          Title.Caption = 'Valor (R$)'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'data_venda'
+          Title.Caption = 'Data da venda'
+          Width = 97
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'idcliente'
+          Title.Caption = 'ID Cliente'
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'nome'
+          Title.Caption = 'Nome Cliente'#13#10
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'cpf'
+          Title.Caption = 'CPF'
           Visible = True
         end>
     end

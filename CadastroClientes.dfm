@@ -3,7 +3,7 @@ object CadastroClientes1: TCadastroClientes1
   Top = 166
   Width = 1081
   Height = 675
-  Caption = '0'
+  Caption = 'Cadastro Clientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object CadastroClientes1: TCadastroClientes1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -31,7 +32,7 @@ object CadastroClientes1: TCadastroClientes1
       BevelOuter = bvNone
       Color = 13423300
       TabOrder = 0
-      object lbl8: TLabel
+      object lblCadastroCliente: TLabel
         Left = 4
         Top = 4
         Width = 248
@@ -50,7 +51,7 @@ object CadastroClientes1: TCadastroClientes1
       Top = 37
       Width = 541
       Height = 456
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroClienteChange
@@ -72,6 +73,15 @@ object CadastroClientes1: TCadastroClientes1
             Enabled = False
             TabOrder = 0
             OnClick = btnEditarCadClienteClick
+          end
+          object btnCadastrarCliente: TButton
+            Left = 372
+            Top = 378
+            Width = 61
+            Height = 33
+            Caption = 'Novo'
+            TabOrder = 1
+            OnClick = btnCadastrarClienteClick
           end
         end
         object dbgrdConsultaCliente: TDBGrid

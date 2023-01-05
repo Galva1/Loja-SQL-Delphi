@@ -4,7 +4,7 @@ object RelatorioCClientes: TRelatorioCClientes
   Width = 1372
   Height = 682
   VertScrollBar.Position = 188
-  Caption = 'RelatorioCClientes'
+  Caption = 'Relat'#243'rio Clientes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

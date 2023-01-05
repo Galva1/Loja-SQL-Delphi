@@ -1,6 +1,6 @@
 object pesquisarCliente: TpesquisarCliente
-  Left = 494
-  Top = 198
+  Left = 495
+  Top = 199
   Width = 760
   Height = 562
   Caption = 'pesquisarCliente'
@@ -49,12 +49,15 @@ object pesquisarCliente: TpesquisarCliente
       Top = 44
       Width = 69
       Height = 28
+      AutoDropDown = True
+      Style = csDropDownList
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ItemHeight = 20
+      ItemIndex = 0
       ParentFont = False
       TabOrder = 1
       Text = 'ID'
@@ -113,6 +116,7 @@ object pesquisarCliente: TpesquisarCliente
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnDblClick = dbgrdconsultacliDblClick
+      OnKeyDown = dbgrdconsultacliKeyDown
       Columns = <
         item
           Expanded = False
@@ -186,6 +190,21 @@ object pesquisarCliente: TpesquisarCliente
       ParentFont = False
       TabOrder = 6
       OnClick = btnSaircliClick
+    end
+    object btnCadastrarCliente: TButton
+      Left = 11
+      Top = 336
+      Width = 73
+      Height = 37
+      Caption = 'Cadastrar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 7
+      OnClick = btnCadastrarClienteClick
     end
   end
   object qryConsultaCliente: TADOQuery

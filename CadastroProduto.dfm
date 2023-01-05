@@ -3,7 +3,7 @@ object CadastroProdutos: TCadastroProdutos
   Top = 164
   Width = 798
   Height = 563
-  Caption = 'CadastroProduto'
+  Caption = 'Cadastro Produtos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object CadastroProdutos: TCadastroProdutos
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -72,6 +73,15 @@ object CadastroProdutos: TCadastroProdutos
             Enabled = False
             TabOrder = 0
             OnClick = btnEditarCadProdutoClick
+          end
+          object btnCadastrarProduto: TButton
+            Left = 372
+            Top = 380
+            Width = 61
+            Height = 29
+            Caption = 'Novo'
+            TabOrder = 1
+            OnClick = btnCadastrarProdutoClick
           end
         end
         object dbgrdConsultaProduto: TDBGrid

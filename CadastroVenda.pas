@@ -21,7 +21,6 @@ type
     dbedtendcli: TDBEdit;
     dbedtbairrocli: TDBEdit;
     dbedtcidcli: TDBEdit;
-    btnBuscar: TSpeedButton;
     lblcodcli: TLabel;
     lblnomecli: TLabel;
     lblcpfcli: TLabel;
@@ -85,10 +84,13 @@ type
     lbl2: TLabel;
     qryEmitirVendaobservacao_venda: TMemoField;
     edtobservacaovenda: TEdit;
-    btnConsultaItem: TButton;
     qryIncluirItemidvenda: TAutoIncField;
     qryIncluirItemnomeproduto: TStringField;
     qryIncluirItemiditem_venda: TAutoIncField;
+    btnRemoverItemVenda: TButton;
+    btnBuscar: TButton;
+    btnConsultaItem: TSpeedButton;
+    btnNovoItem: TSpeedButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -117,6 +119,13 @@ type
     procedure edtobservacaovendaMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure btnRemoverItemVendaClick(Sender: TObject);
+    procedure InseriuObjeto(Sender: TObject);
+    procedure edtqtdprodutoChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnConsultaItem1Click(Sender: TObject);
+    procedure AbrirTelaNovoProduto (Sender: TObject);
+    procedure btnNovoItemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -137,9 +146,6 @@ begin
   try
     Application.CreateForm(TpesquisarCliente, pesquisarCliente);
     pesquisarCliente.ShowModal;
-//    qryConsultaCliente.Close;
-//    qryConsultaCliente.Parameters.ParamByName('idcliente').Value := FloatToStr(pesquisarCliente.dbgrdconsultacli.Fields[0].Value);
-//    qryConsultaCliente.Open;
   finally
     pesquisarCliente.Free;
   end;
@@ -151,6 +157,7 @@ begin
   pnlHoraAtual.Caption := '  ' + TimeToStr(Time);
   qryEmitirVenda.Connection.Connected := true;
   qryEmitirVenda.Connection.BeginTrans;
+  
 end;
 
 procedure TCadastroVendas.FormActivate(Sender: TObject);
@@ -158,14 +165,37 @@ begin
   CadastroVendas.AutoSize := True;
 end;
 
+procedure TCadastroVendas.AbrirTelaNovoProduto (Sender: TObject);
+begin
+  try
+    Application.CreateForm(TCadastroProdutos, CadastroProdutos);
+    CadastroProdutos.pgcCadastroProduto.Pages[0].Destroy;
+    CadastroProdutos.ShowModal;
+    edtCodProduto.Text := CadastroProdutos.dbtxtcodpro.Caption;
+    if CadastroProdutos.dbtxtcodpro.Caption <> EmptyStr then
+      edtCodProdutoExit(nil)
+    else
+      edtCodProduto.Text := '0';
+
+  finally
+    CadastroProdutos.Free;
+  end;
+end;
+
 procedure TCadastroVendas.edtCodProdutoExit(Sender: TObject);
 begin
   with qryConsultaItem do
     begin
       try
-        qryConsultaItem.Close;
-        qryConsultaItem.SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
-        qryConsultaItem.Open;
+        Close;
+        SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
+        Open;
+        if (dbedtnome.Text = EmptyStr) then
+          if (edtCodProduto.Text <> '0') and (edtCodProduto.Text <> EmptyStr) then
+            if MessageDlg('Produto não encontrado no sistema!'+#13+'Gostaria de inserir?', mtInformation, [mbYes, mbNo], 0) = mrYes then
+              AbrirTelaNovoProduto(nil)
+            else
+              InseriuObjeto(nil);
       except
         on e: Exception do
         begin
@@ -174,6 +204,8 @@ begin
       end;
     end;
     if pnlvalorTotal.Caption <> '0' then
+      CadastroVendas.edtqtdprodutoExit(nil);
+    if edtqtdproduto.Text <> '0' then
       CadastroVendas.edtqtdprodutoExit(nil);
 end;
 
@@ -198,17 +230,27 @@ begin
     CadastroVendas.edtqtdprodutoExit(nil);
 end;
 
+procedure TCadastroVendas.InseriuObjeto(Sender: TObject);
+begin
+  edtCodProduto.Text := '0';
+  edtqtdproduto.Text := '0';
+  qryConsultaItem.Close;
+  qryConsultaItem.SQL[2] := 'where idproduto = ' + QuotedStr(Trim(edtCodProduto.Text));
+  qryConsultaItem.Open;
+  pnlvalorTotal.Caption := '0';
+end;
+
 procedure TCadastroVendas.btnIncluirClick(Sender: TObject);
 begin
-  btnConfirmar.Enabled := True;
   if not qryIncluirItem.Active then
     qryIncluirItem.Open;
-  if edtCodProduto.Text <> '0' then
+  if (edtCodProduto.Text <> '0') or (edtCodProduto.Text <> EmptyStr)then
   begin
-    if (edtqtdproduto.Text = '0') then
+    if ((edtqtdproduto.Text = '0') or (edtqtdproduto.Text = EmptyStr)) then
     begin
       MessageDlg('Digite uma quantidade válida.', mtError, [mbok], 0);
-      qryIncluirItem.Close;
+      if qryIncluirItem.IsEmpty then
+        qryIncluirItem.Close;
     end
     else
     begin
@@ -221,17 +263,22 @@ begin
         qryIncluirItemvalor_item.Value        := qryConsultaItemvalor_produto.Value;
         qryIncluirItemidproduto.value         := StrToInt(edtCodProduto.text);
         qryIncluirItem.Post;
-
         if qryEmitirVenda.State = dsbrowse then
           qryEmitirVenda.Edit;
+
         qryEmitirVendavalor.Value := qryEmitirVendavalor.Value + (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
         qryEmitirVenda.Post;
+        btnConfirmar.Enabled := True;
+        btnRemoverItemVenda.Enabled := True;
+        InseriuObjeto(nil);
+
       except
         on e: Exception do
         begin
           qryIncluirItem.Cancel;
           MessageDlg('Erro ao tentar incluir item'+#13+e.Message, mtError, [mbok], 0);
         end;
+
       end;
     end;
   end
@@ -313,19 +360,29 @@ begin
   case Application.MessageBox('Confirmar venda?', 'Confirmação de venda', MB_YESNO + MB_ICONQUESTION)  of
     IDYES:
       begin
-        try
-          qryEmitirVenda.Edit;
-          qryEmitirVendaobservacao_venda.Value := edtobservacaovenda.Text;
-          qryEmitirVenda.Post;
-          MessageDlg('A venda foi concluida com sucesso!', mtConfirmation, [mbok], 0);
-          qryEmitirVenda.Connection.CommitTrans;
-          CadastroVendas.Close;
-          qryEmitirVenda.Connection.Connected := False;
-        except
-          on e:Exception do
+        if qryIncluirItem.IsEmpty then
+          MessageDlg('Inclua algum item para finalizar a venda', mtInformation, [mbOK], 0)
+        else
+        begin
+          if not(dblkcbbidpagamento.Text = '') then
           begin
-            MessageDlg('Erro ao tentar concluir sua venda!' + #13 + e.Message, mtError, [mbok], 0);
-          end;
+            try
+              qryEmitirVenda.Edit;
+              qryEmitirVendaobservacao_venda.Value := edtobservacaovenda.Text;
+              qryEmitirVenda.Post;
+              MessageDlg('A venda foi concluida com sucesso!', mtConfirmation, [mbok], 0);
+              qryEmitirVenda.Connection.CommitTrans;
+              CadastroVendas.Close;
+              qryEmitirVenda.Connection.Connected := False;
+            except
+              on e:Exception do
+              begin
+                MessageDlg('Erro ao tentar concluir sua venda!' + #13 + e.Message, mtError, [mbok], 0);
+              end;
+            end;
+          end
+          else
+            MessageDlg('Insira uma forma de pagamento!', mtError, [mbOK], 0);
         end;
       end;
     IDNO:
@@ -360,16 +417,18 @@ begin
     Beep;
     Key := #0;
   end;
+  if (Length(edtCodProduto.Text) = 7) and (not(Key in [#8]))then
+    Key := #0;
 end;
 
 procedure TCadastroVendas.edtqtdprodutoKeyPress(Sender: TObject;
   var Key: Char);
 begin
-  if not (Key in['0'..'9',#8, #27, #32]) then
-  begin
-    Beep;
+  if (not(Key in['0'..'9',#8, #27, #32])) then
     Key := #0;
-  end;
+
+  if (Length(edtqtdproduto.Text)=5) and (not (Key in [#8])) then
+    Key := #0;
 end;
 
 procedure TCadastroVendas.btnIncluirKeyDown(Sender: TObject; var Key: Word;
@@ -420,6 +479,65 @@ procedure TCadastroVendas.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key in ['v'] then
     Key := #0;
+end;
+
+procedure TCadastroVendas.btnRemoverItemVendaClick(Sender: TObject);
+begin
+  if qryIncluirItem.Active then
+  begin
+    if qryIncluirItem.State in [dsBrowse] then
+    begin
+      if MessageDlg('Deseja excluir o registro '+Trim(qryIncluirItem.FieldByName('nomeproduto').AsString)+'?', mtConfirmation, mbYesNoCancel, 0) = mrYes then
+      begin
+        if qryEmitirVenda.State = dsbrowse then
+          qryEmitirVenda.Edit;
+        qryEmitirVendavalor.Value := qryEmitirVendavalor.Value - (qryIncluirItemvalor_item.Value * qryIncluirItemitem_unidades.Value);
+        qryEmitirVenda.Post;
+        qryIncluirItem.Delete;
+        if qryIncluirItem.IsEmpty then
+        begin
+          btnRemoverItemVenda.Enabled := False;
+          btnConfirmar.Enabled := False;
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TCadastroVendas.edtqtdprodutoChange(Sender: TObject);
+begin
+  edtqtdprodutoExit(nil);
+end;
+
+procedure TCadastroVendas.FormShow(Sender: TObject);
+begin
+  btnBuscar.SetFocus;
+end;
+
+procedure TCadastroVendas.btnConsultaItem1Click(Sender: TObject);
+begin
+  if dbedtNumeroVenda.Text <> EmptyStr then
+    try
+      Application.CreateForm(TCadastroProdutos, CadastroProdutos);
+      CadastroProdutos.lblCadastroProdutoLogo.Caption := 'CONSULTA DE PRODUTOS';
+      CadastroProdutos.pgcCadastroProduto.Pages[1].Destroy;
+      CadastroProdutos.btnEditarCadProduto.Destroy;
+      CadastroProdutos.ShowModal;
+      if CadastroProdutos.qryConsultaProduto.Active then
+      begin
+        CadastroVendas.edtCodProduto.Text := CadastroProdutos.qryConsultaProdutoidproduto.AsString;
+        edtCodProdutoExit(nil);
+        edtqtdproduto.SetFocus;
+      end;
+    finally
+      CadastroProdutos.Free;
+    end;
+end;
+
+procedure TCadastroVendas.btnNovoItemClick(Sender: TObject);
+begin
+  if dbedtNumeroVenda.Text <> EmptyStr then
+    AbrirTelaNovoProduto(nil);
 end;
 
 end.
