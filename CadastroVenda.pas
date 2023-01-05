@@ -90,6 +90,7 @@ type
     btnRemoverItemVenda: TButton;
     btnBuscar: TButton;
     btnConsultaItem: TSpeedButton;
+    btnNovoItem: TSpeedButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -123,6 +124,8 @@ type
     procedure edtqtdprodutoChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnConsultaItem1Click(Sender: TObject);
+    procedure AbrirTelaNovoProduto (Sender: TObject);
+    procedure btnNovoItemClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -162,6 +165,23 @@ begin
   CadastroVendas.AutoSize := True;
 end;
 
+procedure TCadastroVendas.AbrirTelaNovoProduto (Sender: TObject);
+begin
+  try
+    Application.CreateForm(TCadastroProdutos, CadastroProdutos);
+    CadastroProdutos.pgcCadastroProduto.Pages[0].Destroy;
+    CadastroProdutos.ShowModal;
+    edtCodProduto.Text := CadastroProdutos.dbtxtcodpro.Caption;
+    if CadastroProdutos.dbtxtcodpro.Caption <> EmptyStr then
+      edtCodProdutoExit(nil)
+    else
+      edtCodProduto.Text := '0';
+
+  finally
+    CadastroProdutos.Free;
+  end;
+end;
+
 procedure TCadastroVendas.edtCodProdutoExit(Sender: TObject);
 begin
   with qryConsultaItem do
@@ -173,24 +193,9 @@ begin
         if (dbedtnome.Text = EmptyStr) then
           if (edtCodProduto.Text <> '0') and (edtCodProduto.Text <> EmptyStr) then
             if MessageDlg('Produto não encontrado no sistema!'+#13+'Gostaria de inserir?', mtInformation, [mbYes, mbNo], 0) = mrYes then
-              begin
-                try
-                  Application.CreateForm(TCadastroProdutos, CadastroProdutos);
-                  CadastroProdutos.pgcCadastroProduto.Pages[0].Destroy;
-                  CadastroProdutos.ShowModal;
-                  edtCodProduto.Text := CadastroProdutos.dbtxtcodpro.Caption;
-                  if CadastroProdutos.dbtxtcodpro.Caption <> EmptyStr then
-                    edtCodProdutoExit(nil)
-                  else
-                    edtCodProduto.Text := '0';
-
-                finally
-                  CadastroProdutos.Free;
-                end;
-              end
-              else
-                InseriuObjeto(nil);
-
+              AbrirTelaNovoProduto(nil)
+            else
+              InseriuObjeto(nil);
       except
         on e: Exception do
         begin
@@ -527,6 +532,11 @@ begin
     finally
       CadastroProdutos.Free;
     end;
+end;
+
+procedure TCadastroVendas.btnNovoItemClick(Sender: TObject);
+begin
+  AbrirTelaNovoProduto(nil);
 end;
 
 end.

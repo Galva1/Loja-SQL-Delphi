@@ -73,6 +73,15 @@ object CadastroClientes1: TCadastroClientes1
             TabOrder = 0
             OnClick = btnEditarCadClienteClick
           end
+          object btnCadastrarCliente: TButton
+            Left = 372
+            Top = 378
+            Width = 61
+            Height = 33
+            Caption = 'Cadastrar'
+            TabOrder = 1
+            OnClick = btnCadastrarClienteClick
+          end
         end
         object dbgrdConsultaCliente: TDBGrid
           Left = 20

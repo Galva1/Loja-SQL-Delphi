@@ -11,6 +11,7 @@ object CadastroProdutos: TCadastroProdutos
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnActivate = FormActivate
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -50,7 +51,7 @@ object CadastroProdutos: TCadastroProdutos
       Top = 41
       Width = 545
       Height = 456
-      ActivePage = ts2
+      ActivePage = ts1
       Align = alClient
       TabOrder = 1
       OnChange = pgcCadastroProdutoChange
@@ -72,6 +73,15 @@ object CadastroProdutos: TCadastroProdutos
             Enabled = False
             TabOrder = 0
             OnClick = btnEditarCadProdutoClick
+          end
+          object btnCadastrarProduto: TButton
+            Left = 372
+            Top = 380
+            Width = 61
+            Height = 29
+            Caption = 'Cadastrar'
+            TabOrder = 1
+            OnClick = btnCadastrarProdutoClick
           end
         end
         object dbgrdConsultaProduto: TDBGrid

@@ -47,9 +47,9 @@ object ConsultaVenda: TConsultaVenda
     end
     object dbgrdConsultaVenda: TDBGrid
       Left = 8
-      Top = 128
+      Top = 108
       Width = 501
-      Height = 229
+      Height = 249
       DataSource = dsConsultaVenda
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True

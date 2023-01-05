@@ -44,6 +44,7 @@ type
     dbtxtcodpro: TDBText;
     lbl1: TLabel;
     btnEditarCadProduto: TButton;
+    btnCadastrarProduto: TButton;
     procedure btnBuscarProdutoClick(Sender: TObject);
     procedure ConsultarProduto(Sender:TObject);
     procedure edtConsultaProdutoKeyDown(Sender: TObject; var Key: Word;
@@ -67,6 +68,8 @@ type
     procedure pgcCadastroProdutoChange(Sender: TObject);
     procedure edtConsultaProdutoKeyPress(Sender: TObject; var Key: Char);
     procedure dbedtnomeproKeyPress(Sender: TObject; var Key: Char);
+    procedure btnCadastrarProdutoClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
     TemVirgula: Boolean;
@@ -384,6 +387,19 @@ procedure TCadastroProdutos.dbedtnomeproKeyPress(Sender: TObject;
 begin
   if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
     Key := #0;
+end;
+
+procedure TCadastroProdutos.btnCadastrarProdutoClick(Sender: TObject);
+begin
+  pgcCadastroProduto.ActivePage := ts2;
+  qryDadosProduto.Active := True;
+  btnInserirClick(nil);
+end;
+
+procedure TCadastroProdutos.FormActivate(Sender: TObject);
+begin
+  if pgcCadastroProduto.ActivePage = ts2 then
+    CadastroProdutos.btnInserirClick(nil);
 end;
 
 end.

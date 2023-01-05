@@ -21,14 +21,14 @@ object CadastroVendas: TCadastroVendas
   object pnlGeral: TPanel
     Left = 0
     Top = 40
-    Width = 617
+    Width = 645
     Height = 629
     BevelOuter = bvNone
     Color = clWhite
     TabOrder = 0
     object lblNvenda: TLabel
-      Left = 8
-      Top = 244
+      Left = 16
+      Top = 248
       Width = 68
       Height = 20
       Caption = 'N'#186' Venda'
@@ -40,8 +40,8 @@ object CadastroVendas: TCadastroVendas
       ParentFont = False
     end
     object lblFormaPagamento: TLabel
-      Left = 100
-      Top = 244
+      Left = 108
+      Top = 248
       Width = 131
       Height = 20
       Caption = 'Forma pagamento'
@@ -68,7 +68,7 @@ object CadastroVendas: TCadastroVendas
     object pgcClienteEmissao: TPageControl
       Left = 0
       Top = 80
-      Width = 617
+      Width = 645
       Height = 161
       ActivePage = tsCliente
       TabOrder = 2
@@ -268,7 +268,7 @@ object CadastroVendas: TCadastroVendas
     object pnlsuperior: TPanel
       Left = 0
       Top = 0
-      Width = 617
+      Width = 645
       Height = 41
       Align = alTop
       Alignment = taLeftJustify
@@ -292,7 +292,7 @@ object CadastroVendas: TCadastroVendas
     object pnlDataHora: TPanel
       Left = 0
       Top = 40
-      Width = 617
+      Width = 645
       Height = 41
       BevelOuter = bvSpace
       Color = clWhite
@@ -357,14 +357,14 @@ object CadastroVendas: TCadastroVendas
     object pgcItem: TPageControl
       Left = 0
       Top = 304
-      Width = 617
+      Width = 645
       Height = 273
       ActivePage = tsItem
       TabOrder = 3
       object tsItem: TTabSheet
         Caption = 'Item'
         object lblCodProduto: TLabel
-          Left = 32
+          Left = 44
           Top = 21
           Width = 74
           Height = 20
@@ -377,7 +377,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
         end
         object lblDesc: TLabel
-          Left = 112
+          Left = 124
           Top = 21
           Width = 71
           Height = 20
@@ -390,7 +390,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
         end
         object lblQTD: TLabel
-          Left = 304
+          Left = 316
           Top = 21
           Width = 30
           Height = 20
@@ -403,7 +403,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
         end
         object lblValorTotal: TLabel
-          Left = 388
+          Left = 400
           Top = 21
           Width = 111
           Height = 20
@@ -416,7 +416,7 @@ object CadastroVendas: TCadastroVendas
           ParentFont = False
         end
         object btnConsultaItem: TSpeedButton
-          Left = 4
+          Left = 8
           Top = 20
           Width = 23
           Height = 25
@@ -476,10 +476,71 @@ object CadastroVendas: TCadastroVendas
             F7FFF5F5F5FF}
           OnClick = btnConsultaItem1Click
         end
+        object btnNovoItem: TSpeedButton
+          Left = 8
+          Top = 52
+          Width = 23
+          Height = 25
+          Glyph.Data = {
+            82060000424D8206000000000000420000002800000014000000140000000100
+            20000300000040060000C30E0000C30E000000000000000000000000FF0000FF
+            0000FF0000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000190000003E000000560000
+            00560000003F0000001A00000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000270000
+            008C000000DA000000F8000000FD000000FD000000F8000000DB0000008D0000
+            0027000000000000000000000000000000000000000000000000000000000000
+            00000000000000000051000000DB000000FC000000C500000082000000600000
+            006000000082000000C5000000FC000000DC0000005200000000000000000000
+            00000000000000000000000000000000000000000051000000ED000000E20000
+            00610000000F000000000000000000000000000000000000000E000000600000
+            00E1000000EE0000005200000000000000000000000000000000000000000000
+            0026000000DB000000E20000003F0000000000000000000000030000002E0000
+            002E0000000300000000000000000000003E000000E1000000DC000000270000
+            00000000000000000000000000000000008B000000FC00000062000000000000
+            0000000000000000000B000000BF000000C00000000C00000000000000000000
+            000000000060000000FC0000008C000000000000000000000000000000190000
+            00D9000000C70000000F0000000000000000000000000000000B000000C90000
+            00CA0000000C0000000000000000000000000000000E000000C5000000DA0000
+            001900000000000000000000003D000000F80000008400000000000000030000
+            000C0000000C00000018000000CB000000CC000000180000000C0000000C0000
+            00030000000000000083000000F80000003E0000000000000000000000540000
+            00FD00000061000000000000002D000000C1000000CB000000CD000000F40000
+            00F4000000CD000000CB000000C10000002E0000000000000060000000FD0000
+            0056000000000000000000000054000000FD00000062000000000000002D0000
+            00BF000000C9000000CB000000F3000000F4000000CB000000C9000000BF0000
+            002E0000000000000060000000FD0000005600000000000000000000003D0000
+            00F80000008500000000000000030000000B0000000B00000017000000CB0000
+            00CC000000170000000B0000000B000000030000000000000083000000F80000
+            003E000000000000000000000018000000D9000000C700000010000000000000
+            0000000000000000000B000000C9000000CA0000000C00000000000000000000
+            00000000000F000000C6000000DA000000190000000000000000000000000000
+            008A000000FD000000630000000000000000000000000000000B000000BF0000
+            00BF0000000C00000000000000000000000000000062000000FC0000008B0000
+            000000000000000000000000000000000025000000D9000000E3000000410000
+            000000000000000000030000002C0000002C0000000300000000000000000000
+            0040000000E2000000DA00000026000000000000000000000000000000000000
+            00000000004F000000EC000000E3000000630000001000000000000000000000
+            0000000000000000000F00000062000000E3000000ED00000050000000000000
+            000000000000000000000000000000000000000000000000004F000000D90000
+            00FD000000C800000085000000620000006200000085000000C7000000FD0000
+            00DA000000500000000000000000000000000000000000000000000000000000
+            000000000000000000000000002500000089000000D8000000F7000000FD0000
+            00FD000000F7000000D90000008A000000260000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000180000003C00000054000000540000003D00000018000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000}
+          OnClick = btnNovoItemClick
+        end
         object dbgrdprodutos: TDBGrid
           Left = 8
           Top = 104
-          Width = 589
+          Width = 613
           Height = 133
           DataSource = dsIncluirItem
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -519,7 +580,7 @@ object CadastroVendas: TCadastroVendas
             end>
         end
         object edtCodProduto: TEdit
-          Left = 32
+          Left = 44
           Top = 44
           Width = 69
           Height = 28
@@ -539,7 +600,7 @@ object CadastroVendas: TCadastroVendas
           OnMouseDown = edtCodProdutoMouseDown
         end
         object dbedtnome: TDBEdit
-          Left = 112
+          Left = 124
           Top = 44
           Width = 181
           Height = 28
@@ -556,7 +617,7 @@ object CadastroVendas: TCadastroVendas
           TabOrder = 2
         end
         object edtqtdproduto: TEdit
-          Left = 304
+          Left = 316
           Top = 44
           Width = 73
           Height = 28
@@ -577,7 +638,7 @@ object CadastroVendas: TCadastroVendas
           OnMouseDown = edtqtdprodutoMouseDown
         end
         object pnlvalorTotal: TPanel
-          Left = 388
+          Left = 400
           Top = 44
           Width = 113
           Height = 29
@@ -594,7 +655,7 @@ object CadastroVendas: TCadastroVendas
           TabOrder = 4
         end
         object btnIncluir: TButton
-          Left = 516
+          Left = 540
           Top = 4
           Width = 81
           Height = 41
@@ -611,7 +672,7 @@ object CadastroVendas: TCadastroVendas
           OnKeyDown = btnIncluirKeyDown
         end
         object btnRemoverItemVenda: TButton
-          Left = 516
+          Left = 540
           Top = 56
           Width = 81
           Height = 41
@@ -629,7 +690,7 @@ object CadastroVendas: TCadastroVendas
       end
     end
     object btnConfirmar: TButton
-      Left = 407
+      Left = 424
       Top = 594
       Width = 97
       Height = 29
@@ -639,7 +700,7 @@ object CadastroVendas: TCadastroVendas
       OnClick = btnConfirmarClick
     end
     object btnCancelar: TButton
-      Left = 510
+      Left = 527
       Top = 594
       Width = 97
       Height = 29
@@ -648,8 +709,8 @@ object CadastroVendas: TCadastroVendas
       OnClick = btnCancelarClick
     end
     object dbedtNumeroVenda: TDBEdit
-      Left = 8
-      Top = 264
+      Left = 16
+      Top = 268
       Width = 69
       Height = 28
       Color = 15395562
@@ -665,9 +726,9 @@ object CadastroVendas: TCadastroVendas
       TabOrder = 6
     end
     object btnNovaVenda: TButton
-      Left = 320
-      Top = 252
-      Width = 89
+      Left = 300
+      Top = 256
+      Width = 81
       Height = 41
       Caption = 'Nova venda'
       Enabled = False
@@ -675,8 +736,8 @@ object CadastroVendas: TCadastroVendas
       OnClick = btnNovaVendaClick
     end
     object dblkcbbidpagamento: TDBLookupComboBox
-      Left = 100
-      Top = 264
+      Left = 108
+      Top = 268
       Width = 181
       Height = 28
       Color = 15395562

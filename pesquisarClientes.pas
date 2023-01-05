@@ -59,12 +59,20 @@ begin
   if Trim(edtConsulta.Text) <> EmptyStr then
     begin
       try
+        qryConsultaCliente.Close;
         qryConsultaCliente.SQL.Clear;
         qryConsultaCliente.SQL.Add('Select * from cliente');
-        if cbbConsulta.Text = 'ID' then
-          qryConsultaCliente.SQL.Add('where cliente.idcliente'+' = '+QuotedStr(Trim(edtConsulta.Text)))
+        case cbbConsulta.ItemIndex of
+
+        0:
+          qryConsultaCliente.SQL.Add('where cliente.idcliente = ' + QuotedStr(Trim(edtConsulta.Text)));
+        1:
+          qryConsultaCliente.SQL.Add('where cliente.nome = ' + LowerCase(QuotedStr(Trim('%'+edtConsulta.Text+'%'))));
+
         else
-          qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' = '+QuotedStr(Trim(edtConsulta.Text)));
+          MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
+
+        end;
         qryConsultaCliente.Open;
         if qryConsultaCliente.IsEmpty then
         begin
@@ -72,12 +80,12 @@ begin
           btnSelecionarCli.Enabled := False;
           MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
         end;
+
       except
         qryConsultaCliente.Close;
         btnSelecionarCli.Enabled := False;
         MessageDlg('Este ' + LowerCase(cbbConsulta.Text) + ' não se encontra no sistema!', mtError, [mbok], 0);
       end;
-
     end
   else
     begin

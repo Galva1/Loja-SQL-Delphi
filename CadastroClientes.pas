@@ -63,6 +63,7 @@ type
     qryDadosClienteobservacao_cliente: TMemoField;
     qryConsultaClienteobservacao_cliente: TMemoField;
     btnEditarCadCliente: TButton;
+    btnCadastrarCliente: TButton;
     procedure btnInserirClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure AtivarDesativarBotoes(Sender: TObject);
@@ -102,6 +103,7 @@ type
     procedure dbedtbairrocliKeyPress(Sender: TObject; var Key: Char);
     procedure dbedtcidadecliKeyPress(Sender: TObject; var Key: Char);
     procedure edtConsultaKeyPress(Sender: TObject; var Key: Char);
+    procedure btnCadastrarClienteClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -318,7 +320,15 @@ begin
       try
         qryConsultaCliente.SQL.Clear;
         qryConsultaCliente.SQL.Add('Select * from cliente');
-        qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' = '+QuotedStr(Trim(edtConsulta.Text)));
+
+        case cbbConsulta.ItemIndex of
+        0:
+          qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' LIKE '+LowerCase(QuotedStr(Trim('%'+edtConsulta.Text+'%'))));
+        1:
+          qryConsultaCliente.SQL.Add('where '+LowerCase(cbbConsulta.Text)+' = '+QuotedStr(Trim(edtConsulta.Text)));
+        else
+          MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
+        end;
         qryConsultaCliente.Open;
         if qryConsultaCliente.IsEmpty then
         begin
@@ -344,14 +354,7 @@ end;
 procedure TCadastroClientes1.btnBuscarClick(Sender: TObject);
 begin
   btnEditarCadCliente.Enabled := True;
-  case cbbConsulta.ItemIndex of
-  0:
-    ConsultarClientes(nil);
-  1:
-    ConsultarClientes(nil);
-  else
-    MessageDlg('Selecione um filtro!', mtError, [mbok], 0);
-  end;
+  ConsultarClientes(nil);
 end;
 
 procedure TCadastroClientes1.edtConsultaKeyDown(Sender: TObject;
@@ -528,6 +531,13 @@ procedure TCadastroClientes1.edtConsultaKeyPress(Sender: TObject;
 begin
   if not (Key in['0'..'9',#8, #27, #22, #32, 'a'..'z', 'A'..'Z']) then
     Key := #0;
+end;
+
+procedure TCadastroClientes1.btnCadastrarClienteClick(Sender: TObject);
+begin
+  pgcCadastroCliente.ActivePage := ts2;
+  qryDadosCliente.Active := True;
+  btnInserirClick(nil);
 end;
 
 end.
